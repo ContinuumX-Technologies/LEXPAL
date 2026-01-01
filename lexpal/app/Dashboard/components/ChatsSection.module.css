@@ -1,0 +1,106 @@
+/* app/dashboard/ChatsSection.module.css */
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+}
+.title {
+  color: #007aff;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* decorative hr */
+.hrWrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+.hrLine {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(209,213,219,1), transparent);
+  transform: translateY(-50%);
+}
+
+/* chat list */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* each chat item */
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(229,231,235,1);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* left accent for unread */
+.leftAccent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  opacity: 0;
+}
+.unread .leftAccent {
+  opacity: 1;
+  background: #28a745;
+}
+
+/* avatar */
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  object-fit: cover;
+  box-shadow: 0 3px 8px rgba(2,6,23,0.06);
+}
+
+/* content */
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.name {
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0;
+}
+.subText {
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* meta/time */
+.meta {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+.time {
+  color: #9ca3af;
+  font-size: 13px;
+}

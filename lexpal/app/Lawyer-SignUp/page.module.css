@@ -1,0 +1,404 @@
+.signupWrapper {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #dbeafe, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  font-family: "Public Sans", sans-serif;
+  color: #111418;
+}
+
+.signupCard {
+  width: 100%;
+  max-width: 480px;
+  position: relative; /* required for close button */
+}
+
+/* Close button */
+.signupCard .closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #444;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.signupCard .closeBtn:hover {
+  background: #f5f5f5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.signupCard .signupHeader {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.signupCard .signupIcon {
+  background: white;
+  padding: 12px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  margin-bottom: 12px;
+}
+
+.signupCard .gavelIcon {
+  color: #1173d4;
+  font-size: 40px;
+}
+
+.signupCard .signupTitle {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.signupCard .signupSubtitle {
+  margin-top: 6px;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Form */
+.signupCard .signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.signupCard .row {
+  display: flex;
+  gap: 20px;
+}
+
+.signupCard .inputGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.signupCard .inputLabel {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Inputs (scoped! important fix) */
+.signupCard input {
+  height: 56px;
+  border-radius: 12px;
+  border: 1px solid #dbe0e6;
+  padding: 15px;
+  font-size: 16px;
+  color: #111418;
+  outline: none;
+  background: white;
+  width: 100%;
+}
+
+.signupCard input:focus {
+  border-color: #1173d4;
+  box-shadow: 0 0 0 2px rgba(17, 115, 212, 0.3);
+}
+
+.signupCard .passwordWrapper {
+  position: relative;
+}
+
+.signupCard .toggleBtn {
+  position: absolute;
+  right: 14px;
+  top: 0;
+  bottom: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #617589;
+}
+
+/* Buttons */
+.signupCard .signupBtn {
+  width: 100%;
+  background: #1173d4;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: background 0.2s ease;
+}
+
+.signupCard .signupBtn:hover {
+  background: #0f66ba;
+}
+
+/* Divider */
+.signupCard .divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.signupCard .divider hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.signupCard .divider p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Google Button */
+.signupCard .googleBtn {
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.signupCard .googleBtn:hover {
+  background: #f5f5f5;
+}
+
+.signupCard .googleIcon {
+  height: 24px;
+  width: 24px;
+}
+
+/* Links */
+.signupCard .loginLink {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 15px;
+  color: #555;
+}
+
+.signupCard .loginLink a {
+  color: #1173d4;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signupCard .loginLink a:hover {
+  text-decoration: underline;
+}
+
+.signupCard .tos {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #777;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.signupCard .tos a {
+  color: #333;
+}
+/* ----------------------------- */
+/* DROPDOWNS (SELECT ELEMENTS)  */
+/* ----------------------------- */
+
+.signupCard select {
+  height: 56px;
+  border-radius: 12px;
+  border: 1px solid #dbe0e6;
+  padding: 15px;
+  font-size: 16px;
+  color: #111418;
+  outline: none;
+  background: white;
+  width: 100%;
+  cursor: pointer;
+}
+
+.signupCard select:focus {
+  border-color: #1173d4;
+  box-shadow: 0 0 0 2px rgba(17, 115, 212, 0.3);
+}
+
+/* ----------------------------- */
+/* TEXTAREA (ABOUT YOU)          */
+/* ----------------------------- */
+
+.signupCard textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #dbe0e6;
+  padding: 15px;
+  font-size: 16px;
+  background: white;
+  resize: none;
+  outline: none;
+  min-height: 120px;
+}
+
+.signupCard textarea:focus {
+  border-color: #1173d4;
+  box-shadow: 0 0 0 2px rgba(17, 115, 212, 0.3);
+}
+
+/* ----------------------------- */
+/* MULTI SELECT BOX CONTAINER    */
+/* ----------------------------- */
+
+.multiSelectBox {
+  border: 1px solid #dbe0e6;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.multiSelectBox label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.multiSelectBox input[type="checkbox"] {
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+}
+
+/* ----------------------------- */
+/* SECTION TITLES INSIDE BOXES   */
+/* ----------------------------- */
+
+.multiSelectBox .inputLabel {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+/* ----------------------------- */
+/* ERROR MESSAGE                 */
+/* ----------------------------- */
+
+.signupCard .error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* ----------------------------- */
+/* ROW STYLING FOR SELECTS       */
+/* ----------------------------- */
+
+.signupCard .rowSelect {
+  display: flex;
+  gap: 20px;
+}
+
+/* ----------------------------- */
+/* AOR dropdown                  */
+/* ----------------------------- */
+
+.signupCard .aorSelect {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------- */
+/* FIX select + input spacing    */
+/* ----------------------------- */
+
+.signupCard .inputGroup select,
+.signupCard .inputGroup textarea {
+  margin-top: 4px;
+}
+
+/* ----------------------------- */
+/* SMALLER MULTISELECT TEXT      */
+/* ----------------------------- */
+
+.multiSelectBox label span {
+  font-size: 15px;
+  color: #111;
+}
+
+/* ----------------------------- */
+/* HOVER EFFECTS                 */
+/* ----------------------------- */
+
+.signupCard select:hover,
+.signupCard textarea:hover {
+  border-color: #b8c6d0;
+}
+
+/* ----------------------------- */
+/* IMPROVED SPACING              */
+/* ----------------------------- */
+
+.signupCard .inputGroup {
+  margin-bottom: 4px;
+}
+
+/* IMAGE UPLOAD BUTTON STYLE */
+
+.hiddenInput {
+  display: none;
+}
+.uploadBtn {
+  background: #005eff;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+}
+
+.selectedFileText {
+  margin-top: 6px;
+  color: #888;
+  font-size: 13px;
+}
+
+/* ----------------------------- */
+/* RESPONSIVE IMPROVEMENTS       */
+/* ----------------------------- */
+
+
+
+
+@media (max-width: 480px) {
+  .signupCard .row {
+    flex-direction: column;
+  }
+  
+  .signupCard .rowSelect {
+    flex-direction: column;
+  }
+}

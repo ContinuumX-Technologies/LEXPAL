@@ -1,0 +1,61 @@
+/* app/dashboard/Header.module.css */
+
+/* Header bar - sticky at top with subtle backdrop blur and border */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 12px;
+  background: rgba(248, 250, 252, 0.8); /* light fallback */
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(229, 231, 235, 1);
+}
+
+/* Icon buttons on left/right */
+.iconBtn {
+  padding: 8px;
+  margin-left: -8px;
+  margin-right: -8px;
+  border-radius: 9999px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+.iconBtn:hover {
+  background: rgba(229, 231, 235, 0.8);
+}
+
+/* Title in center: small "welcome" + gradient name */
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a; /* dark-navy */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* subtle lowercase welcome text */
+.welcome {
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: lowercase;
+  color: #111827;
+}
+
+/* gradient text for name */
+.name {
+  font-weight: 700;
+  font-size: 20px;
+  background-image: linear-gradient(to right, #0057ff, #28a745, #ffd700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

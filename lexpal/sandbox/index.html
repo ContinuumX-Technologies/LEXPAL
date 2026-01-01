@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Explore page</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0A2A54",
+            "accent": "#D4AF37",
+            // Soft & Approachable Palette
+            "background-light": "#F8F8F8", // Slightly lighter background
+            "background-dark": "#101922",
+            "card-light": "#FFFFFF", // Soft white for cards
+            "card-dark": "#1C2A38",
+            "text-primary-light": "#333333", // Muted primary text
+            "text-secondary-light": "#888888", // Muted secondary text
+            "text-primary-dark": "#F8F9FA",
+            "text-secondary-dark": "#A0AEC0",
+            "light-blue": "#90CAF9",
+            "soft-blue": "#C4DAF1", // Muted blue for accents
+            "soft-primary": "#5F7C9E", // Muted primary color
+            "soft-primary-dark": "#476380", // Darker shade of soft-primary for buttons
+            "normal-blue": "#3366CC", // Added normal blue color
+            "soft-accent": "#E8D8A8", // Muted accent for stars
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem", // More rounded corners for cards
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style type="text/css">
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-rounded {
+        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .filter-panel {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-out;
+    }
+    .filter-panel.open {
+      transform: translateX(0);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="w-full max-w-md mx-auto bg-background-light dark:bg-background-dark">
+<header class="flex flex-col gap-2 bg-background-light dark:bg-background-dark p-4 sticky top-0 z-20 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-2">
+<button class="text-text-primary-light dark:text-text-primary-dark flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-card-dark">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-tight tracking-tight flex-1">Explore Trusted Advocates</h1>
+<button class="text-text-primary-light dark:text-text-primary-dark flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-card-dark" id="filter-button">
+<span class="material-symbols-outlined text-2xl">filter_alt</span>
+</button>
+</div>
+</header>
+<main class="flex flex-col">
+<div class="flex gap-3 px-4 pt-4 overflow-x-auto whitespace-nowrap no-scrollbar sticky top-[calc(56px)] bg-background-light dark:bg-background-dark pb-3 z-10 border-b border-gray-200 dark:border-gray-800 -mt-px">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-normal-blue dark:bg-primary px-4">
+<p class="text-white text-sm font-medium">Relevance</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark px-4 shadow-sm border border-gray-200 dark:border-gray-700">
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium">Highest Rated</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark px-4 shadow-sm border border-gray-200 dark:border-gray-700">
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium">Most Reviews</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark px-4 shadow-sm border border-gray-200 dark:border-gray-700">
+<p class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium">Nearby</p>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-md p-4 flex flex-col gap-3">
+<div class="flex items-start gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-16 w-16 shrink-0" data-alt="Professional headshot of Eleanor Vance" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAUTL3brg78SKkdq6UHDG8TE6M_CXl-0pWQed5hCfctLSQBmQLVoapGnAwo1f2qVOpRP24-m5TJvZDsksmAnCLiVHjYzVthPk16iqBIMCJBIH2Kwl8XpEnpwfu1zle8IvDq-AQZMkEDEz6zp7nvpb1m1SZX8-0YL-fGwElsXZPpL5qd1mkYJdDhS-aJjk_ndOZisWNi_wo1YyAfcB9pOzBAW_bzTSev-8A0w6NkWf6n1taAoLFBAgldUTjIxSSu0G3PnHaiAUx7W5dk");'></div>
+<div class="flex flex-1 flex-col">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-bold leading-tight">Eleanor Vance</p>
+<div class="flex flex-wrap items-center gap-1 mt-2">
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Real Estate Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Property Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Tax Law</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 -mt-1 ml-0">
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-base font-semibold">work</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-semibold">20+ Yrs Exp</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="Supreme Court Eligible">gavel</span>
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="High Court Eligible">balance</span>
+<span class="material-symbols-rounded text-gray-500 dark:text-gray-400 text-lg" title="District Court Eligible (not active)">account_balance</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary-light dark:text-text-secondary-dark text-sm">
+<span class="material-symbols-outlined text-soft-primary dark:text-blue-300 text-base">language</span>
+<span>English, Hindi</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-soft-accent dark:text-accent" style="font-size: 16px;">star</span>
+<span class="font-semibold text-text-primary-light dark:text-text-primary-dark">4.9</span>
+<span>(128 reviews)</span>
+</div>
+<button class="w-full bg-normal-blue text-white font-semibold py-2.5 px-3 rounded-lg text-sm hover:bg-primary/90 transition-colors">
+            View Profile
+          </button>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-md p-4 flex flex-col gap-3">
+<div class="flex items-start gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-16 w-16 shrink-0" data-alt="Professional headshot of Marcus Thorne" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB7khJyJf5hkjNpB8Ab2hwoZvsllN55KNJRrEVgV7Rafq5By_ju4Y2Di9SgVILahUHXoaGUNpAZFBjCPwMGeLojdlU8fAHEr78LOjxScMYh4wLeAWgJd8p84bp6Jkix6WxNWR24br1scKVFYkAOCcTnBPdzjul8x7BnfyWdH2GpnGnz4clihzadL69i_PFv6eB2cCGERPOe8WxRxEYQ7TaPq8nUA8fOAWW0_Y9xFJSRK6WDKAmSict8qn6l6341YMLQBJ05exOajkOw");'></div>
+<div class="flex flex-1 flex-col">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-bold leading-tight">Marcus Thorne</p>
+<div class="flex flex-wrap items-center gap-1 mt-2">
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Contract Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Corporate Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Consumer Protection</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 -mt-1 ml-0">
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-base font-semibold">work</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-semibold">10 Yrs Exp</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="Supreme Court Eligible">gavel</span>
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="High Court Eligible">balance</span>
+<span class="material-symbols-rounded text-blue-600 dark:text-blue-300 text-lg" title="District Court Eligible">account_balance</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary-light dark:text-text-secondary-dark text-sm">
+<span class="material-symbols-outlined text-soft-primary dark:text-blue-300 text-base">language</span>
+<span>English, Odia, Bengali</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-soft-accent dark:text-accent" style="font-size: 16px;">star</span>
+<span class="font-semibold text-text-primary-light dark:text-text-primary-dark">4.8</span>
+<span>(95 reviews)</span>
+</div>
+<button class="w-full bg-normal-blue text-white font-semibold py-2.5 px-3 rounded-lg text-sm hover:bg-primary/90 transition-colors">
+            View Profile
+          </button>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-md p-4 flex flex-col gap-3">
+<div class="flex items-start gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-16 w-16 shrink-0" data-alt="Professional headshot of Clara Oswald" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9N6x8MGFzuYJS8NWzfxhnFFoyoue2BrvhoeDx1RFg68GQS6-TT2-f8wbDKyFldIe5cUW9EDEKiFWTkxiAYtjscFu_OC7aluaV19Uu3R0AzyPnTbn6uo2oZeHv_AaVoOrmzW-YJK5x3VNeVOMtjcvcG9EeJ2OZPXwGg5bkiiswVn9-EurTBadmkcl58IQVyX9Tb8yYB__EBVrYcsEzNQOz7qmFP5wGXt2iU-TuPxEQTPwOg8zy1HD34ikAD7AoaaFjhG3kRWxwyjLt");'></div>
+<div class="flex flex-1 flex-col">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-bold leading-tight">Clara Oswald</p>
+<div class="flex flex-wrap items-center gap-1 mt-2">
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Family Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Matrimony Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Human Rights Law</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 -mt-1 ml-0">
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-base font-semibold">work</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-semibold">15 Yrs Exp</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 text-lg" title="Supreme Court Eligible (not active)">gavel</span>
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="High Court Eligible">balance</span>
+<span class="material-symbols-rounded text-blue-600 dark:text-blue-300 text-lg" title="District Court Eligible">account_balance</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary-light dark:text-text-secondary-dark text-sm">
+<span class="material-symbols-outlined text-soft-primary dark:text-blue-300 text-base">language</span>
+<span>English, Tamil</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-soft-accent dark:text-accent" style="font-size: 16px;">star</span>
+<span class="font-semibold text-text-primary-light dark:text-text-primary-dark">5.0</span>
+<span>(210 reviews)</span>
+</div>
+<button class="w-full bg-normal-blue text-white font-semibold py-2.5 px-3 rounded-lg text-sm hover:bg-primary/90 transition-colors">
+            View Profile
+          </button>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-md p-4 flex flex-col gap-3">
+<div class="flex items-start gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-16 w-16 shrink-0" data-alt="Professional headshot of David Lee" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAUTL3brg78SKkdq6UHDG8TE6M_CXl-0pWQed5hCfctLSQBmQLVoapGnAwo1f2qVOpRP24-m5TJvZDsksmAnCLiVHjYzVthPk16iqBIMCJBIH2Kwl8XpEnpwfu1zle8IvDq-AQZMkEDEz6zp7nvpb1m1SZX8-0YL-fGwElsXZPpL5qd1mkYJdDhS-aJjk_ndOZisWNi_wo1YyAfcB9pOzBAW_bzTSev-8A0w6NkWf6n1taAoLFBAgldUTjIxSSu0G3PnHaiAUx7W5dk");'></div>
+<div class="flex flex-1 flex-col">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-bold leading-tight">David Lee</p>
+<div class="flex flex-wrap items-center gap-1 mt-2">
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Criminal Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Cyber Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Environmental Law</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 -mt-1 ml-0">
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-base font-semibold">work</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-semibold">18 Yrs Exp</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="Supreme Court Eligible">gavel</span>
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 text-lg" title="High Court Eligible (not active)">balance</span>
+<span class="material-symbols-rounded text-blue-600 dark:text-blue-300 text-lg" title="District Court Eligible">account_balance</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary-light dark:text-text-secondary-dark text-sm">
+<span class="material-symbols-outlined text-soft-primary dark:text-blue-300 text-base">language</span>
+<span>English, Mandarin</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-soft-accent dark:text-accent" style="font-size: 16px;">star</span>
+<span class="font-semibold text-text-primary-light dark:text-text-primary-dark">4.7</span>
+<span>(88 reviews)</span>
+</div>
+<button class="w-full bg-normal-blue text-white font-semibold py-2.5 px-3 rounded-lg text-sm hover:bg-primary/90 transition-colors">
+            View Profile
+          </button>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-md p-4 flex flex-col gap-3">
+<div class="flex items-start gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-16 w-16 shrink-0" data-alt="Professional headshot of Sophie Miller" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB7khJyJf5hkjNpB8Ab2hwoZvsllN55KNJRrEVgV7Rafq5By_ju4Y2Di9SgVILahUHXoaGUNpAZFBjCPwMGeLojdlU8fAHEr78LOjxScMYh4wLeAWgJd8p84bp6Jkix6WxNWR24br1scKVFYkAOCcTnBPdzjul8x7BnfyWdH2GpnGnz4clihzadL69i_PFv6eB2cCGERPOe8WxRxEYQ7TaPq8nUA8fOAWW0_Y9xFJSRK6WDKAmSict8qn6l6341YMLQBJ05exOajkOw");'></div>
+<div class="flex flex-1 flex-col">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-bold leading-tight">Sophie Miller</p>
+<div class="flex flex-wrap items-center gap-1 mt-2">
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Corporate Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Intellectual Property</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Mergers &amp; Acquisitions</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 -mt-1 ml-0">
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-base font-semibold">work</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-semibold">12 Yrs Exp</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 text-lg" title="Supreme Court Eligible (not active)">gavel</span>
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="High Court Eligible">balance</span>
+<span class="material-symbols-rounded text-blue-600 dark:text-blue-300 text-lg" title="District Court Eligible">account_balance</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary-light dark:text-text-secondary-dark text-sm">
+<span class="material-symbols-outlined text-soft-primary dark:text-blue-300 text-base">language</span>
+<span>English, German</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-soft-accent dark:text-accent" style="font-size: 16px;">star</span>
+<span class="font-semibold text-text-primary-light dark:text-text-primary-dark">4.9</span>
+<span>(150 reviews)</span>
+</div>
+<button class="w-full bg-normal-blue text-white font-semibold py-2.5 px-3 rounded-lg text-sm hover:bg-primary/90 transition-colors">
+            View Profile
+          </button>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-md p-4 flex flex-col gap-3">
+<div class="flex items-start gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-16 w-16 shrink-0" data-alt="Professional headshot of Alex Johnson" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9N6x8MGFzuYJS8NWzfxhnFFoyoue2BrvhoeDx1RFg68GQS6-TT2-f8wbDKyFldIe5cUW9EDEKiFWTkxiAYtjscFu_OC7aluaV19Uu3R0AzyPnTbn6uo2oZeHv_AaVoOrmzW-YJK5x3VNeVOMtjcvcG9EeJ2OZPXwGg5bkiiswVn9-EurTBadmkcl58IQVyX9Tb8yYB__EBVrYcsEzNQOz7qmFP5wGXt2iU-TuPxEQTPwOg8zy1HD34ikAD7AoaaFjhG3kRWxwyjLt");'></div>
+<div class="flex flex-1 flex-col">
+<p class="text-text-primary-light dark:text-text-primary-dark text-base font-bold leading-tight">Alex Johnson</p>
+<div class="flex flex-wrap items-center gap-1 mt-2">
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Tax Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Business Law</span>
+<span class="inline-flex items-center bg-soft-blue/30 text-soft-primary dark:bg-primary/20 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full w-fit">Dispute Resolution</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 -mt-1 ml-0">
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-base font-semibold">work</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-xs font-semibold">25 Yrs Exp</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="Supreme Court Eligible">gavel</span>
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg" title="High Court Eligible">balance</span>
+<span class="material-symbols-rounded text-gray-500 dark:text-gray-400 text-lg" title="District Court Eligible (not active)">account_balance</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary-light dark:text-text-secondary-dark text-sm">
+<span class="material-symbols-outlined text-soft-primary dark:text-blue-300 text-base">language</span>
+<span>English, Spanish</span>
+</div>
+<div class="flex items-center gap-1 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-soft-accent dark:text-accent" style="font-size: 16px;">star</span>
+<span class="font-semibold text-text-primary-light dark:text-text-primary-dark">4.6</span>
+<span>(200 reviews)</span>
+</div>
+<button class="w-full bg-normal-blue text-white font-semibold py-2.5 px-3 rounded-lg text-sm hover:bg-primary/90 transition-colors">
+            View Profile
+          </button>
+</div>
+</div>
+</main>
+</div>
+<div class="filter-panel fixed inset-y-0 right-0 w-full max-w-xs bg-background-light dark:bg-background-dark shadow-lg z-20 overflow-y-auto" id="filter-panel">
+<div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
+<h2 class="text-lg font-bold text-text-primary-light dark:text-text-primary-dark">Filters</h2>
+<button class="text-text-primary-light dark:text-text-primary-dark flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-card-dark" id="close-filter-button">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<div class="p-4 flex flex-col gap-6">
+<div>
+<p class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark mb-2">Experience</p>
+<div class="flex flex-wrap gap-2">
+<input checked="" class="hidden peer" id="exp1" name="experience" type="radio" value="1"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp1">1yr+</label>
+<input class="hidden peer" id="exp2" name="experience" type="radio" value="2"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp2">2yr+</label>
+<input class="hidden peer" id="exp3" name="experience" type="radio" value="3"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp3">3yr+</label>
+<input class="hidden peer" id="exp5" name="experience" type="radio" value="5"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp5">5yr+</label>
+<input class="hidden peer" id="exp10" name="experience" type="radio" value="10"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp10">10yr+</label>
+<input class="hidden peer" id="exp15" name="experience" type="radio" value="15"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp15">15yr+</label>
+<input class="hidden peer" id="exp20" name="experience" type="radio" value="20"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp20">20yr+</label>
+<input class="hidden peer" id="exp25" name="experience" type="radio" value="25"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp25">25yr+</label>
+<input class="hidden peer" id="exp30" name="experience" type="radio" value="30"/>
+<label class="cursor-pointer px-3 py-1 text-sm rounded-full border border-gray-300 dark:border-gray-700 text-text-secondary-light dark:text-text-secondary-dark peer-checked:bg-normal-blue peer-checked:text-white peer-checked:border-normal-blue transition-colors" for="exp30">30yr+</label>
+</div>
+</div>
+<div>
+<p class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark mb-2">Eligibility</p>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="eligibility" type="checkbox" value="supreme_court"/>
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg">gavel</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Supreme Court</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="eligibility" type="checkbox" value="high_court"/>
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-300 text-lg">balance</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">High Court</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="eligibility" type="checkbox" value="district_court"/>
+<span class="material-symbols-rounded text-blue-600 dark:text-blue-300 text-lg">account_balance</span>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">District Court</span>
+</label>
+</div>
+</div>
+<div>
+<p class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark mb-2">Specialization</p>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="specialization" type="checkbox" value="criminal_law"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Criminal Law</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="specialization" type="checkbox" value="matrimony_law"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Matrimony Law</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="specialization" type="checkbox" value="corporate_law"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Corporate Law</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="specialization" type="checkbox" value="property_law"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Property Law</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="specialization" type="checkbox" value="tax_law"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Tax Law</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="specialization" type="checkbox" value="consumer_protection"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Consumer Protection</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="specialization" type="checkbox" value="human_rights"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Human Rights Law</span>
+</label>
+</div>
+</div>
+<div>
+<p class="text-sm font-semibold text-text-primary-light dark:text-text-primary-dark mb-2">Language</p>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="english"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">English</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="hindi"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Hindi</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="odia"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Odia</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="bengali"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Bengali</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="gujarati"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Gujarati</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="kannada"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Kannada</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="malayalam"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Malayalam</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="marathi"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Marathi</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="punjabi"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Punjabi</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="tamil"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Tamil</span>
+</label>
+<label class="flex items-center gap-2">
+<input class="form-checkbox text-normal-blue dark:text-blue-300 rounded focus:ring-normal-blue dark:focus:ring-blue-300" name="language" type="checkbox" value="telugu"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Telugu</span>
+</label>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-gray-200 dark:border-gray-800 sticky bottom-0 bg-background-light dark:bg-background-dark">
+<button class="w-full bg-normal-blue text-white font-semibold py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors">
+        Apply Filters
+      </button>
+</div>
+</div>
+</div>
+<script>
+    document.getElementById('filter-button').addEventListener('click', function() {
+      document.getElementById('filter-panel').classList.add('open');
+    });
+    document.getElementById('close-filter-button').addEventListener('click', function() {
+      document.getElementById('filter-panel').classList.remove('open');
+    });
+  </script>
+</body></html>

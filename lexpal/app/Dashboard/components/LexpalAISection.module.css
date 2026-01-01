@@ -1,0 +1,96 @@
+/* app/dashboard/LexpalAISection.module.css */
+
+/* Section container */
+.wrap {
+  padding: 0 24px 40px 24px;
+}
+
+/* big gradient heading */
+.heading {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  background-image: linear-gradient(to right, #8a2be2, #a020f0, #4b0082, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Talk to AI CTA */
+.talkBtn {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  background: linear-gradient(90deg, #7c3aed, #4f46e5);
+  color: white;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(124,58,237,0.15);
+  margin-bottom: 20px;
+}
+
+/* Row header */
+.rowHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+.recentTitle {
+  color: #007aff; /* accent-blue */
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Cards container */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual card */
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  border: 1px solid rgba(229,231,235,1);
+  box-shadow: 0 8px 20px rgba(15,23,42,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #0f172a;
+}
+.cardText {
+  color: #4b5563;
+  margin: 0;
+}
+.meta {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: right;
+  margin-top: 8px;
+}
+.continueBtn {
+  align-self: flex-start;
+  margin-top: 8px;
+  border: 1px solid #007aff;
+  color: #007aff;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}

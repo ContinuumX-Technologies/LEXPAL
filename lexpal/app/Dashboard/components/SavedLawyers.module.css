@@ -1,0 +1,124 @@
+/* app/dashboard/SavedLawyers.module.css */
+
+.wrap {
+  padding: 0 24px 32px 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+}
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.seeAll {
+  color: #007aff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* horizontal scroll row */
+.scrollRow {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+/* individual card */
+.card {
+  width: 208px;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(2,6,23,0.04);
+  border: 1px solid rgba(229,231,235,1);
+  flex: 0 0 auto;
+}
+
+.img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.cardBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+.specialty {
+  font-size: 13px;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* meta row */
+.metaRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* active dot */
+.activeDot {
+  width: 10px;
+  height: 10px;
+  background: #28a745;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* last seen text */
+.lastSeen {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* rating */
+.rating {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: #f59e0b;
+}
+
+/* action buttons */
+.chatBtn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  background: #0057ff;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+.profileBtn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  background: transparent;
+  color: #0f172a;
+  border: 1px solid rgba(209,213,219,1);
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}

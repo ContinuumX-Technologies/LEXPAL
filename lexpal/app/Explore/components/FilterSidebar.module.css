@@ -1,0 +1,8 @@
+.filterPanel {
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out;
+}
+
+.open {
+  transform: translateX(0);
+}
