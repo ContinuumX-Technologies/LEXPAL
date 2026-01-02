@@ -1,10 +1,17 @@
-import { ChromaClient } from "chromadb";
+import { CloudClient } from "chromadb";
 import { openai } from "../llm/openai.client.js";
 
 const CHROMA_COLLECTION_NAME = "Indian_Law_Acts";
 
-const chroma = new ChromaClient(); 
+// const chroma = new ChromaClient(); 
 
+
+
+const chroma = new CloudClient({
+  apiKey: 'ck-8ePn3omPUvtBn7n3TrQh2zqcqkKgPU1qekFvLrgwdKBt',
+  tenant: '1985f5f2-7b61-467f-93ed-afe6a5a9048f',
+  database: 'Dev'
+});
 /**
  * OpenAI embedding function (manual, explicit)
  */
