@@ -59,7 +59,7 @@ export default function FeaturedLawyers({router}:FeaturedLawyersProps) {
       </div>
 
       <div className={styles.ctaWrap}>
-        <button className={styles.cta} onClick={()=>{router.push("/Explore")}}>
+        <button className={styles.cta} onClick={()=>{router.push("lexpal/Explore")}}>
           View All Experts
           <span className="material-symbols-outlined" style={{ fontVariationSettings: `'wght' 400` }}>
             arrow_right_alt

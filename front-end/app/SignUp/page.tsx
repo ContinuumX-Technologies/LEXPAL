@@ -70,7 +70,7 @@ export default function SignUp() {
 
       // document.cookie = `token=${data.token}; path=/; max-age=604800;`;
 
-      router.push("/Dashboard");
+      router.push("lexpal/Dashboard");
 
     } catch (e) {
       setError("Server error. Try again.");
@@ -234,7 +234,7 @@ export default function SignUp() {
 
          {/* redirect to login link */}
         <p className={styles.loginLink}>
-          Already have an account? <a href="#">Log In</a>
+          Already have an account? <button onClick={()=>{router.push("lexpal/Login")}}><a>Log In</a></button>
         </p>
 
         <p className={styles.tos}>

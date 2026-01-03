@@ -15,7 +15,7 @@ export default function HomePage() {
           <span className={`material-symbols-outlined ${styles.logoIcon}`}>gavel</span>
           <h2 className={styles.logoText}>Lexpal</h2>
         </div>
-        <button onClick={()=>{router.push("/Login")}}>
+        <button onClick={()=>{router.push("lexpal/Login")}}>
         <a href="#" className={styles.primaryButton}>
           Get Started
         </a>
@@ -32,7 +32,7 @@ export default function HomePage() {
           </h2>
           {/* <button className={styles.primaryButtonLarge}>Talk to AI Chatbot</button> */}
           
-         <Button1 onClick={()=>{router.push("/Login")}}/>
+         <Button1 onClick={()=>{router.push("lexpal/Login")}}/>
 
         </div>
         <div
@@ -123,7 +123,7 @@ export default function HomePage() {
         <p>
           Take the first step towards resolving your legal matters. Our AI is ready to assist you 24/7.
         </p>
-        <button className={styles.ctaButton}>Get Started Now</button>
+        <button onClick={()=>{router.push("lexpal/Lawyer-Login")}} className={styles.ctaButton}>Get Started Now</button>
       </section>
 
       {/* Footer */}

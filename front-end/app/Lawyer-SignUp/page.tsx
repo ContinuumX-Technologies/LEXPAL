@@ -161,7 +161,7 @@ export default function LawyerSignUp() {
       if (!imgRes.ok) return setError(imgDataRes.message || "Image upload failed");
 
 
-      router.push("/Lawyer-Dashboard");
+      router.push("lexpal/Lawyer-Dashboard");
     } catch (err) {
       setError("Server error. Try again.");
     }
@@ -434,7 +434,7 @@ export default function LawyerSignUp() {
         <GoogleButton /> */}
 
         <p className={styles.loginLink}>
-          Already have an account? <a href="#">Log In</a>
+          Already have an account? <button onClick={()=>{router.push("lexpal/Lawyer-Login")}}><a>Log In</a></button>
         </p>
       </div>
     </div>
