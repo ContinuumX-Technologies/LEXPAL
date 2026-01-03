@@ -107,6 +107,25 @@
   border: none;
   font-weight: 700;
   cursor: pointer;
+  position: relative;
+  height: 44px; /* Fixed height for consistency */
+}
+
+.chatBtnContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.chatBtn .material-symbols-outlined {
+  font-size: 20px;
+  line-height: 1;
 }
 .profileBtn {
   width: 100%;
