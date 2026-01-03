@@ -17,7 +17,7 @@ export interface ChatMessage {
   read_at?: string | null;
 }
 
-const server_url = process.env.NEXT_PUBLIC_DEV_SERVER_URL || "http://localhost:5001";
+const server_url = process.env.NEXT_PUBLIC_DEV_SERVER_URL  || "http://localhost:5001";
 /* ─────────────────────────────────────────────
    HTTP FETCHERS
    ───────────────────────────────────────────── */
@@ -48,11 +48,13 @@ export async function fetchChatHistory(
    ───────────────────────────────────────────── */
 
 export function createChatSocket(receiverId: string): WebSocket {
-  // Construct WebSocket URL properly
-  const wsProtocol = server_url.startsWith('https://') ? 'wss://' : 'ws://';
-  const serverHost = server_url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  // If server_url is http://139.59.25.145/lexpal-server
+  // We want ws://139.59.25.145/lexpal-server/ws/user-chat
   
-  const wsUrl = `${wsProtocol}${serverHost}/ws/user-chat?receiver_id=${receiverId}`;
+  const wsUrl = server_url
+    .replace(/^http/, 'ws')  // Convert protocol
+    + '/ws/user-chat?receiver_id=' + receiverId;
+  
   console.log('🔗 Creating WebSocket:', wsUrl);
   
   return new WebSocket(wsUrl);
