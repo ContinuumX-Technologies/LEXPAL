@@ -1,5 +1,5 @@
 // app/dashboard/LexpalAISection.tsx
-import React from "react";
+
 import { useState } from "react";
 import styles from "./LexpalAISection.module.css";
 import Button1 from "@/UI_components/button";
@@ -34,7 +34,7 @@ export default function LexpalAISection({
     <section className={styles.wrap}>
       <h2 className={styles.heading}>Lexpal AI</h2>
 
-      <Button1 onClick={() => router.push(`/lexpal/Lex-AI/${"new"}`)} />
+      <Button1 onClick={() => router.push(`/Lex-AI/${"new"}`)} />
 
       <div className={styles.rowHeader}>
         <h3 className={styles.recentTitle}>Recent Conversation</h3>
@@ -51,7 +51,7 @@ export default function LexpalAISection({
               <p className={styles.meta}>Yesterday, 10:30 AM</p>
               <button
                 className={styles.continueBtn}
-                onClick={() => router.push(`/lexpal/Lex-AI/${c._id}`)}
+                onClick={() => router.push(`/Lex-AI/${c._id}`)}
               >
                 Continue Chat
                 <span className="material-symbols-outlined">arrow_forward</span>

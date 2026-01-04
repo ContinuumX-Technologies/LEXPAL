@@ -257,7 +257,7 @@ const LawyerProfilePage: React.FC = () => {
       </main>
 
       <footer className={styles.footer}>
-        <button className={styles.bookButton} onClick={()=>{router.push(`/lexpal/User-Chat/${id}`)}}>Chat</button>
+        <button className={styles.bookButton} onClick={()=>{router.push(`/User-Chat/${id}`)}}>Chat</button>
       </footer>
     </div>
   );

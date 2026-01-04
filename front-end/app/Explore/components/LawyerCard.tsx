@@ -110,7 +110,7 @@ const LawyerCard: React.FC<LawyerCardProps> = ({
       </div>
 
       <button
-      onClick={() => router.push(`/lexpal/Lawyer-Profile/${id}`)}
+      onClick={() => router.push(`/Lawyer-Profile/${id}`)}
       className="w-full bg-normal-blue text-white font-semibold py-2.5 px-3 rounded-lg text-sm hover:bg-primary/90 transition-colors"
     >
       View Profile

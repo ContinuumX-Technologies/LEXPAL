@@ -62,7 +62,7 @@ export default function LoginPage() {
       // set cookie (simple, adjust for HttpOnly via server if needed)
       // document.cookie = `token=${data.token}; path=/; max-age=604800; Secure; SameSite=Lax;`;
 
-      router.push("/lexpal/Lawyer-Dashboard");
+      router.push("/Lawyer-Dashboard");
     } catch (err) {
       console.error(err);
       setError("Server error, try again later.");
@@ -123,7 +123,7 @@ export default function LoginPage() {
               </button>
             </div>
 
-            <a className={styles.forgot} href="#">
+            <a className={styles.forgot} >
               Forgot Password?
             </a>
           </label>
@@ -139,16 +139,16 @@ export default function LoginPage() {
               {submitting ? "Logging in..." : "Login"}
             </button>
 
-            <button
+            {/* <button
               type="button"
-              onClick={() => {
-                /* If your GoogleButton handles auth, call it here or render it directly. */
-              }}
+              onClick={() => { */}
+                
+              {/* }}
               className={styles.googleWrap}
             >
               <div className={styles.googleIcon} aria-hidden />
               <span>Login with Google</span>
-            </button>
+            </button> */}
             {/* Or use your existing component: <GoogleButton /> */}
           </div>
         </form>
@@ -156,7 +156,7 @@ export default function LoginPage() {
         <div className={styles.bottomNote}>
           <p>
             Don't have an account?{" "}
-            <button onClick={()=>{router.push("/lexpal/Lawyer-SignUp")}}>
+            <button onClick={()=>{router.push("/Lawyer-SignUp")}}>
             <a className={styles.signUpLink} >
               Sign Up
             </a>

@@ -65,7 +65,7 @@ export default function ChatsSection({router}:chatProps) {
             <button
               key={chat.userId}
               className={`${styles.item} ${unread ? styles.unread : ""}`}
-              onClick={() => router.push(`/lexpal/User-Chat/${chat.userId}`)}
+              onClick={() => router.push(`/User-Chat/${chat.userId}`)}
             >
               {/* green accent if user is online */}
               <div

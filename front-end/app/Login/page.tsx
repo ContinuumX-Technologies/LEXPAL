@@ -60,7 +60,7 @@ export default function LoginPage() {
 
   
 
-      router.push("/lexpal/Dashboard");
+      router.push("/Dashboard");
     } catch (err) {
       console.error(err);
       setError("Server error, try again later.");
@@ -154,7 +154,7 @@ export default function LoginPage() {
         <div className={styles.bottomNote}>
           <p>
             Don't have an account?{" "}
-            <button onClick={()=>{router.push("/lexpal/SignUp")}}>
+            <button onClick={()=>{router.push("/SignUp")}}>
             <a className={styles.signUpLink} >
               Sign Up
             </a>
