@@ -1,51 +1,876 @@
-/* Outer wrapper (flex column + gap-5) */
-.wrap {
+/* ============================================
+   APPLE-INSPIRED EMPTY STATE
+   Clean, inviting, action-oriented
+   ============================================ */
+
+/* -------------------- CONTAINER -------------------- */
+
+.container {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem; /* gap-5 */
+  gap: 24px;
 }
 
-/* White card container */
+/* -------------------- MAIN CARD -------------------- */
+
 .card {
+  position: relative;
+  padding: 48px 24px;
+  
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+  overflow: hidden;
+  
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+/* Decorative Background */
+.cardBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bgCircle1 {
+  position: absolute;
+  top: -60%;
+  right: -30%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.08) 0%,
+    transparent 70%
+  );
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.bgCircle2 {
+  position: absolute;
+  bottom: -40%;
+  left: -20%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.06) 0%,
+    transparent 70%
+  );
+  animation: floatSlow 8s ease-in-out infinite 2s;
+}
+
+.bgCircle3 {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.04) 0%,
+    transparent 70%
+  );
+  animation: floatSlow 8s ease-in-out infinite 4s;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Content */
+.content {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-
-  padding: 3rem 1rem; /* py-12 px-4 */
   text-align: center;
-
-  background-color: white;
-  border-radius: 1.5rem; /* rounded-3xl */
-  border: 1px solid #e5e7eb; /* gray-200 */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-
-  transition: background-color 0.3s ease;
+  gap: 24px;
+  z-index: 1;
 }
 
-/* Dark mode override */
-.dark .card {
-  background-color: #1E293B; /* dark-navy */
-  border-color: #374151;     /* gray-700 */
-  box-shadow: none;
+/* -------------------- ANIMATED ICON -------------------- */
+
+.iconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
 }
 
-/* Icon styles: text-6xl + vibrant-purple + mb-4 */
-.icon {
-  font-size: 3.75rem; /* text-6xl */
-  color: var(--vibrant-purple);
-  margin-bottom: 1rem;
+.iconInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  border-radius: 22px;
+  
+  transition: transform 0.3s ease;
 }
 
-/* Text paragraph: text-xl, medium, relaxed, max-w-xs */
-.text {
-  font-size: 1.25rem;
+.card:hover .iconInner {
+  transform: scale(1.05);
+}
+
+.iconInner .material-symbols-outlined {
+  font-size: 36px;
+  color: #6366f1;
+}
+
+.iconRing {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed rgba(99, 102, 241, 0.2);
+  border-radius: 26px;
+  animation: spinSlow 20s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Animated dots inside icon */
+.iconDots {
+  position: absolute;
+  bottom: 22px;
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #6366f1;
+  border-radius: 50%;
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* -------------------- TEXT -------------------- */
+
+.textWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.title {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: rgba(0, 0, 0, 0.88);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+/* -------------------- CTA BUTTON -------------------- */
+
+.ctaButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 8px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  
+  color: white;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  
+  box-shadow: 
+    0 4px 16px rgba(99, 102, 241, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  
+  transition: 
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 28px rgba(99, 102, 241, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.ctaButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.ctaIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.ctaIcon .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.ctaText {
+  flex: 1;
+  text-align: left;
+  padding-right: 4px;
+}
+
+.ctaArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+.ctaArrow .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* -------------------- SUGGESTIONS -------------------- */
+
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.suggestionsLabel {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 13px;
   font-weight: 500;
-  line-height: 1.6;
-  color: #111827; /* gray-900 */
-  max-width: 20rem;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0;
+  padding-left: 4px;
 }
 
-.dark .text {
-  color: #f3f4f6; /* gray-100 */
+.suggestionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Suggestion Card */
+.suggestionCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: left;
+  
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  
+  transition: 
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.suggestionCard:hover {
+  background: rgba(99, 102, 241, 0.02);
+  border-color: rgba(99, 102, 241, 0.15);
+  box-shadow: 
+    0 2px 8px rgba(99, 102, 241, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  transform: translateX(4px);
+}
+
+.suggestionCard:active {
+  transform: translateX(4px) scale(0.99);
+}
+
+.suggestionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(139, 92, 246, 0.08) 100%
+  );
+  border-radius: 12px;
+  
+  transition: background 0.2s ease;
+}
+
+.suggestionCard:hover .suggestionIcon {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.12) 0%,
+    rgba(139, 92, 246, 0.12) 100%
+  );
+}
+
+.suggestionIcon .material-symbols-outlined {
+  font-size: 22px;
+  color: #6366f1;
+}
+
+.suggestionText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.suggestionTitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.suggestionDesc {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
+  
+  /* Truncate */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestionArrow {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+  transition: 
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.suggestionCard:hover .suggestionArrow {
+  color: #6366f1;
+  transform: translateX(4px);
+}
+
+/* -------------------- HELP LINK -------------------- */
+
+.helpWrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.helpLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  
+  color: rgba(0, 0, 0, 0.45);
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  
+  transition: 
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.helpLink:hover {
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.06);
+}
+
+.helpLink .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: rgba(44, 44, 46, 1);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .bgCircle1 {
+    background: radial-gradient(
+      circle,
+      rgba(99, 102, 241, 0.12) 0%,
+      transparent 70%
+    );
+  }
+  
+  .bgCircle2 {
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.1) 0%,
+      transparent 70%
+    );
+  }
+  
+  .bgCircle3 {
+    background: radial-gradient(
+      circle,
+      rgba(168, 85, 247, 0.08) 0%,
+      transparent 70%
+    );
+  }
+  
+  .iconInner {
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.15) 0%,
+      rgba(139, 92, 246, 0.15) 100%
+    );
+  }
+  
+  .iconInner .material-symbols-outlined {
+    color: #818cf8;
+  }
+  
+  .iconRing {
+    border-color: rgba(129, 140, 248, 0.25);
+  }
+  
+  .dot {
+    background: #818cf8;
+  }
+  
+  .title {
+    color: rgba(255, 255, 255, 0.92);
+  }
+  
+  .subtitle {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .suggestionsLabel {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .suggestionCard {
+    background: rgba(44, 44, 46, 1);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+  
+  .suggestionCard:hover {
+    background: rgba(129, 140, 248, 0.06);
+    border-color: rgba(129, 140, 248, 0.2);
+    box-shadow: 
+      0 2px 8px rgba(129, 140, 248, 0.1),
+      0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .suggestionIcon {
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.12) 0%,
+      rgba(139, 92, 246, 0.12) 100%
+    );
+  }
+  
+  .suggestionCard:hover .suggestionIcon {
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.18) 0%,
+      rgba(139, 92, 246, 0.18) 100%
+    );
+  }
+  
+  .suggestionIcon .material-symbols-outlined {
+    color: #818cf8;
+  }
+  
+  .suggestionTitle {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .suggestionDesc {
+    color: rgba(255, 255, 255, 0.45);
+  }
+  
+  .suggestionArrow {
+    color: rgba(255, 255, 255, 0.25);
+  }
+  
+  .suggestionCard:hover .suggestionArrow {
+    color: #818cf8;
+  }
+  
+  .helpLink {
+    color: rgba(255, 255, 255, 0.45);
+  }
+  
+  .helpLink:hover {
+    color: #818cf8;
+    background: rgba(129, 140, 248, 0.1);
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet */
+@media (min-width: 640px) {
+  .card {
+    padding: 56px 32px;
+    border-radius: 28px;
+  }
+  
+  .iconWrap {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .iconInner {
+    width: 80px;
+    height: 80px;
+    border-radius: 24px;
+  }
+  
+  .iconInner .material-symbols-outlined {
+    font-size: 40px;
+  }
+  
+  .iconRing {
+    border-radius: 30px;
+  }
+  
+  .title {
+    font-size: 26px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .textWrap {
+    max-width: 380px;
+  }
+  
+  .ctaButton {
+    height: 56px;
+    padding: 0 10px;
+    font-size: 17px;
+    border-radius: 18px;
+  }
+  
+  .ctaIcon,
+  .ctaArrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+  
+  .suggestionsGrid {
+    flex-direction: row;
+    gap: 12px;
+  }
+  
+  .suggestionCard {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+    border-radius: 18px;
+  }
+  
+  .suggestionIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .suggestionText {
+    gap: 4px;
+  }
+  
+  .suggestionDesc {
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  
+  .suggestionArrow {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+  }
+  
+  .suggestionCard {
+    position: relative;
+  }
+  
+  .suggestionCard:hover {
+    transform: translateY(-4px);
+  }
+  
+  .suggestionCard:active {
+    transform: translateY(-4px) scale(0.99);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .card {
+    padding: 64px 40px;
+    border-radius: 32px;
+  }
+  
+  .content {
+    gap: 28px;
+  }
+  
+  .iconWrap {
+    width: 112px;
+    height: 112px;
+  }
+  
+  .iconInner {
+    width: 88px;
+    height: 88px;
+    border-radius: 26px;
+  }
+  
+  .iconInner .material-symbols-outlined {
+    font-size: 44px;
+  }
+  
+  .title {
+    font-size: 28px;
+  }
+  
+  .textWrap {
+    max-width: 420px;
+    gap: 10px;
+  }
+  
+  .suggestionsGrid {
+    gap: 16px;
+  }
+  
+  .suggestionCard {
+    padding: 22px;
+    border-radius: 20px;
+  }
+  
+  .suggestionIcon {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .suggestionTitle {
+    font-size: 16px;
+  }
+  
+  .suggestionDesc {
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 380px) {
+  .card {
+    padding: 36px 20px;
+    border-radius: 20px;
+  }
+  
+  .iconWrap {
+    width: 76px;
+    height: 76px;
+  }
+  
+  .iconInner {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+  }
+  
+  .iconInner .material-symbols-outlined {
+    font-size: 32px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+  }
+  
+  .ctaButton {
+    width: 100%;
+    height: 48px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+  
+  .ctaIcon,
+  .ctaArrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  
+  .suggestionCard {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+  
+  .suggestionIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  
+  .suggestionIcon .material-symbols-outlined {
+    font-size: 20px;
+  }
+  
+  .suggestionTitle {
+    font-size: 14px;
+  }
+  
+  .suggestionDesc {
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .bgCircle1,
+  .bgCircle2,
+  .bgCircle3,
+  .iconRing,
+  .dot {
+    animation: none;
+  }
+  
+  .iconInner,
+  .ctaButton,
+  .ctaArrow,
+  .suggestionCard,
+  .suggestionArrow {
+    transition: none;
+  }
+}
+
+/* Focus states */
+.ctaButton:focus-visible,
+.suggestionCard:focus-visible,
+.helpLink:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline-offset: 3px;
+}
+
+/* High contrast */
+@media (forced-colors: active) {
+  .card {
+    border: 2px solid CanvasText;
+  }
+  
+  .suggestionCard {
+    border: 1px solid CanvasText;
+  }
+  
+  .ctaButton {
+    background: Highlight;
+    color: HighlightText;
+  }
+  
+  .iconInner {
+    border: 2px solid CanvasText;
+    background: Canvas;
+  }
+  
+  .iconRing {
+    border-style: solid;
+  }
 }

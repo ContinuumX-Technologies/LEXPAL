@@ -1,115 +1,266 @@
-// app/dashboard/Navbar.tsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import styles from "./Navbar.module.css";
 
-/**
- * Sticky horizontal navbar with scrollspy + animated overline.
- *
- * Behavior:
- * - Highlights nav link based on current section in view (scrollspy).
- * - Moves an overline element underneath the active nav item.
- * - Smooth scroll on click with offset (accounts for header + navbar heights).
- *
- * Implementation notes:
- * - Uses window scroll listener and computes active section by comparing scroll position.
- * - Measures link and container positions to move the overline using transform.
- */
+interface NavItem {
+  id: string;
+  label: string;
+  icon?: string;
+}
 
-const NAV_ITEMS = [
-  { id: "featured-lawyers", label: "Featured Lawyers" },
-  { id: "lexpal-ai", label: "Lexpal AI" },
-  { id: "saved-lawyers", label: "Saved Lawyers" },
-  { id: "chats", label: "Chats" },
+type props = {
+  firstName: string;
+}
+
+const NAV_ITEMS: NavItem[] = [
+  { id: "featured-lawyers", label: "Featured", icon: "star" },
+  { id: "lexpal-ai", label: "AI", icon: "auto_awesome" },
+  { id: "saved-lawyers", label: "Saved", icon: "bookmark" },
+  { id: "chats", label: "Chats", icon: "chat" },
 ];
 
-export default function Navbar() {
+const SCROLL_OFFSET = 120;
+
+export default function Navbar({ firstName }: props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const overlineRef = useRef<HTMLDivElement | null>(null);
+  const pillRef = useRef<HTMLDivElement | null>(null);
+  const indicatorRef = useRef<HTMLDivElement | null>(null);
 
-  // Update active nav link based on scroll position
-  useEffect(() => {
-    const sections = NAV_ITEMS.map((n) => document.getElementById(n.id)).filter(Boolean) as HTMLElement[];
-    const handleScroll = () => {
-      let current: string | null = null;
-      const y = window.scrollY;
-      // choose the section whose top is <= y + offset and largest top
-      const offset = 150; // matches original heuristic
-      for (const s of sections) {
-        const top = s.offsetTop - offset;
-        const bottom = top + s.offsetHeight;
-        if (y >= top && y < bottom) {
-          current = s.id;
-          break;
-        }
-      }
-      setActiveId(current);
-    };
+  const [activeId, setActiveId] = useState<string>(NAV_ITEMS[0].id);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [notificationCount] = useState(3);
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+  const isScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Get greeting based on time
+  const getGreeting = useCallback(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Morning";
+    if (hour < 18) return "Afternoon";
+    return "Evening";
   }, []);
 
-  // Move the overline to active link
+  // Scroll detection for glass effect intensity
   useEffect(() => {
-    const container = containerRef.current;
-    const overline = overlineRef.current;
-    if (!container || !overline) return;
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    const activeLink = container.querySelector<HTMLAnchorElement>(
-      `a[data-nav="${activeId}"]`
-    );
+  // Active section detection
+  const detectActiveSection = useCallback(() => {
+    if (isScrollingRef.current) return;
 
-    if (activeLink) {
-      const navRect = container.getBoundingClientRect();
-      const linkRect = activeLink.getBoundingClientRect();
-      const offsetLeft = linkRect.left - navRect.left + container.scrollLeft;
-      const width = linkRect.width;
-      overline.style.transform = `translateX(${offsetLeft}px)`;
-      overline.style.width = `${width}px`;
-      overline.style.opacity = "1";
-    } else {
-      overline.style.width = `0px`;
-      overline.style.opacity = "0";
+    const sections = NAV_ITEMS
+      .map((n) => document.getElementById(n.id))
+      .filter(Boolean) as HTMLElement[];
+
+    const scrollY = window.scrollY + SCROLL_OFFSET;
+    let currentId = NAV_ITEMS[0].id;
+
+    for (const section of sections) {
+      if (scrollY >= section.offsetTop && scrollY < section.offsetTop + section.offsetHeight) {
+        currentId = section.id;
+        break;
+      }
+    }
+
+    setActiveId(currentId);
+  }, []);
+
+  useEffect(() => {
+    let rafId: number;
+    const throttled = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        detectActiveSection();
+        rafId = 0;
+      });
+    };
+
+    window.addEventListener("scroll", throttled, { passive: true });
+    detectActiveSection();
+    return () => {
+      window.removeEventListener("scroll", throttled);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [detectActiveSection]);
+
+  // Animate indicator pill
+  useEffect(() => {
+    const pill = pillRef.current;
+    const indicator = indicatorRef.current;
+    if (!pill || !indicator) return;
+
+    const activeBtn = pill.querySelector<HTMLButtonElement>(`[data-id="${activeId}"]`);
+    if (activeBtn) {
+      const pillRect = pill.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      indicator.style.transform = `translateX(${btnRect.left - pillRect.left}px)`;
+      indicator.style.width = `${btnRect.width}px`;
+      indicator.style.opacity = "1";
     }
   }, [activeId]);
 
-  // Click handler for smooth scroll with offset
-  const onClick = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
+  // Handle navigation click
+  const handleNavClick = useCallback((id: string) => {
     const target = document.getElementById(id);
     if (!target) return;
 
-    const header = document.querySelector("header");
-    const navbar = containerRef.current;
-    const headerHeight = header ? header.getBoundingClientRect().height : 0;
-    const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
-    const offset = headerHeight + navbarHeight;
-
-    const top = target.offsetTop - offset;
-    window.scrollTo({ top, behavior: "smooth" });
-
-    // set active immediately for better UX
+    isScrollingRef.current = true;
     setActiveId(id);
-  };
+
+    const navHeight = containerRef.current?.getBoundingClientRect().height || 100;
+    window.scrollTo({
+      top: target.offsetTop - navHeight - 16,
+      behavior: "smooth",
+    });
+
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 600);
+  }, []);
+
+  // Menu toggle
+  const toggleMenu = useCallback(() => {
+    setMenuOpen((prev) => !prev);
+    if (navigator.vibrate) navigator.vibrate(8);
+  }, []);
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
+  }, []);
 
   return (
-    <nav className={styles.navbar} ref={containerRef}>
-      <div className={styles.overline} ref={overlineRef} />
-      <div className={styles.links}>
-        {NAV_ITEMS.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            data-nav={item.id}
-            onClick={(e) => onClick(e, item.id)}
-            className={`${styles.link} ${activeId === item.id ? styles.active : ""}`}
-          >
-            {item.label}
-          </a>
-        ))}
+    <>
+      {/* Main Navigation Bar */}
+      <div
+        ref={containerRef}
+        className={`${styles.navbar} ${isScrolled ? styles.navbarScrolled : ""}`}
+      >
+        <div className={styles.navContent}>
+          {/* Left - Menu & Greeting */}
+          <div className={styles.navLeft}>
+            <button
+              className={styles.menuBtn}
+              onClick={toggleMenu}
+              aria-label="Menu"
+              aria-expanded={menuOpen}
+            >
+              <div className={`${styles.burger} ${menuOpen ? styles.burgerOpen : ""}`}>
+                <span /><span />
+              </div>
+            </button>
+            
+            <div className={styles.greetingWrap}>
+              <span className={styles.greetingLabel}>{getGreeting()},</span>
+              <span className={styles.greetingName}>{firstName}</span>
+            </div>
+          </div>
+
+          {/* Center - Navigation Pill */}
+          <div className={styles.navCenter}>
+            <div className={styles.pill} ref={pillRef}>
+              <div className={styles.pillIndicator} ref={indicatorRef} />
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item.id}
+                  data-id={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`${styles.pillItem} ${activeId === item.id ? styles.pillItemActive : ""}`}
+                >
+                  <span
+                    className="material-symbols-outlined"
+                    style={{
+                      fontSize: 18,
+                      fontVariationSettings: `'wght' ${activeId === item.id ? 600 : 400}`,
+                    }}
+                  >
+                    {item.icon}
+                  </span>
+                  <span className={styles.pillLabel}>{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Right - Actions */}
+          <div className={styles.navRight}>
+            <button className={styles.actionBtn} aria-label="Search">
+              <span className="material-symbols-outlined">search</span>
+            </button>
+
+            <button className={styles.actionBtn} aria-label="Notifications">
+              <span className="material-symbols-outlined">notifications</span>
+              {notificationCount > 0 && (
+                <span className={styles.badge}>{notificationCount}</span>
+              )}
+            </button>
+
+            <button className={styles.avatarBtn} aria-label="Profile">
+              <span className={styles.avatarText}>
+                {firstName.charAt(0).toUpperCase()}
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
-    </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`${styles.overlay} ${menuOpen ? styles.overlayVisible : ""}`}
+        onClick={toggleMenu}
+      />
+
+      {/* Mobile Menu Drawer */}
+      <aside className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ""}`}>
+        <div className={styles.drawerHeader}>
+          <div className={styles.drawerAvatar}>
+            {firstName.charAt(0).toUpperCase()}
+          </div>
+          <div className={styles.drawerUser}>
+            <span className={styles.drawerName}>{firstName}</span>
+            <span className={styles.drawerSub}>View Profile →</span>
+          </div>
+        </div>
+
+        <nav className={styles.drawerNav}>
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              className={`${styles.drawerItem} ${activeId === item.id ? styles.drawerItemActive : ""}`}
+              onClick={() => {
+                handleNavClick(item.id);
+                setMenuOpen(false);
+              }}
+            >
+              <span className="material-symbols-outlined">{item.icon}</span>
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className={styles.drawerFooter}>
+          <button className={styles.drawerFooterBtn}>
+            <span className="material-symbols-outlined">settings</span>
+            Settings
+          </button>
+          <button className={styles.drawerFooterBtn}>
+            <span className="material-symbols-outlined">help</span>
+            Help
+          </button>
+          <button className={`${styles.drawerFooterBtn} ${styles.drawerLogout}`}>
+            <span className="material-symbols-outlined">logout</span>
+            Sign Out
+          </button>
+        </div>
+      </aside>
+    </>
   );
 }

@@ -1,0 +1,620 @@
+/* ============================================
+   APPLE-INSPIRED EMPTY CHAT STATE
+   ============================================ */
+
+   .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px;
+  }
+  
+  /* Main Card */
+  .card {
+    position: relative;
+    padding: 48px 24px;
+    
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 24px;
+    overflow: hidden;
+    
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      0 6px 16px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Background */
+  .cardBg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  
+  .bgGradient {
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(
+      circle,
+      rgba(52, 199, 89, 0.08) 0%,
+      rgba(48, 209, 88, 0.04) 40%,
+      transparent 70%
+    );
+    animation: gradientFloat 10s ease-in-out infinite;
+  }
+  
+  @keyframes gradientFloat {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(-30px, 20px) scale(1.1);
+      opacity: 1;
+    }
+  }
+  
+  .bgBubbles {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .bgBubble {
+    position: absolute;
+    opacity: 0.04;
+    animation: bubbleFloat 12s ease-in-out infinite;
+  }
+  
+  .bgBubble:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+  .bgBubble:nth-child(2) { top: 55%; left: 12%; animation-delay: 2s; }
+  .bgBubble:nth-child(3) { top: 25%; right: 10%; animation-delay: 4s; }
+  .bgBubble:nth-child(4) { top: 65%; right: 15%; animation-delay: 1s; }
+  .bgBubble:nth-child(5) { top: 40%; left: 25%; animation-delay: 3s; }
+  
+  .bgBubble .material-symbols-outlined {
+    font-size: 28px;
+    color: rgba(52, 199, 89, 1);
+  }
+  
+  @keyframes bubbleFloat {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0.04;
+    }
+    50% {
+      transform: translateY(-12px) rotate(8deg);
+      opacity: 0.08;
+    }
+  }
+  
+  /* Content */
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    z-index: 1;
+  }
+  
+  /* Icon */
+  .iconWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .iconInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    
+    background: linear-gradient(
+      135deg,
+      rgba(52, 199, 89, 0.12) 0%,
+      rgba(48, 209, 88, 0.12) 100%
+    );
+    border-radius: 24px;
+    
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover .iconInner {
+    transform: scale(1.05);
+  }
+  
+  .iconInner .material-symbols-outlined {
+    font-size: 40px;
+    color: #34c759;
+  }
+  
+  .iconPulse {
+    position: absolute;
+    inset: -8px;
+    border: 2px solid rgba(52, 199, 89, 0.2);
+    border-radius: 28px;
+    animation: pulseBorder 2.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulseBorder {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 0.2;
+    }
+  }
+  
+  /* Text */
+  .textWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 320px;
+  }
+  
+  .title {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: rgba(0, 0, 0, 0.88);
+    margin: 0;
+  }
+  
+  .subtitle {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+  }
+  
+  /* CTA Button */
+  .ctaButton {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
+    padding: 0 8px;
+    
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    
+    color: white;
+    background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    
+    box-shadow: 
+      0 4px 16px rgba(52, 199, 89, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    
+    transition: 
+      transform 0.2s ease,
+      box-shadow 0.3s ease;
+  }
+  
+  .ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 28px rgba(52, 199, 89, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  
+  .ctaButton:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  .ctaIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
+  
+  .ctaIcon .material-symbols-outlined {
+    font-size: 22px;
+  }
+  
+  .ctaText {
+    flex: 1;
+    text-align: left;
+    padding-right: 4px;
+  }
+  
+  .ctaArrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .ctaButton:hover .ctaArrow {
+    transform: translateX(4px);
+  }
+  
+  .ctaArrow .material-symbols-outlined {
+    font-size: 20px;
+  }
+  
+  /* Quick Actions */
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .actionsLabel {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0;
+    padding-left: 4px;
+  }
+  
+  .actionsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .actionCard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    cursor: pointer;
+    text-align: left;
+    
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    
+    transition: 
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+  
+  .actionCard:hover {
+    transform: translateX(4px);
+    border-color: rgba(52, 199, 89, 0.2);
+    box-shadow: 
+      0 2px 8px rgba(52, 199, 89, 0.08),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+  
+  .actionIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    
+    background: linear-gradient(
+      135deg,
+      rgba(52, 199, 89, 0.1) 0%,
+      rgba(48, 209, 88, 0.1) 100%
+    );
+    border-radius: 12px;
+  }
+  
+  .actionIcon .material-symbols-outlined {
+    font-size: 22px;
+    color: #34c759;
+  }
+  
+  .actionText {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+  
+  .actionTitle {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.85);
+  }
+  
+  .actionDesc {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.45);
+  }
+  
+  /* ============================================
+     DARK MODE
+     ============================================ */
+  
+  @media (prefers-color-scheme: dark) {
+    .card {
+      background: rgba(44, 44, 46, 1);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    .bgGradient {
+      background: radial-gradient(
+        circle,
+        rgba(48, 209, 88, 0.1) 0%,
+        rgba(48, 209, 88, 0.05) 40%,
+        transparent 70%
+      );
+    }
+    
+    .bgBubble .material-symbols-outlined {
+      color: rgba(48, 209, 88, 0.8);
+    }
+    
+    .iconInner {
+      background: linear-gradient(
+        135deg,
+        rgba(48, 209, 88, 0.15) 0%,
+        rgba(48, 209, 88, 0.15) 100%
+      );
+    }
+    
+    .iconInner .material-symbols-outlined {
+      color: #30d158;
+    }
+    
+    .iconPulse {
+      border-color: rgba(48, 209, 88, 0.25);
+    }
+    
+    .title {
+      color: rgba(255, 255, 255, 0.92);
+    }
+    
+    .subtitle {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .ctaButton {
+      background: linear-gradient(135deg, #30d158 0%, #34c759 100%);
+    }
+    
+    .actionsLabel {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .actionCard {
+      background: rgba(44, 44, 46, 1);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    .actionCard:hover {
+      border-color: rgba(48, 209, 88, 0.25);
+    }
+    
+    .actionIcon {
+      background: linear-gradient(
+        135deg,
+        rgba(48, 209, 88, 0.15) 0%,
+        rgba(48, 209, 88, 0.15) 100%
+      );
+    }
+    
+    .actionIcon .material-symbols-outlined {
+      color: #30d158;
+    }
+    
+    .actionTitle {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .actionDesc {
+      color: rgba(255, 255, 255, 0.45);
+    }
+  }
+  
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  
+  @media (min-width: 640px) {
+    .container {
+      padding: 0 32px;
+      gap: 24px;
+    }
+    
+    .card {
+      padding: 56px 32px;
+      border-radius: 28px;
+    }
+    
+    .iconInner {
+      width: 88px;
+      height: 88px;
+      border-radius: 26px;
+    }
+    
+    .iconInner .material-symbols-outlined {
+      font-size: 44px;
+    }
+    
+    .title {
+      font-size: 28px;
+    }
+    
+    .textWrap {
+      max-width: 400px;
+    }
+    
+    .ctaButton {
+      height: 56px;
+      font-size: 17px;
+      border-radius: 18px;
+    }
+    
+    .actionsGrid {
+      flex-direction: row;
+      gap: 12px;
+    }
+    
+    .actionCard {
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      border-radius: 18px;
+    }
+    
+    .actionCard:hover {
+      transform: translateY(-4px);
+    }
+    
+    .actionIcon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container {
+      padding: 0 48px;
+    }
+    
+    .card {
+      padding: 64px 48px;
+      border-radius: 32px;
+    }
+    
+    .title {
+      font-size: 32px;
+    }
+    
+    .actionsGrid {
+      gap: 16px;
+    }
+    
+    .actionCard {
+      padding: 24px;
+      border-radius: 20px;
+    }
+  }
+  
+  @media (max-width: 380px) {
+    .container {
+      padding: 0 16px;
+    }
+    
+    .card {
+      padding: 36px 20px;
+      border-radius: 20px;
+    }
+    
+    .iconInner {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+    }
+    
+    .iconInner .material-symbols-outlined {
+      font-size: 34px;
+    }
+    
+    .title {
+      font-size: 20px;
+    }
+    
+    .ctaButton {
+      width: 100%;
+      height: 48px;
+      font-size: 15px;
+      border-radius: 14px;
+    }
+    
+    .actionCard {
+      padding: 12px 14px;
+      border-radius: 14px;
+    }
+    
+    .actionIcon {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .actionTitle {
+      font-size: 14px;
+    }
+    
+    .actionDesc {
+      font-size: 12px;
+    }
+  }
+  
+  /* ============================================
+     ACCESSIBILITY
+     ============================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    .bgGradient,
+    .bgBubble,
+    .iconPulse {
+      animation: none;
+    }
+    
+    .iconInner,
+    .ctaButton,
+    .ctaArrow,
+    .actionCard {
+      transition: none;
+    }
+  }
+  
+  .ctaButton:focus-visible,
+  .actionCard:focus-visible {
+    outline: 2px solid rgba(52, 199, 89, 0.6);
+    outline-offset: 3px;
+  }
+  
+  @media (forced-colors: active) {
+    .card {
+      border: 2px solid CanvasText;
+    }
+    
+    .actionCard {
+      border: 1px solid CanvasText;
+    }
+    
+    .ctaButton {
+      background: Highlight;
+      color: HighlightText;
+    }
+    
+    .iconInner {
+      border: 2px solid CanvasText;
+      background: Canvas;
+    }
+  }

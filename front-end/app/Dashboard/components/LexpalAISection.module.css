@@ -1,96 +1,1130 @@
-/* app/dashboard/LexpalAISection.module.css */
+/* ============================================
+   APPLE-INSPIRED LEXPAL AI SECTION
+   Premium AI experience with clean aesthetics
+   ============================================ */
 
-/* Section container */
-.wrap {
-  padding: 0 24px 40px 24px;
+/* -------------------- SECTION -------------------- */
+
+.section {
+  width: 100%;
+  padding: 32px 0 48px;
 }
 
-/* big gradient heading */
-.heading {
-  font-size: 40px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  background-image: linear-gradient(to right, #8a2be2, #a020f0, #4b0082, #ffffff);
+/* -------------------- HERO CARD -------------------- */
+
+.heroCard {
+  position: relative;
+  margin: 0 20px 32px;
+  padding: 32px 24px;
+  
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(139, 92, 246, 0.08) 50%,
+    rgba(168, 85, 247, 0.08) 100%
+  );
+  
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.15) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+.heroContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  z-index: 1;
+}
+
+/* AI Icon */
+.aiIconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aiIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  border-radius: 20px;
+  
+  box-shadow: 
+    0 8px 24px rgba(99, 102, 241, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.aiIcon .material-symbols-outlined {
+  font-size: 32px;
+  color: white;
+}
+
+.aiIconRing {
+  position: absolute;
+  inset: -8px;
+  border: 2px solid rgba(99, 102, 241, 0.2);
+  border-radius: 24px;
+  animation: ringPulse 2s ease-in-out infinite;
+}
+
+.aiIconRing2 {
+  position: absolute;
+  inset: -16px;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  border-radius: 28px;
+  animation: ringPulse 2s ease-in-out infinite 0.5s;
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.05); }
+}
+
+/* Hero Text */
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.heroTitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  
+  background: linear-gradient(
+    135deg,
+    #6366f1 0%,
+    #8b5cf6 40%,
+    #a855f7 70%,
+    #6366f1 100%
+  );
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  
+  animation: gradientShift 6s ease-in-out infinite;
+  margin: 0;
 }
 
-/* Talk to AI CTA */
-.talkBtn {
-  display: inline-flex;
-  gap: 10px;
-  align-items: center;
-  background: linear-gradient(90deg, #7c3aed, #4f46e5);
-  color: white;
-  border: none;
-  padding: 14px 22px;
-  border-radius: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 14px 30px rgba(124,58,237,0.15);
-  margin-bottom: 20px;
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
 }
 
-/* Row header */
-.rowHeader {
+.heroSubtitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.55);
+  margin: 0;
+  max-width: 280px;
+}
+
+/* New Chat Button */
+.newChatBtn {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-top: 20px;
-  margin-bottom: 8px;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 8px 0 8px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  
+  color: white;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  
+  box-shadow: 
+    0 4px 16px rgba(99, 102, 241, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  
+  transition: 
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
 }
+
+.newChatBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 28px rgba(99, 102, 241, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.newChatBtn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.newChatIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.newChatIcon .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.newChatText {
+  flex: 1;
+  text-align: left;
+}
+
+.newChatArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.newChatBtn:hover .newChatArrow {
+  transform: translateX(4px);
+}
+
+.newChatArrow .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* Quick Prompts */
+.quickPrompts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.quickPromptBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  
+  color: rgba(99, 102, 241, 0.9);
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 20px;
+  cursor: pointer;
+  
+  transition: 
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.quickPromptBtn:hover {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.quickPromptBtn:active {
+  transform: scale(0.96);
+}
+
+.quickPromptBtn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+/* -------------------- RECENT SECTION -------------------- */
+
+.recentSection {
+  padding: 0 20px;
+}
+
+.recentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.recentTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recentIcon {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
 .recentTitle {
-  color: #007aff; /* accent-blue */
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
   font-size: 18px;
   font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(0, 0, 0, 0.85);
+  margin: 0;
 }
 
-/* Cards container */
-.cards {
+.viewAllBtn {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px 6px 12px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  
+  color: #6366f1;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  
+  transition: background 0.2s ease;
+}
+
+.viewAllBtn:hover {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.viewAllBtn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* -------------------- CARDS GRID -------------------- */
+
+.cardsGrid {
+  display: grid;
+  gap: 12px;
+}
+
+/* -------------------- CONVERSATION CARD -------------------- */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  cursor: pointer;
+  overflow: hidden;
+  
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.03);
+  
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.2);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 12px 28px rgba(99, 102, 241, 0.08);
+}
+
+.cardGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.02) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover .cardGradient {
+  opacity: 1;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cardIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 10px;
+}
+
+.cardIconWrap .material-symbols-outlined {
+  font-size: 20px;
+  color: #6366f1;
+}
+
+.cardTime {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.cardTitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(0, 0, 0, 0.9);
+  margin: 0 0 6px;
+  
+  /* Clamp to 1 line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardDesc {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.55);
+  margin: 0 0 16px;
+  
+  /* Clamp to 2 lines */
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.cardMeta .material-symbols-outlined {
+  font-size: 14px;
+}
+
+.continueBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.08);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  
+  transition: 
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.continueBtn:hover {
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.continueBtn:active {
+  transform: scale(0.96);
+}
+
+.continueBtn .material-symbols-outlined {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.continueBtn:hover .material-symbols-outlined {
+  transform: translateX(2px);
+}
+
+/* -------------------- LOADING STATE -------------------- */
+
+.loadingWrap {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* Individual card */
-.card {
-  background: white;
-  border-radius: 24px;
-  padding: 20px;
-  border: 1px solid rgba(229,231,235,1);
-  box-shadow: 0 8px 20px rgba(15,23,42,0.04);
+.skeletonCard {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+  padding: 20px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 18px;
 }
-.cardTitle {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-  color: #0f172a;
+
+.skeletonLine {
+  height: 14px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.06) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.06) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: shimmer 1.5s ease-in-out infinite;
 }
-.cardText {
-  color: #4b5563;
-  margin: 0;
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
-.meta {
-  font-size: 12px;
-  color: #9ca3af;
-  text-align: right;
-  margin-top: 8px;
-}
-.continueBtn {
-  align-self: flex-start;
-  margin-top: 8px;
-  border: 1px solid #007aff;
-  color: #007aff;
-  background: transparent;
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 700;
-  display: inline-flex;
-  gap: 8px;
+
+/* -------------------- ERROR STATE -------------------- */
+
+.errorWrap {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+  
+  background: rgba(239, 68, 68, 0.04);
+  border: 1px solid rgba(239, 68, 68, 0.1);
+  border-radius: 18px;
+}
+
+.errorIcon {
+  font-size: 40px;
+  color: #ef4444;
+  margin-bottom: 12px;
+}
+
+.errorText {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 16px;
+}
+
+.retryBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  
+  transition: background 0.2s ease;
+}
+
+.retryBtn:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.retryBtn .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* -------------------- EMPTY STATE -------------------- */
+
+.emptyWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  text-align: center;
+  
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  border-radius: 18px;
+}
+
+.emptyIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 18px;
+}
+
+.emptyIcon .material-symbols-outlined {
+  font-size: 32px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.emptyTitle {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0 0 8px;
+}
+
+.emptyText {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0 0 20px;
+  max-width: 280px;
+}
+
+.emptyBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  
+  color: white;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+  transition: 
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.emptyBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+}
+
+.emptyBtn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.emptyBtn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* -------------------- DIVIDER -------------------- */
+
+.divider {
+  padding: 40px 20px 0;
+}
+
+.dividerLine {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 20%,
+    rgba(0, 0, 0, 0.08) 80%,
+    transparent 100%
+  );
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .heroCard {
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.12) 0%,
+      rgba(139, 92, 246, 0.12) 50%,
+      rgba(168, 85, 247, 0.12) 100%
+    );
+    border-color: rgba(99, 102, 241, 0.2);
+  }
+  
+  .heroGlow {
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.2) 0%,
+      transparent 70%
+    );
+  }
+  
+  .heroSubtitle {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  
+  .quickPromptBtn {
+    color: rgba(129, 140, 248, 0.95);
+    background: rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.25);
+  }
+  
+  .quickPromptBtn:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: rgba(99, 102, 241, 0.35);
+  }
+  
+  .recentIcon {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .recentTitle {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .viewAllBtn {
+    color: #818cf8;
+  }
+  
+  .viewAllBtn:hover {
+    background: rgba(129, 140, 248, 0.12);
+  }
+  
+  .card {
+    background: rgba(44, 44, 46, 1);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card:hover {
+    border-color: rgba(129, 140, 248, 0.3);
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      0 12px 28px rgba(129, 140, 248, 0.12);
+  }
+  
+  .cardIconWrap {
+    background: rgba(129, 140, 248, 0.15);
+  }
+  
+  .cardIconWrap .material-symbols-outlined {
+    color: #818cf8;
+  }
+  
+  .cardTime {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .cardTitle {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .cardDesc {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  
+  .cardMeta {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .continueBtn {
+    color: #818cf8;
+    background: rgba(129, 140, 248, 0.12);
+  }
+  
+  .continueBtn:hover {
+    background: rgba(129, 140, 248, 0.2);
+  }
+  
+  .skeletonCard {
+    background: rgba(44, 44, 46, 1);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+  
+  .skeletonLine {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    background-size: 200% 100%;
+  }
+  
+  .errorWrap {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.15);
+  }
+  
+  .errorText {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .emptyWrap {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .emptyIcon {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  
+  .emptyIcon .material-symbols-outlined {
+    color: rgba(255, 255, 255, 0.25);
+  }
+  
+  .emptyTitle {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .emptyText {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .dividerLine {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 20%,
+      rgba(255, 255, 255, 0.08) 80%,
+      transparent 100%
+    );
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet */
+@media (min-width: 640px) {
+  .section {
+    padding: 40px 0 56px;
+  }
+  
+  .heroCard {
+    margin: 0 32px 36px;
+    padding: 40px 32px;
+    border-radius: 28px;
+  }
+  
+  .heroTitle {
+    font-size: 38px;
+  }
+  
+  .heroSubtitle {
+    font-size: 16px;
+    max-width: 320px;
+  }
+  
+  .newChatBtn {
+    height: 56px;
+    padding: 0 10px;
+    font-size: 17px;
+    border-radius: 18px;
+  }
+  
+  .newChatIcon,
+  .newChatArrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+  
+  .recentSection {
+    padding: 0 32px;
+  }
+  
+  .recentTitle {
+    font-size: 20px;
+  }
+  
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .card {
+    padding: 24px;
+    border-radius: 20px;
+  }
+  
+  .divider {
+    padding: 48px 32px 0;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .section {
+    padding: 48px 0 64px;
+  }
+  
+  .heroCard {
+    margin: 0 48px 44px;
+    padding: 48px 40px;
+    border-radius: 32px;
+  }
+  
+  .heroContent {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+  
+  .aiIconWrap {
+    order: 1;
+  }
+  
+  .heroText {
+    order: 2;
+    text-align: left;
+    flex: 1;
+    min-width: 240px;
+  }
+  
+  .heroTitle {
+    font-size: 42px;
+  }
+  
+  .heroSubtitle {
+    max-width: none;
+  }
+  
+  .newChatBtn {
+    order: 3;
+  }
+  
+  .quickPrompts {
+    order: 4;
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  .recentSection {
+    padding: 0 48px;
+  }
+  
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .card {
+    padding: 28px;
+    border-radius: 22px;
+  }
+  
+  .cardTitle {
+    font-size: 18px;
+  }
+  
+  .cardDesc {
+    font-size: 15px;
+  }
+  
+  .divider {
+    padding: 56px 48px 0;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1280px) {
+  .cardsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 380px) {
+  .heroCard {
+    margin: 0 16px 28px;
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+  
+  .aiIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+  }
+  
+  .aiIcon .material-symbols-outlined {
+    font-size: 28px;
+  }
+  
+  .heroTitle {
+    font-size: 28px;
+  }
+  
+  .heroSubtitle {
+    font-size: 14px;
+  }
+  
+  .newChatBtn {
+    width: 100%;
+    height: 48px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+  
+  .quickPrompts {
+    width: 100%;
+  }
+  
+  .quickPromptBtn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  
+  .recentSection {
+    padding: 0 16px;
+  }
+  
+  .recentTitle {
+    font-size: 16px;
+  }
+  
+  .card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+  
+  .cardTitle {
+    font-size: 16px;
+  }
+  
+  .divider {
+    padding: 32px 16px 0;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .heroGlow,
+  .aiIconRing,
+  .aiIconRing2,
+  .heroTitle,
+  .skeletonLine {
+    animation: none;
+  }
+  
+  .card,
+  .newChatBtn,
+  .quickPromptBtn,
+  .continueBtn,
+  .emptyBtn {
+    transition: none;
+  }
+  
+  .newChatArrow,
+  .continueBtn .material-symbols-outlined {
+    transition: none;
+  }
+}
+
+/* Focus states */
+.newChatBtn:focus-visible,
+.quickPromptBtn:focus-visible,
+.viewAllBtn:focus-visible,
+.card:focus-visible,
+.continueBtn:focus-visible,
+.retryBtn:focus-visible,
+.emptyBtn:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline-offset: 3px;
+}
+
+/* High contrast */
+@media (forced-colors: active) {
+  .heroCard {
+    border: 2px solid CanvasText;
+  }
+  
+  .card {
+    border: 1px solid CanvasText;
+  }
+  
+  .newChatBtn,
+  .emptyBtn {
+    background: Highlight;
+    color: HighlightText;
+  }
+  
+  .aiIcon {
+    background: Highlight;
+  }
+  
+  .continueBtn {
+    border: 1px solid LinkText;
+  }
 }

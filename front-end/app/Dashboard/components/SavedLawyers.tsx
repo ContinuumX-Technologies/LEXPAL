@@ -1,121 +1,286 @@
-// app/dashboard/SavedLawyers.tsx
-import  { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import styles from "./SavedLawyers.module.css";
 import EmptySavedLawyers from "./SavedLawyer.alternate";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-const CARDS = [
-  {
-    name: "Jane Doe",
-    specialty: "Family Law",
-    active: true,
-    rating: "4.9",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDPwK_q6QO_sV8lS4kUxNxOMXUYewedqdvlWKw3b6y696bSKytq8pyHxFh5231aO_zayynBLa07Pz0zuzmIdHvhI0N4F0pwgArcKcMeQGrUUmZcKZeU_QsuAIJbONRjo28ojWhYiLEVuTlJ2mrB2vQFiwEZGXAe5yivQs2Uh6X1A4YV-D0083Zh5xIl66-JzkiUO7cgbbJtf91wM3aDgOgzGj5pe573xSiWIIckJkv4M-hDGo0_w-FS7-rdhfRrK6e44ABhsjTYd1KM",
-  },
-  {
-    name: "John Smith",
-    specialty: "Criminal Defense",
-    active: false,
-    rating: "4.8",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuB5GFzK2v5quexqZzAj7MT0FnHPnHYHmd4w1NgCjXENGRfI5Yyvwr0vifTaosqUT6g7sKyVe9J9uoRhNA3FRIebLjq7e3tg6LLBlTwAkCIqGsvRAYG4BFUw8cEmY1OsH7sD_DqQJzpgQkL9BDZsXKZENPJXQWCv4ToZ2iS5uTP4KsE_J9z0KthIM_B_0AHKWXsmqYSNYGuqA5C87FVuO4Spr1bB1vJfcNcu-4mNzR-QOybAw0WKfcqOw34AvrBCpVU0gPPUq1IzPsCE",
-  },
-  {
-    name: "Samantha Ray",
-    specialty: "Corporate Law",
-    active: true,
-    rating: "5.0",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAk2wHx-yGqr_735dL9742sHSwEK8ziI75LWMWGqyJ80zakY1pYW19NNcFHVb2PnD6AAefajRW0PUHGhNlm5RYABRll6LlQHuNp6iBDIjl_bF-7jn52N9SmDBxzzB30cjYxFdGxQVr2acXseOx4PY_n3T8CsuXiBXDDywpg7HHjdkxSrbFTs36YDZngZOJydvs3wCY1xEcvFQcpQtBTJfhdV39v9QiFPLLW19JcLMx1Ja8ibjvHr-MtZEpyU6hesbarN7BmiwPKRlNt",
-  },
-];
+interface Lawyer {
+  id: string;
+  name: string;
+  speciality: string;
+  profile_pic: string;
+  active: boolean;
+  review_count: number;
+  rating?: number;
+  lastSeen?: string;
+}
 
-type SavedLawyersProps = {
-  lawyers: any[] | null;
+interface SavedLawyersProps {
+  lawyers: Lawyer[] | null;
   loading: boolean;
   error: string | null;
-  router: AppRouterInstance
-};
+  router: AppRouterInstance;
+}
 
-export default function SavedLawyers({ lawyers, loading, error, router}: SavedLawyersProps) {
-  const [lawyersEmpty, setLawyersEmpty] = useState<boolean>(false);
+export default function SavedLawyers({
+  lawyers,
+  loading,
+  error,
+  router,
+}: SavedLawyersProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  // Use useEffect to update lawyersEmpty based on lawyers prop
+  // Check scroll position for navigation arrows
+  const checkScrollPosition = useCallback(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  }, []);
+
   useEffect(() => {
-    setLawyersEmpty(!lawyers || lawyers.length === 0);
-  }, [lawyers]);
+    const container = scrollRef.current;
+    if (!container) return;
 
-  // Handle loading state
-  if (loading) {
-    return (
-      <section className={styles.wrap}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Saved Lawyers</h2>
-        </div>
-        <div className={styles.loading}>Loading...</div>
-      </section>
-    );
-  }
+    checkScrollPosition();
+    container.addEventListener("scroll", checkScrollPosition, { passive: true });
+    window.addEventListener("resize", checkScrollPosition);
 
-  // Handle error state
-  if (error) {
-    return (
-      <section className={styles.wrap}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>Saved Lawyers</h2>
-        </div>
-        <div className={styles.error}>Error: {error}</div>
-      </section>
-    );
-  }
+    return () => {
+      container.removeEventListener("scroll", checkScrollPosition);
+      window.removeEventListener("resize", checkScrollPosition);
+    };
+  }, [checkScrollPosition, lawyers]);
 
-  // Check if lawyers is null or empty
+  // Scroll navigation
+  const scroll = useCallback((direction: "left" | "right") => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const cardWidth = 260;
+    const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
+
+    container.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  }, []);
+
+  // Format last seen time
+  const formatLastSeen = useCallback((lastSeen?: string) => {
+    if (!lastSeen) return "Recently";
+    return lastSeen;
+  }, []);
+
+  // Handle navigation
+  const handleChat = useCallback(
+    (id: string) => {
+      router.push(`/User-Chat/${id}`);
+    },
+    [router]
+  );
+
+  const handleProfile = useCallback(
+    (id: string) => {
+      router.push(`/Lawyer-Profile/${id}`);
+    },
+    [router]
+  );
+
+  const handleSeeAll = useCallback(() => {
+    router.push("/saved-lawyers");
+  }, [router]);
+
   const isEmpty = !lawyers || lawyers.length === 0;
 
   return (
-    <section className={styles.wrap}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>Saved Lawyers</h2>
-        {!isEmpty && <a className={styles.seeAll} >See All</a>}
-      </div>
+    <section className={styles.section} id="saved-lawyers">
+      {/* Section Header */}
+      <header className={styles.header}>
+        <div className={styles.headerLeft}>
+          <div className={styles.titleWrap}>
+            <span className={`material-symbols-outlined ${styles.titleIcon}`}>
+              bookmark
+            </span>
+            <h2 className={styles.title}>Saved Lawyers</h2>
+          </div>
+          {!isEmpty && !loading && (
+            <span className={styles.count}>{lawyers?.length} saved</span>
+          )}
+        </div>
 
-      {isEmpty ? (
-        <EmptySavedLawyers  router={router}/>
-      ) : (
-        <div className={styles.scrollRow}>
-          {lawyers.map((l) => (
-            <div key={l.id} className={styles.card}>
-              <img src={l.profile_pic} alt={l.name} className={styles.img} />
-              <div className={styles.cardBody}>
-                <p className={styles.name}>{l.name}</p>
-                <p className={styles.specialty}>{l.speciality.trim()}</p>
-                <div className={styles.metaRow}>
-                  {l.active ? (
-                    <span className={styles.activeDot} />
-                  ) : (
-                    <span className={styles.lastSeen}>Last seen 2h ago</span>
-                  )}
-                  <div className={styles.rating}>
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontVariationSettings: `'FILL' 1` }}
-                    >
-                      star
-                    </span>
-                    <span>{l.review_count}</span>
-                  </div>
-                </div>
-                <button className={styles.chatBtn} onClick={()=>{router.push(`/User-Chat/${l.id}`)}}>
-  <div className={styles.chatBtnContent}>
-    <span className="material-symbols-outlined">chat</span> 
-    <span>Chat</span>
-  </div>
-</button>
-                <button className={styles.profileBtn} onClick={()=>{router.push(`/Lawyer-Profile/${l.id}`)}}>
-                  View Profile{" "}
-                  <span className="material-symbols-outlined">arrow_right_alt</span>
+        <div className={styles.headerRight}>
+          {!isEmpty && !loading && (
+            <>
+              {/* Navigation Arrows */}
+              <div className={styles.navArrows}>
+                <button
+                  className={`${styles.navBtn} ${!canScrollLeft ? styles.navBtnDisabled : ""}`}
+                  onClick={() => scroll("left")}
+                  disabled={!canScrollLeft}
+                  aria-label="Scroll left"
+                >
+                  <span className="material-symbols-outlined">chevron_left</span>
                 </button>
+                <button
+                  className={`${styles.navBtn} ${!canScrollRight ? styles.navBtnDisabled : ""}`}
+                  onClick={() => scroll("right")}
+                  disabled={!canScrollRight}
+                  aria-label="Scroll right"
+                >
+                  <span className="material-symbols-outlined">chevron_right</span>
+                </button>
+              </div>
+
+              {/* See All Link */}
+              <button className={styles.seeAllBtn} onClick={handleSeeAll}>
+                See All
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </>
+          )}
+        </div>
+      </header>
+
+      {/* Loading State */}
+      {loading && (
+        <div className={styles.loadingWrap}>
+          {[1, 2, 3].map((i) => (
+            <div key={i} className={styles.skeletonCard}>
+              <div className={styles.skeletonImage} />
+              <div className={styles.skeletonBody}>
+                <div className={styles.skeletonLine} style={{ width: "70%" }} />
+                <div className={styles.skeletonLine} style={{ width: "50%" }} />
+                <div className={styles.skeletonLine} style={{ width: "40%" }} />
+                <div className={styles.skeletonBtns}>
+                  <div className={styles.skeletonBtn} />
+                  <div className={styles.skeletonBtn} />
+                </div>
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Error State */}
+      {error && !loading && (
+        <div className={styles.errorWrap}>
+          <div className={styles.errorIcon}>
+            <span className="material-symbols-outlined">error</span>
+          </div>
+          <p className={styles.errorText}>{error}</p>
+          <button className={styles.retryBtn}>
+            <span className="material-symbols-outlined">refresh</span>
+            Try Again
+          </button>
+        </div>
+      )}
+
+      {/* Empty State */}
+      {isEmpty && !loading && !error && <EmptySavedLawyers router={router} />}
+
+      {/* Lawyer Cards */}
+      {!isEmpty && !loading && !error && (
+        <div className={styles.carouselWrap}>
+          {/* Gradient Fade Left */}
+          {canScrollLeft && <div className={styles.fadeLeft} />}
+
+          {/* Cards Container */}
+          <div className={styles.carousel} ref={scrollRef}>
+            {lawyers?.map((lawyer) => (
+              <article
+                key={lawyer.id}
+                className={`${styles.card} ${
+                  hoveredCard === lawyer.id ? styles.cardHovered : ""
+                }`}
+                onMouseEnter={() => setHoveredCard(lawyer.id)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                {/* Card Image */}
+                <div className={styles.cardImageWrap}>
+                  <img
+                    src={lawyer.profile_pic}
+                    alt={lawyer.name}
+                    className={styles.cardImage}
+                    loading="lazy"
+                  />
+                  <div className={styles.cardImageOverlay} />
+
+                  {/* Status Badge */}
+                  {lawyer.active ? (
+                    <div className={styles.statusBadge}>
+                      <span className={styles.statusDot} />
+                      Available
+                    </div>
+                  ) : (
+                    <div className={`${styles.statusBadge} ${styles.statusOffline}`}>
+                      <span className="material-symbols-outlined">schedule</span>
+                      {formatLastSeen(lawyer.lastSeen)}
+                    </div>
+                  )}
+
+                  {/* Save Button */}
+                  <button className={styles.saveBtn} aria-label="Remove from saved">
+                    <span
+                      className="material-symbols-outlined"
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      bookmark
+                    </span>
+                  </button>
+                </div>
+
+                {/* Card Content */}
+                <div className={styles.cardContent}>
+                  <h3 className={styles.cardName}>{lawyer.name}</h3>
+                  <p className={styles.cardSpecialty}>{lawyer.speciality?.trim()}</p>
+
+                  {/* Rating */}
+                  <div className={styles.ratingWrap}>
+                    <div className={styles.stars}>
+                      <span
+                        className="material-symbols-outlined"
+                        style={{ fontVariationSettings: "'FILL' 1" }}
+                      >
+                        star
+                      </span>
+                    </div>
+                    <span className={styles.ratingScore}>
+                      {lawyer.rating || "4.9"}
+                    </span>
+                    <span className={styles.ratingCount}>
+                      ({lawyer.review_count} reviews)
+                    </span>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className={styles.cardActions}>
+                    <button
+                      className={styles.chatBtn}
+                      onClick={() => handleChat(lawyer.id)}
+                    >
+                      <span className="material-symbols-outlined">chat</span>
+                      Chat
+                    </button>
+                    <button
+                      className={styles.profileBtn}
+                      onClick={() => handleProfile(lawyer.id)}
+                    >
+                      <span className="material-symbols-outlined">person</span>
+                      Profile
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* Gradient Fade Right */}
+          {canScrollRight && <div className={styles.fadeRight} />}
         </div>
       )}
     </section>

@@ -1,69 +1,877 @@
-/* app/dashboard/Navbar.module.css */
+/* ============================================
+   APPLE-INSPIRED GLASS NAVBAR
+   Compact, centered, with premium glass effect
+   ============================================ */
 
-/* Navbar wrapper - sticky below header */
-
+/* -------------------- NAVBAR -------------------- */
 
 .navbar {
   position: sticky;
-  top: 80px;
-  z-index: 10;
-  padding: 12px 24px;
-  background: rgba(248, 250, 252, 0.85);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(229, 231, 235, 1);
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 12px 16px;
+  
+  /* Apple Glass Effect - Light */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  
+  /* Subtle bottom border */
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  
+  transition: 
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
 
-  /* horizontal scrolling ONLY */
-  overflow-x: auto;
-  overflow-y: hidden; /* ← THIS FIXES THE VERTICAL SCROLL */
+.navbarScrolled {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 1px 0 rgba(0, 0, 0, 0.06),
+    0 4px 16px -8px rgba(0, 0, 0, 0.1);
+}
 
-  white-space: nowrap;
+.navContent {
   display: flex;
   align-items: center;
-
-  scrollbar-width: none;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 16px;
 }
 
-/* Overline - animated element that moves under active nav link */
-.overline {
+/* -------------------- LEFT SECTION -------------------- */
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 160px;
+}
+
+.menuBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease;
+}
+
+.menuBtn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.menuBtn:active {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.burger {
+  position: relative;
+  width: 16px;
+  height: 10px;
+}
+
+.burger span {
   position: absolute;
   left: 0;
-  top: calc(80px + 8px); /* relative to page -- small vertical offset */
-  height: 2px;
-  width: 0;
-  background-image: linear-gradient(to right, #8a2be2, #a020f0, #4b0082);
-  transform-origin: left;
-  transition: transform 0.25s ease, width 0.25s ease, opacity 0.25s ease;
-  z-index: 20;
-  opacity: 0;
+  width: 100%;
+  height: 1.5px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 2px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Container holding links */
-.links {
+.burger span:first-child { top: 0; }
+.burger span:last-child { bottom: 0; }
+
+.burgerOpen span:first-child {
+  transform: translateY(4.25px) rotate(45deg);
+}
+
+.burgerOpen span:last-child {
+  transform: translateY(-4.25px) rotate(-45deg);
+}
+
+/* Greeting */
+.greetingWrap {
   display: flex;
-  gap: 24px;
+  align-items: baseline;
+  gap: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
 }
 
-/* Individual link */
-.link {
-  display: inline-block;
-  padding-top: 4px;
-  color: #374151; /* gray-700 */
+.greetingLabel {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
+  letter-spacing: -0.01em;
+}
+
+.greetingName {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  letter-spacing: -0.01em;
+}
+
+/* -------------------- CENTER - NAVIGATION PILL -------------------- */
+
+.navCenter {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  
+  /* Glass pill background */
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 14px;
+  
+  /* Inner shadow for depth */
+  box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.06);
+}
+
+/* Sliding indicator */
+.pillIndicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  background: white;
+  border-radius: 10px;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  
+  /* Premium shadow */
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  
+  /* Apple's signature smooth animation */
+  transition: 
+    transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+}
+
+/* Individual nav item */
+.pillItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 34px;
+  padding: 0 14px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 13px;
   font-weight: 500;
-  font-size: 16px;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.12s ease;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  
+  color: rgba(0, 0, 0, 0.5);
+  background: transparent;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  flex-shrink: 0;
+  
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease;
 }
 
-/* hover */
-.link:hover {
-  color: #a020f0; /* vibrant purple */
+.pillItem:hover:not(.pillItemActive) {
+  color: rgba(0, 0, 0, 0.7);
 }
 
-/* active */
-.active {
-  color: #a020f0;
-  font-weight: 700;
+.pillItemActive {
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 600;
+}
+
+.pillLabel {
+  display: block;
+}
+
+/* -------------------- RIGHT SECTION -------------------- */
+
+.navRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.actionBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: 
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.12s ease;
+}
+
+.actionBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.actionBtn:active {
+  transform: scale(0.92);
+}
+
+.actionBtn .material-symbols-outlined {
+  font-size: 20px;
+}
+
+/* Notification Badge */
+.badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  
+  color: white;
+  background: #ff3b30;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+/* Avatar Button */
+.avatarBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin-left: 4px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease;
+}
+
+.avatarBtn:active {
+  transform: scale(0.92);
+}
+
+.avatarText {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  
+  color: white;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  border-radius: 50%;
+  
+  box-shadow: 
+    0 2px 6px rgba(99, 102, 241, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* -------------------- MOBILE OVERLAY -------------------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 998;
+  transition: 
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.overlayVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* -------------------- MOBILE DRAWER -------------------- */
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  max-width: 80vw;
+  height: 100vh;
+  height: 100dvh;
+  
+  display: flex;
+  flex-direction: column;
+  
+  /* Glass drawer */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  border-right: 0.5px solid rgba(0, 0, 0, 0.08);
+  
+  transform: translateX(-100%);
+  z-index: 999;
+  
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 56px 20px 20px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+}
+
+.drawerAvatar {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
   font-size: 18px;
+  font-weight: 600;
+  
+  color: white;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+  border-radius: 50%;
+}
+
+.drawerUser {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.drawerName {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.drawerSub {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.drawerNav {
+  flex: 1;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+.drawerItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 48px;
+  padding: 0 20px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: left;
+  
+  color: rgba(0, 0, 0, 0.7);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  
+  transition: background 0.15s ease;
+}
+
+.drawerItem:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.drawerItem:active {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.drawerItemActive {
+  color: #6366f1;
+  font-weight: 600;
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.drawerItem .material-symbols-outlined {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.drawerItemActive .material-symbols-outlined {
+  color: #6366f1;
+}
+
+.drawerFooter {
+  padding: 8px 0 20px;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+}
+
+.drawerFooterBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 44px;
+  padding: 0 20px;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 14px;
+  text-align: left;
+  
+  color: rgba(0, 0, 0, 0.6);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  
+  transition: background 0.15s ease;
+}
+
+.drawerFooterBtn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.drawerFooterBtn .material-symbols-outlined {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.drawerLogout {
+  color: #ff3b30;
+}
+
+.drawerLogout .material-symbols-outlined {
+  color: #ff3b30;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background: rgba(28, 28, 30, 0.6);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .navbarScrolled {
+    background: rgba(28, 28, 30, 0.85);
+    box-shadow: 
+      0 1px 0 rgba(255, 255, 255, 0.05),
+      0 4px 16px -8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .burger span {
+    background: rgba(255, 255, 255, 0.85);
+  }
+  
+  .greetingLabel {
+    color: rgba(255, 255, 255, 0.45);
+  }
+  
+  .greetingName {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .pill {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pillIndicator {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pillItem {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .pillItem:hover:not(.pillItemActive) {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .pillItemActive {
+    color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .actionBtn {
+    color: rgba(255, 255, 255, 0.65);
+  }
+  
+  .actionBtn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .badge {
+    border-color: rgba(28, 28, 30, 0.9);
+  }
+  
+  .avatarText {
+    box-shadow: 
+      0 2px 6px rgba(0, 0, 0, 0.5),
+      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .drawer {
+    background: rgba(28, 28, 30, 0.95);
+    border-right-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .drawerHeader {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  
+  .drawerName {
+    color: rgba(255, 255, 255, 0.92);
+  }
+  
+  .drawerSub {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .drawerItem {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .drawerItem:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  
+  .drawerItem:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .drawerItemActive {
+    color: #818cf8;
+    background: rgba(129, 140, 248, 0.12);
+  }
+  
+  .drawerItem .material-symbols-outlined {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .drawerItemActive .material-symbols-outlined {
+    color: #818cf8;
+  }
+  
+  .drawerFooter {
+    border-top-color: rgba(255, 255, 255, 0.06);
+  }
+  
+  .drawerFooterBtn {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  .drawerFooterBtn:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  
+  .drawerFooterBtn .material-symbols-outlined {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .drawerLogout {
+    color: #ff453a;
+  }
+  
+  .drawerLogout .material-symbols-outlined {
+    color: #ff453a;
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Desktop - Hide menu button */
+@media (min-width: 768px) {
+  .menuBtn {
+    display: none;
+  }
+  
+  .navLeft {
+    min-width: 180px;
+  }
+  
+  .navRight {
+    min-width: 180px;
+  }
+  
+  .greetingLabel,
+  .greetingName {
+    font-size: 15px;
+  }
+  
+  .pill {
+    padding: 5px;
+    border-radius: 16px;
+  }
+  
+  .pillItem {
+    height: 38px;
+    padding: 0 18px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+  
+  .pillIndicator {
+    top: 5px;
+    left: 5px;
+    height: calc(100% - 10px);
+    border-radius: 12px;
+  }
+  
+  .drawer,
+  .overlay {
+    display: none;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1024px) {
+  .navbar {
+    padding: 14px 24px;
+  }
+  
+  .navLeft {
+    min-width: 220px;
+  }
+  
+  .navRight {
+    min-width: 220px;
+    gap: 8px;
+  }
+  
+  .actionBtn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .avatarBtn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .avatarText {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 12px;
+  }
+  
+  .navContent {
+    gap: 8px;
+  }
+  
+  .navLeft {
+    min-width: auto;
+    gap: 8px;
+  }
+  
+  .greetingWrap {
+    display: none;
+  }
+  
+  .navRight {
+    min-width: auto;
+    gap: 2px;
+  }
+  
+  .pill {
+    padding: 3px;
+    border-radius: 12px;
+  }
+  
+  .pillItem {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+    gap: 4px;
+    border-radius: 9px;
+  }
+  
+  .pillIndicator {
+    border-radius: 9px;
+  }
+  
+  /* Icon only on very small screens */
+  .pillLabel {
+    display: none;
+  }
+  
+  .actionBtn {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .actionBtn .material-symbols-outlined {
+    font-size: 18px;
+  }
+  
+  .avatarBtn {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .avatarText {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+  
+  .badge {
+    min-width: 14px;
+    height: 14px;
+    font-size: 9px;
+    padding: 0 3px;
+    border-width: 1.5px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .pillIndicator,
+  .pillItem,
+  .actionBtn,
+  .drawer,
+  .overlay,
+  .burger span {
+    transition: none;
+  }
+  
+  .badge {
+    animation: none;
+  }
+}
+
+/* Focus states */
+.menuBtn:focus-visible,
+.pillItem:focus-visible,
+.actionBtn:focus-visible,
+.avatarBtn:focus-visible,
+.drawerItem:focus-visible,
+.drawerFooterBtn:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline-offset: 2px;
+}
+
+/* High contrast */
+@media (forced-colors: active) {
+  .navbar {
+    border-bottom: 1px solid CanvasText;
+    background: Canvas;
+  }
+  
+  .pill {
+    border: 1px solid CanvasText;
+  }
+  
+  .pillItemActive {
+    background: Highlight;
+    color: HighlightText;
+  }
+  
+  .pillIndicator {
+    display: none;
+  }
+}
+
+/* ============================================
+   SAFE AREA (iPhone Notch)
+   ============================================ */
+
+@supports (padding: env(safe-area-inset-top)) {
+  .navbar {
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  
+  .drawer {
+    padding-left: env(safe-area-inset-left);
+  }
 }

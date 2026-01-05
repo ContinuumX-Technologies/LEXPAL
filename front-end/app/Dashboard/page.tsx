@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import FeaturedLawyers from "./components/FeaturedLawyers";
 import LexpalAISection from "./components/LexpalAISection";
@@ -90,8 +89,7 @@ export default function DashboardPage() {
 
   return (
     <div className="dashboard-root">
-      <Header firstName={firstName} />
-      <Navbar />
+      <Navbar firstName={firstName} />
       <main style={{ paddingTop: "10px", paddingBottom: "64px" }}>
         <section id="featured-lawyers">
           <FeaturedLawyers router={router} />
