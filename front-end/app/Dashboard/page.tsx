@@ -16,7 +16,7 @@ export default function DashboardPage() {
   const router= useRouter();
 
 
-  const [firstName, setFirstName]=useState<String>("");
+  const [firstName, setFirstName]=useState<string>("");
   const [savedLawyers, setSavedLawyers] = useState<SavedLawyer[] | null>(null);
   const [savedLoading, setSavedLoading] = useState(false);
   const [savedError, setSavedError] = useState<string | null>(null);
