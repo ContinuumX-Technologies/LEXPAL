@@ -1,83 +1,191 @@
-'use client';
+"use client"
 
+import { useRouter } from "next/navigation"
+import { useEffect, useRef } from "react"
+import styles from "./page.module.css"
 
-import styles from './page.module.css';
-import Button1 from '../UI_components/button';
-import { useRouter } from 'next/navigation';
+export default function LexpalLanding() {
+  const router = useRouter()
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
-export default function HomePage() {
-  const router= useRouter();
+  useEffect(() => {
+    // Add Google Material Icons if not already present
+    if (!document.querySelector('link[href*="material-symbols"]')) {
+      const link = document.createElement("link")
+      link.href =
+        "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      link.rel = "stylesheet"
+      document.head.appendChild(link)
+    }
+
+    // Intersection Observer for scroll animations
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.visible)
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    const animatedElements = document.querySelectorAll(`.${styles.animateOnScroll}`)
+    animatedElements.forEach((el) => observerRef.current?.observe(el))
+
+    return () => observerRef.current?.disconnect()
+  }, [])
+
   return (
     <div className={styles.container}>
       {/* Header */}
       <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <span className={`material-symbols-outlined ${styles.logoIcon}`}>gavel</span>
-          <h2 className={styles.logoText}>Lexpal</h2>
+        <div className={styles.logo}>
+          <span className="material-symbols-outlined">gavel</span>
+          <span className={styles.logoText}>Lexpal</span>
         </div>
-        <button onClick={()=>{router.push("/Login")}}>
-        <a href="#" className={styles.primaryButton}>
-          Get Started
-        </a>
-        </button>
+        <nav className={styles.nav}>
+          <button className={styles.navButton} onClick={() => router.push("/Lawyer-Login")}>
+            Login as Lawyer
+          </button>
+          <button className={styles.primaryButton} onClick={() => router.push("/Lawyer-SignUp")}>
+            Create Lawyer Account
+          </button>
+        </nav>
       </header>
 
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.heroText}>
-          <h1>Your Legal Questions, Answered by AI.</h1>
-          <h2>
-            Get matched with top-rated local lawyers instantly. Describe your case and let our AI find the best
-            legal expert for you.
-          </h2>
-          {/* <button className={styles.primaryButtonLarge}>Talk to AI Chatbot</button> */}
-          
-         <Button1 onClick={()=>{router.push("/Login")}}/>
-
+        <div className={styles.heroBackground}>
+          <div className={styles.shape1}></div>
+          <div className={styles.shape2}></div>
+          <div className={styles.shape3}></div>
         </div>
-        <div
-          className={styles.heroImage}
-          style={{
-            backgroundImage:
-              'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-MioYeNWYc6oDlikQ3UIdJK8uSvRuB7AmH7Q61RyYpe0aUKA1GCLTwau9tc7HqLi2P6V847Xvs3j1R9u7wx-_dKEA8ME3TdiHJmgL9gE__hfSTv9PxdDRV6nKY2nFVXgSjKcBrNph3Xmzq8EUPs0BOaZ4O9gOouG_ecTwkTLt8VZaf99RzB9yuQzOm1jPTontCxFbEmwr1LW9G-TQ0IL7Mmf1wq4IxyCjDlP87ZvXZBLAcihbDBQIvbt151xIELeqSzM92uJPxA2q")',
-          }}
-        ></div>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>The AI Operating System for Modern Lawyers</h1>
+          <p className={styles.heroSubtitle}>
+            Manage clients, cases, documents, research, and drafting — all in one intelligent workspace.
+          </p>
+          <div className={styles.heroCTA}>
+            <button className={styles.primaryButtonLarge} onClick={() => router.push("/Lawyer-SignUp")}>
+              Create Lawyer Account
+            </button>
+            <button className={styles.secondaryButtonLarge} onClick={() => router.push("/Lawyer-Login")}>
+              Login as Lawyer
+            </button>
+          </div>
+          <div className={styles.clientCTA}>
+            <button className={styles.textButton} onClick={() => router.push("/SignUp")}>
+              Create Client Account
+            </button>
+            <span className={styles.separator}>|</span>
+            <button className={styles.textButton} onClick={() => router.push("/Login")}>
+              Client Login
+            </button>
+          </div>
+        </div>
       </section>
 
-      {/* Features */}
-      <section className={styles.features}>
-        <div className={styles.sectionHeader}>
-          <h1>AI-Powered Legal Assistance</h1>
-          <p>Leverage cutting-edge technology to simplify your legal journey from start to finish.</p>
+      {/* Trust Strip */}
+      <section className={`${styles.trustStrip} ${styles.animateOnScroll}`}>
+        <div className={styles.trustItem}>
+          <span className="material-symbols-outlined">lock</span>
+          <span>Secure & Confidential</span>
         </div>
+        <div className={styles.trustItem}>
+          <span className="material-symbols-outlined">account_balance</span>
+          <span>Built for Indian Legal System</span>
+        </div>
+        <div className={styles.trustItem}>
+          <span className="material-symbols-outlined">psychology</span>
+          <span>AI-Assisted, Lawyer-Controlled</span>
+        </div>
+      </section>
 
+      {/* Problem Solution Section */}
+      <section className={styles.problemSolution}>
+        <div className={`${styles.problemSide} ${styles.animateOnScroll}`}>
+          <h2 className={styles.sectionTitle}>The Problem</h2>
+          <ul className={styles.problemList}>
+            <li className={styles.problemItem}>
+              <span className="material-symbols-outlined">close</span>
+              Too many tools
+            </li>
+            <li className={styles.problemItem}>
+              <span className="material-symbols-outlined">close</span>
+              Too many PDFs
+            </li>
+            <li className={styles.problemItem}>
+              <span className="material-symbols-outlined">close</span>
+              Too much manual drafting
+            </li>
+            <li className={styles.problemItem}>
+              <span className="material-symbols-outlined">close</span>
+              Too much context switching
+            </li>
+          </ul>
+        </div>
+        <div className={`${styles.solutionSide} ${styles.animateOnScroll}`}>
+          <h2 className={styles.sectionTitle}>The Solution</h2>
+          <ul className={styles.solutionList}>
+            <li className={styles.solutionItem}>
+              <span className="material-symbols-outlined">check_circle</span>
+              One workspace per case
+            </li>
+            <li className={styles.solutionItem}>
+              <span className="material-symbols-outlined">check_circle</span>
+              AI that understands your case, not just keywords
+            </li>
+            <li className={styles.solutionItem}>
+              <span className="material-symbols-outlined">check_circle</span>
+              Research → Draft → File in one flow
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Core Features */}
+      <section className={styles.features}>
+        <h2 className={`${styles.sectionTitle} ${styles.centered}`}>Core Features</h2>
         <div className={styles.featureGrid}>
           {[
             {
-              icon: 'auto_awesome',
-              title: 'AI-Assisted Case Handling',
-              text: 'Our AI analyzes the nuances of your case to provide initial insights and guidance.',
+              icon: "dashboard",
+              title: "Lawyer CMS Dashboard",
+              description: "Manage cases, appointments, and tasks",
             },
             {
-              icon: 'person_search',
-              title: 'Personalized Lawyer Recommendations',
-              text: 'Receive a curated list of lawyers perfectly matched to your specific needs.',
+              icon: "folder_shared",
+              title: "Client & Case Workspaces",
+              description: "All documents, timelines, and notes in one place",
             },
             {
-              icon: 'travel_explore',
-              title: 'Find Lawyers In Your Jurisdiction',
-              text: 'Easily find experienced lawyers who are licensed and practice in your local area.',
+              icon: "search",
+              title: "AI Legal Research",
+              description: "Natural-language search for judgments & statutes",
             },
             {
-              icon: 'description',
-              title: 'Instantly Draft Legal Notices',
-              text: 'Get a head start by using AI automation to instantly file legal notices or suits.',
+              icon: "edit_document",
+              title: "AI-Assisted Drafting",
+              description: "Templates + contextual drafting",
             },
-          ].map((item, i) => (
-            <div key={i} className={styles.featureCard}>
-              <span className={`material-symbols-outlined ${styles.featureIcon}`}>{item.icon}</span>
-              <h2>{item.title}</h2>
-              <p>{item.text}</p>
+            {
+              icon: "push_pin",
+              title: "Pin & Cite",
+              description: "Pin judgments and laws directly into the case",
+            },
+            {
+              icon: "summarize",
+              title: "Smart Summaries",
+              description: "AI-powered case summaries and document analysis",
+            },
+          ].map((feature, index) => (
+            <div key={index} className={`${styles.featureCard} ${styles.animateOnScroll}`}>
+              <div className={styles.featureIcon}>
+                <span className="material-symbols-outlined">{feature.icon}</span>
+              </div>
+              <h3 className={styles.featureTitle}>{feature.title}</h3>
+              <p className={styles.featureDescription}>{feature.description}</p>
             </div>
           ))}
         </div>
@@ -85,60 +193,112 @@ export default function HomePage() {
 
       {/* How It Works */}
       <section className={styles.howItWorks}>
-        <h2>How It Works</h2>
-        <div className={styles.steps}>
+        <h2 className={`${styles.sectionTitle} ${styles.centered}`}>How It Works</h2>
+        <div className={styles.timeline}>
           {[
-            {
-              icon: 'chat',
-              step: '1. Describe Your Case',
-              text: 'Simply tell our secure AI chatbot about your situation in plain language.',
-            },
-            {
-              icon: 'manage_search',
-              step: '2. Get Instant AI Matches',
-              text: 'Our algorithm analyzes your case and instantly recommends the best lawyers for you.',
-            },
-            {
-              icon: 'handshake',
-              step: '3. Connect and Consult Securely',
-              text: 'Review profiles, chat securely, and hire the right lawyer with confidence.',
-            },
-          ].map((item, i) => (
-            <div key={i} className={styles.step}>
-              <div className={styles.stepIcon}>
+            { step: 1, title: "Lawyer creates account", icon: "person_add" },
+            { step: 2, title: "Client schedules appointment", icon: "event" },
+            { step: 3, title: "Documents uploaded to case workspace", icon: "upload_file" },
+            { step: 4, title: "AI understands the case context", icon: "psychology" },
+            { step: 5, title: "Lawyer researches, drafts, and files faster", icon: "rocket_launch" },
+          ].map((item, index) => (
+            <div key={index} className={`${styles.timelineItem} ${styles.animateOnScroll}`}>
+              <div className={styles.timelineNumber}>{item.step}</div>
+              <div className={styles.timelineIcon}>
                 <span className="material-symbols-outlined">{item.icon}</span>
               </div>
-              <div>
-                <p className={styles.stepTitle}>{item.step}</p>
-                <p className={styles.stepDesc}>{item.text}</p>
-              </div>
+              <p className={styles.timelineText}>{item.title}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className={styles.cta}>
-        <h2>Find the right legal help today.</h2>
-        <p>
-          Take the first step towards resolving your legal matters. Our AI is ready to assist you 24/7.
-        </p>
-        <button onClick={()=>{router.push("/Lawyer-Login")}} className={styles.ctaButton}>Get Started Now</button>
+      {/* Lawyers vs Clients */}
+      <section className={styles.forWho}>
+        <div className={`${styles.forLawyers} ${styles.animateOnScroll}`}>
+          <h2 className={styles.sectionTitle}>For Lawyers</h2>
+          <ul className={styles.benefitsList}>
+            <li>
+              <span className="material-symbols-outlined">bolt</span>
+              Faster drafting
+            </li>
+            <li>
+              <span className="material-symbols-outlined">auto_awesome</span>
+              Better research
+            </li>
+            <li>
+              <span className="material-symbols-outlined">verified</span>
+              Fewer mistakes
+            </li>
+            <li>
+              <span className="material-symbols-outlined">trending_up</span>
+              More cases handled
+            </li>
+          </ul>
+        </div>
+        <div className={`${styles.forClients} ${styles.animateOnScroll}`}>
+          <h2 className={styles.sectionTitle}>For Clients</h2>
+          <ul className={styles.benefitsList}>
+            <li>
+              <span className="material-symbols-outlined">cloud_upload</span>
+              Easy document upload
+            </li>
+            <li>
+              <span className="material-symbols-outlined">schedule</span>
+              Appointment tracking
+            </li>
+            <li>
+              <span className="material-symbols-outlined">forum</span>
+              Transparent communication
+            </li>
+            <li>
+              <span className="material-symbols-outlined">insights</span>
+              Real-time case updates
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className={styles.finalCTA}>
+        <div className={styles.ctaBackground}></div>
+        <h2 className={styles.ctaTitle}>Stop switching tabs. Start practicing smarter.</h2>
+        <div className={styles.ctaButtons}>
+          <button className={styles.primaryButtonLarge} onClick={() => router.push("/Lawyer-SignUp")}>
+            Create Lawyer Account
+          </button>
+          <button className={styles.secondaryButtonLarge} onClick={() => router.push("/Lawyer-Login")}>
+            Login as Lawyer
+          </button>
+        </div>
+        <div className={styles.clientCTAFooter}>
+          <button className={styles.textButton} onClick={() => router.push("/SignUp")}>
+            Create Client Account
+          </button>
+          <span className={styles.separator}>|</span>
+          <button className={styles.textButton} onClick={() => router.push("/Login")}>
+            Client Login
+          </button>
+        </div>
       </section>
 
       {/* Footer */}
       <footer className={styles.footer}>
-        <div className={styles.footerLogo}>
-          <span className={`material-symbols-outlined ${styles.logoIcon}`}>gavel</span>
-          <h2>Lexpal</h2>
+        <div className={styles.footerContent}>
+          <div className={styles.footerLogo}>
+            <span className="material-symbols-outlined">gavel</span>
+            <span className={styles.logoText}>Lexpal</span>
+          </div>
+          <nav className={styles.footerLinks}>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms</a>
+            <a href="/contact">Contact</a>
+          </nav>
         </div>
-        <div className={styles.footerLinks}>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Contact</a>
-        </div>
-        <p>© 2024 Lexpal. All rights reserved.</p>
+        <p className={styles.footerDisclaimer}>
+          Lexpal is a legal-tech productivity platform. AI assists, lawyers decide.
+        </p>
       </footer>
     </div>
-  );
+  )
 }

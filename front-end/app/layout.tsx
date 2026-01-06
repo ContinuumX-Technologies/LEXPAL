@@ -44,10 +44,32 @@ const ExplorePagelinks = (
   </>
 )
 
+
+
 export const metadata: Metadata = {
-  title: "Lexpal",
-  description: "Lawyer marketplace",
-};
+  title: "Lexpal - AI Operating System for Modern Lawyers",
+  description:
+    "Manage clients, cases, documents, research, and drafting — all in one intelligent workspace. Built for the Indian legal system.",
+  generator: "v0.app",
+  icons: {
+    icon: [
+      {
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/apple-icon.png",
+  },
+}
+
 
 export default function RootLayout({
   children,
