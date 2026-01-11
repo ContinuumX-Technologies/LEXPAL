@@ -16,17 +16,13 @@ const app = express();
 
 // server/app.js
 
-const allowedOrigins = [
-  "https://lexpal.in",
-  "https://www.lexpal.in",
-  "http://localhost:3000", // Add your local development URL
-  "http://localhost:5173"  // Add Vite default if applicable
-];
-
 app.use(cors({
-    origin: "http://localhost:3000",
-    credentials: true
+  origin: "https://lexpal.in",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+app.options("/*", cors());
 app.use(express.json());
 app.use(cookieParser());
 
