@@ -15,8 +15,8 @@ const app = express();
 
 
 app.use(cors({
-    origin: "http://localhost:3000",
-    credentials: true
+  origin: "https://lexpal.in",
+  credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
