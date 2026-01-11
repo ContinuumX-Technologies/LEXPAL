@@ -61,7 +61,7 @@
   color: rgba(0, 0, 0, 0.7);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: 
+  transition:
     background 0.2s ease,
     transform 0.15s ease,
     color 0.2s ease;
@@ -90,7 +90,7 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  
+
   /* Hide scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -106,31 +106,31 @@
   flex: 0 0 calc(100% - 40px);
   max-width: 380px;
   scroll-snap-align: center;
-  
+
   display: flex;
   flex-direction: column;
-  
+
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  
+
   /* Apple-style shadow */
-  box-shadow: 
+  box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.04),
     0 8px 24px rgba(0, 0, 0, 0.08);
-  
+
   cursor: pointer;
   transform: scale(0.96);
   opacity: 0.7;
-  
-  transition: 
+
+  transition:
     transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.4s ease,
     box-shadow 0.4s ease;
 }
 
 .card:hover {
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.06),
     0 16px 40px rgba(0, 0, 0, 0.12);
 }
@@ -162,12 +162,10 @@
 .cardImageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.03) 100%
-  );
+  background: linear-gradient(180deg,
+      transparent 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.03) 100%);
   pointer-events: none;
 }
 
@@ -180,11 +178,11 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 12px;
   font-weight: 600;
-  
+
   color: white;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(12px);
@@ -201,8 +199,17 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.2); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
 }
 
 /* Card Content */
@@ -218,15 +225,15 @@
   display: inline-flex;
   align-self: flex-start;
   padding: 4px 10px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  
-  color: #6366f1;
-  background: rgba(99, 102, 241, 0.1);
+
+  color: #0071e3;
+  background: rgba(0, 113, 227, 0.1);
   border-radius: 6px;
 }
 
@@ -299,7 +306,7 @@
   line-height: 1.5;
   color: rgba(0, 0, 0, 0.6);
   margin: 8px 0;
-  
+
   /* Clamp to 2 lines */
   display: -webkit-box;
   line-clamp: 2;
@@ -322,29 +329,30 @@
   gap: 6px;
   height: 44px;
   padding: 0 16px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
-  
+
   color: white;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #0071e3 0%, #005bb5 100%);
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  
-  box-shadow: 
-    0 2px 8px rgba(99, 102, 241, 0.25),
+
+  box-shadow:
+    0 2px 8px rgba(0, 113, 227, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  
-  transition: 
+
+  transition:
     transform 0.15s ease,
     box-shadow 0.2s ease;
 }
 
 .primaryBtn:hover {
-  box-shadow: 
-    0 4px 16px rgba(99, 102, 241, 0.35),
+  background: linear-gradient(135deg, #0077ed 0%, #0062c4 100%);
+  box-shadow:
+    0 4px 16px rgba(0, 113, 227, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
@@ -363,18 +371,18 @@
   gap: 6px;
   height: 44px;
   padding: 0 16px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
-  
+
   color: rgba(0, 0, 0, 0.75);
   background: rgba(0, 0, 0, 0.05);
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  
-  transition: 
+
+  transition:
     background 0.2s ease,
     transform 0.15s ease;
 }
@@ -409,7 +417,7 @@
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  transition: 
+  transition:
     background 0.3s ease,
     transform 0.3s ease,
     width 0.3s ease;
@@ -422,7 +430,7 @@
 .dotActive {
   width: 24px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: linear-gradient(90deg, #0071e3, #005bb5);
 }
 
 /* -------------------- CTA SECTION -------------------- */
@@ -442,29 +450,29 @@
   max-width: 340px;
   height: 56px;
   padding: 0 28px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 16px;
   font-weight: 600;
-  
+
   color: white;
   background: linear-gradient(135deg, #1d1d1f 0%, #2d2d2f 100%);
   border: none;
   border-radius: 16px;
   cursor: pointer;
-  
-  box-shadow: 
+
+  box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  
-  transition: 
+
+  transition:
     transform 0.2s ease,
     box-shadow 0.3s ease;
 }
 
 .ctaButton:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 8px 28px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
@@ -505,13 +513,11 @@
 
 .dividerLine {
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.08) 20%,
-    rgba(0, 0, 0, 0.08) 80%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.08) 20%,
+      rgba(0, 0, 0, 0.08) 80%,
+      transparent 100%);
 }
 
 /* ============================================
@@ -522,104 +528,102 @@
   .title {
     color: rgba(255, 255, 255, 0.95);
   }
-  
+
   .subtitle {
     color: rgba(255, 255, 255, 0.5);
   }
-  
+
   .navBtn {
     background: rgba(255, 255, 255, 0.08);
     color: rgba(255, 255, 255, 0.7);
   }
-  
+
   .navBtn:hover {
     background: rgba(255, 255, 255, 0.12);
     color: rgba(255, 255, 255, 0.95);
   }
-  
+
   .card {
     background: rgba(44, 44, 46, 1);
-    box-shadow: 
+    box-shadow:
       0 2px 8px rgba(0, 0, 0, 0.2),
       0 8px 24px rgba(0, 0, 0, 0.3);
   }
-  
+
   .card:hover {
-    box-shadow: 
+    box-shadow:
       0 4px 12px rgba(0, 0, 0, 0.3),
       0 16px 40px rgba(0, 0, 0, 0.4);
   }
-  
+
   .availableBadge {
     background: rgba(255, 255, 255, 0.15);
   }
-  
+
   .specialtyTag {
-    color: #818cf8;
-    background: rgba(129, 140, 248, 0.15);
+    color: #0077ed;
+    background: rgba(0, 119, 237, 0.15);
   }
-  
+
   .cardName {
     color: rgba(255, 255, 255, 0.95);
   }
-  
+
   .cardTitle {
     color: rgba(255, 255, 255, 0.5);
   }
-  
+
   .ratingScore {
     color: rgba(255, 255, 255, 0.9);
   }
-  
+
   .ratingCount {
     color: rgba(255, 255, 255, 0.45);
   }
-  
+
   .starEmpty {
     color: rgba(255, 255, 255, 0.2);
   }
-  
+
   .cardQuote {
     color: rgba(255, 255, 255, 0.6);
   }
-  
+
   .secondaryBtn {
     color: rgba(255, 255, 255, 0.85);
     background: rgba(255, 255, 255, 0.1);
   }
-  
+
   .secondaryBtn:hover {
     background: rgba(255, 255, 255, 0.15);
   }
-  
+
   .dot {
     background: rgba(255, 255, 255, 0.2);
   }
-  
+
   .dot:hover {
     background: rgba(255, 255, 255, 0.35);
   }
-  
+
   .ctaButton {
     background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
     color: rgba(0, 0, 0, 0.9);
-    box-shadow: 
+    box-shadow:
       0 4px 16px rgba(0, 0, 0, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
-  
+
   .ctaIcon {
     background: rgba(0, 0, 0, 0.1);
   }
-  
+
   .dividerLine {
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.08) 20%,
-      rgba(255, 255, 255, 0.08) 80%,
-      transparent 100%
-    );
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.08) 20%,
+        rgba(255, 255, 255, 0.08) 80%,
+        transparent 100%);
   }
 }
 
@@ -632,41 +636,41 @@
   .section {
     padding: 40px 0 56px;
   }
-  
+
   .header {
     padding: 0 32px;
     margin-bottom: 28px;
   }
-  
+
   .title {
     font-size: 32px;
   }
-  
+
   .subtitle {
     font-size: 16px;
   }
-  
+
   .carousel {
     padding: 8px 32px 28px;
     gap: 20px;
   }
-  
+
   .card {
     flex: 0 0 340px;
   }
-  
+
   .cardContent {
     padding: 24px;
   }
-  
+
   .pagination {
     padding: 0 32px;
   }
-  
+
   .ctaSection {
     padding: 36px 32px 0;
   }
-  
+
   .divider {
     padding: 48px 32px 0;
   }
@@ -677,66 +681,66 @@
   .section {
     padding: 48px 0 64px;
   }
-  
+
   .header {
     padding: 0 48px;
     margin-bottom: 32px;
   }
-  
+
   .title {
     font-size: 36px;
   }
-  
+
   .carousel {
     padding: 12px 48px 32px;
     gap: 24px;
   }
-  
+
   .card {
     flex: 0 0 380px;
     border-radius: 24px;
   }
-  
+
   .cardImageWrap {
     aspect-ratio: 16/10;
   }
-  
+
   .cardContent {
     padding: 28px;
     gap: 10px;
   }
-  
+
   .cardName {
     font-size: 24px;
   }
-  
+
   .cardActions {
     gap: 12px;
     margin-top: 16px;
   }
-  
+
   .primaryBtn,
   .secondaryBtn {
     height: 48px;
     font-size: 15px;
   }
-  
+
   .pagination {
     padding: 0 48px;
     gap: 10px;
   }
-  
+
   .ctaSection {
     padding: 44px 48px 0;
   }
-  
+
   .ctaButton {
     max-width: 380px;
     height: 60px;
     font-size: 17px;
     border-radius: 18px;
   }
-  
+
   .divider {
     padding: 56px 48px 0;
   }
@@ -747,7 +751,7 @@
   .card {
     flex: 0 0 420px;
   }
-  
+
   .cardName {
     font-size: 26px;
   }
@@ -761,63 +765,63 @@
     align-items: flex-start;
     gap: 16px;
   }
-  
+
   .headerActions {
     align-self: flex-end;
   }
-  
+
   .title {
     font-size: 24px;
   }
-  
+
   .subtitle {
     font-size: 14px;
   }
-  
+
   .carousel {
     padding: 8px 16px 20px;
     gap: 12px;
   }
-  
+
   .card {
     flex: 0 0 calc(100% - 32px);
     border-radius: 16px;
   }
-  
+
   .cardContent {
     padding: 16px;
   }
-  
+
   .cardName {
     font-size: 20px;
   }
-  
+
   .cardActions {
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .primaryBtn,
   .secondaryBtn {
     width: 100%;
     height: 42px;
     font-size: 13px;
   }
-  
+
   .pagination {
     padding: 0 16px;
   }
-  
+
   .ctaSection {
     padding: 28px 16px 0;
   }
-  
+
   .ctaButton {
     height: 52px;
     font-size: 15px;
     border-radius: 14px;
   }
-  
+
   .divider {
     padding: 36px 16px 0;
   }
@@ -828,6 +832,7 @@
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
+
   .card,
   .cardImage,
   .primaryBtn,
@@ -838,11 +843,11 @@
   .dot {
     transition: none;
   }
-  
+
   .carousel {
     scroll-behavior: auto;
   }
-  
+
   .availableDot {
     animation: none;
   }
@@ -855,7 +860,7 @@
 .dot:focus-visible,
 .ctaButton:focus-visible,
 .card:focus-visible {
-  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline: 2px solid rgba(0, 113, 227, 0.6);
   outline-offset: 3px;
 }
 
@@ -864,20 +869,20 @@
   .card {
     border: 2px solid CanvasText;
   }
-  
+
   .primaryBtn {
     background: Highlight;
     color: HighlightText;
   }
-  
+
   .secondaryBtn {
     border: 1px solid CanvasText;
   }
-  
+
   .dotActive {
     background: Highlight;
   }
-  
+
   .availableBadge {
     border: 1px solid CanvasText;
   }

@@ -7,16 +7,17 @@ import LexpalAISection from "./components/LexpalAISection";
 import SavedLawyers from "./components/SavedLawyers";
 import ChatsSection from "./components/ChatsSection";
 import { useRouter } from "next/navigation";
+import styles from "./page.module.css";
 
 type SavedLawyer = any; // refine types to your schema
 type Conversation = any; // refine types to your schema
 
 export default function DashboardPage() {
   const server_url = process.env.NEXT_PUBLIC_DEV_SERVER_URL || "http://localhost:5001";
-  const router= useRouter();
+  const router = useRouter();
 
 
-  const [firstName, setFirstName]=useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
   const [savedLawyers, setSavedLawyers] = useState<SavedLawyer[] | null>(null);
   const [savedLoading, setSavedLoading] = useState(false);
   const [savedError, setSavedError] = useState<string | null>(null);
@@ -88,9 +89,9 @@ export default function DashboardPage() {
   }, [server_url]);
 
   return (
-    <div className="dashboard-root">
+    <div className={styles.dashboardRoot}>
       <Navbar firstName={firstName} />
-      <main style={{ paddingTop: "10px", paddingBottom: "64px" }}>
+      <main style={{ paddingTop: "24px", paddingBottom: "64px" }}>
         <section id="featured-lawyers">
           <FeaturedLawyers router={router} />
         </section>

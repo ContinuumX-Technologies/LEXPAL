@@ -43,7 +43,7 @@
   height: 300px;
   background: radial-gradient(
     circle,
-    rgba(99, 102, 241, 0.08) 0%,
+    rgba(0, 113, 227, 0.08) 0%,
     transparent 70%
   );
   animation: floatSlow 8s ease-in-out infinite;
@@ -57,7 +57,7 @@
   height: 250px;
   background: radial-gradient(
     circle,
-    rgba(139, 92, 246, 0.06) 0%,
+    rgba(0, 91, 181, 0.06) 0%,
     transparent 70%
   );
   animation: floatSlow 8s ease-in-out infinite 2s;
@@ -71,7 +71,7 @@
   height: 150px;
   background: radial-gradient(
     circle,
-    rgba(168, 85, 247, 0.04) 0%,
+    rgba(0, 113, 227, 0.04) 0%,
     transparent 70%
   );
   animation: floatSlow 8s ease-in-out infinite 4s;
@@ -119,8 +119,8 @@
   
   background: linear-gradient(
     135deg,
-    rgba(99, 102, 241, 0.1) 0%,
-    rgba(139, 92, 246, 0.1) 100%
+    rgba(0, 113, 227, 0.1) 0%,
+    rgba(0, 91, 181, 0.1) 100%
   );
   border-radius: 22px;
   
@@ -133,13 +133,13 @@
 
 .iconInner .material-symbols-outlined {
   font-size: 36px;
-  color: #6366f1;
+  color: #0071e3;
 }
 
 .iconRing {
   position: absolute;
   inset: 0;
-  border: 2px dashed rgba(99, 102, 241, 0.2);
+  border: 2px dashed rgba(0, 113, 227, 0.2);
   border-radius: 26px;
   animation: spinSlow 20s linear infinite;
 }
@@ -160,7 +160,7 @@
 .dot {
   width: 6px;
   height: 6px;
-  background: #6366f1;
+  background: #0071e3;
   border-radius: 50%;
   animation: dotPulse 1.5s ease-in-out infinite;
 }
@@ -225,13 +225,13 @@
   font-weight: 600;
   
   color: white;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #0071e3 0%, #005bb5 100%);
   border: none;
   border-radius: 16px;
   cursor: pointer;
   
   box-shadow: 
-    0 4px 16px rgba(99, 102, 241, 0.3),
+    0 4px 16px rgba(0, 113, 227, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   
   transition: 
@@ -242,7 +242,7 @@
 .ctaButton:hover {
   transform: translateY(-2px);
   box-shadow: 
-    0 8px 28px rgba(99, 102, 241, 0.4),
+    0 8px 28px rgba(0, 113, 227, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
@@ -337,10 +337,10 @@
 }
 
 .suggestionCard:hover {
-  background: rgba(99, 102, 241, 0.02);
-  border-color: rgba(99, 102, 241, 0.15);
+  background: rgba(0, 113, 227, 0.02);
+  border-color: rgba(0, 113, 227, 0.15);
   box-shadow: 
-    0 2px 8px rgba(99, 102, 241, 0.08),
+    0 2px 8px rgba(0, 113, 227, 0.08),
     0 4px 12px rgba(0, 0, 0, 0.04);
   transform: translateX(4px);
 }
@@ -359,8 +359,8 @@
   
   background: linear-gradient(
     135deg,
-    rgba(99, 102, 241, 0.08) 0%,
-    rgba(139, 92, 246, 0.08) 100%
+    rgba(0, 113, 227, 0.08) 0%,
+    rgba(0, 91, 181, 0.08) 100%
   );
   border-radius: 12px;
   
@@ -370,14 +370,14 @@
 .suggestionCard:hover .suggestionIcon {
   background: linear-gradient(
     135deg,
-    rgba(99, 102, 241, 0.12) 0%,
-    rgba(139, 92, 246, 0.12) 100%
+    rgba(0, 113, 227, 0.12) 0%,
+    rgba(0, 91, 181, 0.12) 100%
   );
 }
 
 .suggestionIcon .material-symbols-outlined {
   font-size: 22px;
-  color: #6366f1;
+  color: #0071e3;
 }
 
 .suggestionText {
@@ -417,7 +417,7 @@
 }
 
 .suggestionCard:hover .suggestionArrow {
-  color: #6366f1;
+  color: #0071e3;
   transform: translateX(4px);
 }
 
@@ -451,8 +451,8 @@
 }
 
 .helpLink:hover {
-  color: #6366f1;
-  background: rgba(99, 102, 241, 0.06);
+  color: #0071e3;
+  background: rgba(0, 113, 227, 0.06);
 }
 
 .helpLink .material-symbols-outlined {
@@ -475,7 +475,7 @@
   .bgCircle1 {
     background: radial-gradient(
       circle,
-      rgba(99, 102, 241, 0.12) 0%,
+      rgba(0, 113, 227, 0.12) 0%,
       transparent 70%
     );
   }
@@ -483,7 +483,7 @@
   .bgCircle2 {
     background: radial-gradient(
       circle,
-      rgba(139, 92, 246, 0.1) 0%,
+      rgba(0, 91, 181, 0.1) 0%,
       transparent 70%
     );
   }
@@ -491,7 +491,7 @@
   .bgCircle3 {
     background: radial-gradient(
       circle,
-      rgba(168, 85, 247, 0.08) 0%,
+      rgba(0, 113, 227, 0.08) 0%,
       transparent 70%
     );
   }
@@ -499,21 +499,21 @@
   .iconInner {
     background: linear-gradient(
       135deg,
-      rgba(99, 102, 241, 0.15) 0%,
-      rgba(139, 92, 246, 0.15) 100%
+      rgba(0, 113, 227, 0.15) 0%,
+      rgba(0, 91, 181, 0.15) 100%
     );
   }
   
   .iconInner .material-symbols-outlined {
-    color: #818cf8;
+    color: #0077ed;
   }
   
   .iconRing {
-    border-color: rgba(129, 140, 248, 0.25);
+    border-color: rgba(0, 119, 237, 0.25);
   }
   
   .dot {
-    background: #818cf8;
+    background: #0077ed;
   }
   
   .title {
@@ -535,31 +535,31 @@
   }
   
   .suggestionCard:hover {
-    background: rgba(129, 140, 248, 0.06);
-    border-color: rgba(129, 140, 248, 0.2);
+    background: rgba(0, 119, 237, 0.06);
+    border-color: rgba(0, 119, 237, 0.2);
     box-shadow: 
-      0 2px 8px rgba(129, 140, 248, 0.1),
+      0 2px 8px rgba(0, 119, 237, 0.1),
       0 4px 12px rgba(0, 0, 0, 0.2);
   }
   
   .suggestionIcon {
     background: linear-gradient(
       135deg,
-      rgba(99, 102, 241, 0.12) 0%,
-      rgba(139, 92, 246, 0.12) 100%
+      rgba(0, 113, 227, 0.12) 0%,
+      rgba(0, 91, 181, 0.12) 100%
     );
   }
   
   .suggestionCard:hover .suggestionIcon {
     background: linear-gradient(
       135deg,
-      rgba(99, 102, 241, 0.18) 0%,
-      rgba(139, 92, 246, 0.18) 100%
+      rgba(0, 113, 227, 0.18) 0%,
+      rgba(0, 91, 181, 0.18) 100%
     );
   }
   
   .suggestionIcon .material-symbols-outlined {
-    color: #818cf8;
+    color: #0077ed;
   }
   
   .suggestionTitle {
@@ -575,7 +575,7 @@
   }
   
   .suggestionCard:hover .suggestionArrow {
-    color: #818cf8;
+    color: #0077ed;
   }
   
   .helpLink {
@@ -583,8 +583,8 @@
   }
   
   .helpLink:hover {
-    color: #818cf8;
-    background: rgba(129, 140, 248, 0.1);
+    color: #0077ed;
+    background: rgba(0, 119, 237, 0.1);
   }
 }
 
@@ -846,7 +846,7 @@
 .ctaButton:focus-visible,
 .suggestionCard:focus-visible,
 .helpLink:focus-visible {
-  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline: 2px solid rgba(0, 113, 227, 0.6);
   outline-offset: 3px;
 }
 
