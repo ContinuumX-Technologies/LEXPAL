@@ -1,240 +1,422 @@
-.signupWrapper {
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #dbeafe, #ffffff);
+/* page.module.css - Apple-Style "White Titanium" Split Layout (Client Sign-Up) */
+
+/* === VARIABLES === */
+:root {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Palette: "White Titanium" (Silver, White, Cool Grey) */
+  --c-bg: #f5f5f7;
+  --c-bg-card: #ffffff;
+  --c-text-main: #1d1d1f;
+  --c-text-sec: #86868b;
+  --c-accent: #0071e3;
+  --c-danger: #ff453a;
+
+  --ease-apple: cubic-bezier(0.42, 0, 0.58, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.root {
   display: flex;
-  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--c-bg);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+/* === LEFT COLUMN: VISUAL SHOWCASE === */
+.visualColumn {
+  flex: 1;
+  position: relative;
+  background: #ffffff;
+  display: flex;
   align-items: center;
-  padding: 16px;
-  font-family: "Public Sans", sans-serif;
-  color: #111418;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 1.2s var(--ease-expo) forwards;
 }
 
-.signupCard {
-  width: 100%;
-  max-width: 480px;
-  position: relative; /* required for close button */
-}
-
-/* Close button */
-.signupCard .closeBtn {
+.titaniumFlow {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  background: white;
-  border: 1px solid #d0d0d0;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(at 20% 20%, #eff1f5 0px, transparent 50%),
+    radial-gradient(at 80% 0%, #eef0f4 0px, transparent 50%),
+    radial-gradient(at 0% 50%, #f5f5f7 0px, transparent 50%),
+    radial-gradient(at 80% 50%, #e2e4ea 0px, transparent 50%),
+    radial-gradient(at 0% 100%, #eff1f5 0px, transparent 50%),
+    radial-gradient(at 80% 100%, #eef0f4 0px, transparent 50%),
+    radial-gradient(at 0% 0%, #ffffff 0px, transparent 50%);
+  filter: blur(60px);
+  opacity: 1;
+  animation: flowMove 20s infinite alternate ease-in-out;
+}
+
+@keyframes flowMove {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+
+  100% {
+    transform: scale(1.05) translate(-2%, -2%);
+  }
+}
+
+.visualContent {
+  position: relative;
+  z-index: 10;
+  max-width: 640px;
+  padding: 60px;
+  text-align: left;
+}
+
+.visualTitle {
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--c-text-main);
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s var(--ease-expo) 0.2s forwards;
+}
+
+.visualTitle span {
+  display: block;
+  background: linear-gradient(135deg, #8e8e93 0%, #1d1d1f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.visualDesc {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--c-text-sec);
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s var(--ease-expo) 0.4s forwards;
+}
+
+/* === RIGHT COLUMN: FORM === */
+.formColumn {
+  width: 520px;
+  /* Slightly wider for signup forms */
+  flex-shrink: 0;
+  background: var(--c-bg-card);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 60px;
+  /* Less vertical padding to accommodate scroll */
+  position: relative;
+  z-index: 20;
+  border-left: 1px solid rgba(0, 0, 0, 0.04);
+  overflow-y: auto;
+  /* Enable scroll for long form */
+}
+
+/* Navigation */
+.topNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.logo {
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #444;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--c-text-main);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
 
-.signupCard .closeBtn:hover {
-  background: #f5f5f5;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.backBtn {
+  font-size: 13px;
+  color: var(--c-text-sec);
+  text-decoration: none;
+  transition: color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
 
-/* Header */
-.signupCard .signupHeader {
-  text-align: center;
+.backBtn:hover {
+  color: var(--c-text-main);
+}
+
+/* Form Content */
+.formContent {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s var(--ease-expo) 0.4s forwards;
+  padding-bottom: 40px;
+}
+
+.formHeader {
   margin-bottom: 32px;
 }
 
-.signupCard .signupIcon {
-  background: white;
-  padding: 12px;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  margin-bottom: 12px;
-}
-
-.signupCard .gavelIcon {
-  color: #1173d4;
-  font-size: 40px;
-}
-
-.signupCard .signupTitle {
+.heading {
   font-size: 32px;
   font-weight: 700;
-}
-
-.signupCard .signupSubtitle {
-  margin-top: 6px;
-  font-size: 16px;
-  color: #555;
-}
-
-/* Form */
-.signupCard .signupForm {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.signupCard .row {
-  display: flex;
-  gap: 20px;
-}
-
-.signupCard .inputGroup {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.signupCard .inputLabel {
-  font-size: 16px;
-  font-weight: 500;
+  letter-spacing: -0.02em;
   margin-bottom: 8px;
+  color: var(--c-text-main);
 }
 
-.signupCard select {
-  height: 56px;
-  border-radius: 12px;
-  border: 1px solid #dbe0e6;
-  padding: 15px;
+.subheading {
   font-size: 16px;
-  color: #111418;
-  outline: none;
-  background: white;
-  width: 100%;
+  color: var(--c-text-sec);
 }
 
-.signupCard select:focus {
-  border-color: #1173d4;
-  box-shadow: 0 0 0 2px rgba(17, 115, 212, 0.3);
+.subheading a {
+  color: var(--c-accent);
+  text-decoration: none;
+  font-weight: 500;
 }
 
-/* Inputs (scoped! important fix) */
-.signupCard input {
-  height: 56px;
-  border-radius: 12px;
-  border: 1px solid #dbe0e6;
-  padding: 15px;
-  font-size: 16px;
-  color: #111418;
-  outline: none;
-  background: white;
-  width: 100%;
+.subheading a:hover {
+  text-decoration: underline;
 }
 
-.signupCard input:focus {
-  border-color: #1173d4;
-  box-shadow: 0 0 0 2px rgba(17, 115, 212, 0.3);
+/* Inputs */
+.row {
+  display: flex;
+  gap: 16px;
 }
 
-.signupCard .passwordWrapper {
+.row .inputGroup {
+  flex: 1;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
   position: relative;
 }
 
-.signupCard .toggleBtn {
+.input,
+.select {
+  width: 100%;
+  height: 56px;
+  padding: 20px 16px 0;
+  font-size: 16px;
+  color: var(--c-text-main);
+  background: var(--c-bg);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s ease;
+  appearance: none;
+}
+
+.select {
+  padding: 16px;
+  /* Select usually doesn't need floating label padding tweak as much or needs adjustment */
+  padding-top: 20px;
+}
+
+.input:focus,
+.select:focus {
+  background: white;
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12);
+}
+
+.label {
   position: absolute;
-  right: 14px;
+  left: 16px;
+  top: 18px;
+  font-size: 16px;
+  color: var(--c-text-sec);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform-origin: left top;
+}
+
+/* Floating label logic */
+.input:focus~.label,
+.input:not(:placeholder-shown)~.label,
+.select:focus~.label,
+.select:not([value=""])~.label {
+  transform: translateY(-10px) scale(0.75);
+  color: var(--c-text-sec);
+}
+
+/* Select specific fix for "has value" detection if using value prop in React, 
+   but simplistic CSS fallback uses :valid or JS state.
+   Here we rely on the placeholder trick or just persistent label if needed.
+   For simplicity in this design, assuming React handles value prop presence.
+*/
+
+.passwordWrapper {
+  position: relative;
+}
+
+.toggleBtn {
+  position: absolute;
+  right: 12px;
   top: 0;
   bottom: 0;
   border: none;
   background: none;
   cursor: pointer;
-  color: #617589;
+  color: var(--c-text-sec);
+  display: flex;
+  align-items: center;
 }
 
-/* Buttons */
-.signupCard .signupBtn {
+/* Actions */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.signupBtn {
   width: 100%;
-  background: #1173d4;
+  height: 56px;
+  background: var(--c-accent);
   color: white;
+  border: none;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
-  padding: 16px;
-  border-radius: 12px;
-  border: none;
   cursor: pointer;
-  margin-top: 24px;
-  transition: background 0.2s ease;
+  transition: transform 0.1s, background 0.2s, box-shadow 0.2s;
 }
 
-.signupCard .signupBtn:hover {
-  background: #0f66ba;
+.signupBtn:hover {
+  background: #0077ed;
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
 }
 
-/* Divider */
-.signupCard .divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 24px 0;
+.signupBtn:active {
+  transform: scale(0.98);
 }
 
-.signupCard .divider hr {
-  flex: 1;
-  border: none;
-  border-top: 1px solid #ccc;
-}
-
-.signupCard .divider p {
-  font-size: 14px;
-  color: #666;
-}
-
-/* Google Button */
-.signupCard .googleBtn {
+.googleBtn {
   width: 100%;
+  height: 56px;
   background: white;
-  border: 1px solid #ccc;
-  padding: 16px;
+  color: var(--c-text-main);
+  border: 1px solid #d2d2d7;
   border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
   cursor: pointer;
-  font-weight: 500;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: background 0.2s;
 }
 
-.signupCard .googleBtn:hover {
-  background: #f5f5f5;
+.googleBtn:hover {
+  background: #f5f5f7;
 }
 
-.signupCard .googleIcon {
-  height: 24px;
-  width: 24px;
-}
-
-/* Links */
-.signupCard .loginLink {
+.divider {
+  display: flex;
+  align-items: center;
   text-align: center;
-  margin-top: 32px;
-  font-size: 15px;
-  color: #555;
+  color: var(--c-text-sec);
+  font-size: 13px;
+  margin: 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.signupCard .loginLink a {
-  color: #1173d4;
-  font-weight: 600;
-  text-decoration: none;
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.signupCard .loginLink a:hover {
+.divider span {
+  padding: 0 16px;
+}
+
+.tos {
+  text-align: center;
+  font-size: 12px;
+  color: var(--c-text-sec);
+  margin-top: 24px;
+  line-height: 1.5;
+}
+
+.tos a {
+  color: var(--c-text-main);
   text-decoration: underline;
 }
 
-.signupCard .tos {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 12px;
-  color: #777;
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-.signupCard .tos a {
-  color: #333;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .root {
+    flex-direction: column;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .visualColumn {
+    display: none;
+  }
+
+  .formColumn {
+    width: 100%;
+    padding: 40px 24px;
+    border: none;
+    flex: 1;
+    border-radius: 0;
+    background: var(--c-bg);
+  }
+
+  .visualTitle {
+    font-size: 40px;
+  }
+
+  .input,
+  .select {
+    background: white;
+  }
 }
