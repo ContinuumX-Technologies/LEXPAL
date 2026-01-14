@@ -27,7 +27,7 @@ export async function handleSendMessage(socket, payload) {
       type: "incoming_message",
       message: {
         _id: message._id,
-        senderId,
+        sender_id:senderId,
         content,
         createdAt: message.createdAt,
       },
@@ -43,7 +43,7 @@ export async function handleSendMessage(socket, payload) {
       type: "incoming_message",
       message: {
         _id: message._id,
-        senderId,
+        sender_id:senderId,
         content,
         createdAt: message.createdAt,
       },
