@@ -28,11 +28,10 @@
 }
 
 /* Dark mode override */
-@media (prefers-color-scheme: dark) {
-    .inputWrapper {
-        background: #2f2f2f;
-        /* ChatGPT Dark Input */
-    }
+/* Dark mode override */
+:global(.dark) .inputWrapper {
+    background: #2f2f2f;
+    /* ChatGPT Dark Input */
 }
 
 .inputWrapper:focus-within {
@@ -40,10 +39,8 @@
     border-color: rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-    .inputWrapper:focus-within {
-        border-color: rgba(255, 255, 255, 0.1);
-    }
+:global(.dark) .inputWrapper:focus-within {
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Context Chips (Internal) */
@@ -66,11 +63,9 @@
     color: #333;
 }
 
-@media (prefers-color-scheme: dark) {
-    .chip {
-        background: #424242;
-        color: #ececec;
-    }
+:global(.dark) .chip {
+    background: #424242;
+    color: #ececec;
 }
 
 .chipName {
@@ -128,15 +123,13 @@
     color: #000;
 }
 
-@media (prefers-color-scheme: dark) {
-    .attachBtn {
-        color: #b4b4b4;
-    }
+:global(.dark) .attachBtn {
+    color: #b4b4b4;
+}
 
-    .attachBtn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
-    }
+:global(.dark) .attachBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 .input {
@@ -156,14 +149,12 @@
     color: #0d0d0d;
 }
 
-@media (prefers-color-scheme: dark) {
-    .input {
-        color: #ececec;
-    }
+:global(.dark) .input {
+    color: #ececec;
+}
 
-    .input::placeholder {
-        color: #8e8e8e;
-    }
+:global(.dark) .input::placeholder {
+    color: #8e8e8e;
 }
 
 /* Send Button */
@@ -183,12 +174,10 @@
     margin-bottom: 2px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .sendBtn {
-        background: #fff;
-        /* White send button in dark mode */
-        color: #000;
-    }
+:global(.dark) .sendBtn {
+    background: #fff;
+    /* White send button in dark mode */
+    color: #000;
 }
 
 .sendBtn:disabled {
@@ -197,11 +186,9 @@
     cursor: default;
 }
 
-@media (prefers-color-scheme: dark) {
-    .sendBtn:disabled {
-        background: #424242;
-        color: #666;
-    }
+:global(.dark) .sendBtn:disabled {
+    background: #424242;
+    color: #666;
 }
 
 /* Stop Button */
@@ -223,11 +210,9 @@
     opacity: 1;
 }
 
-@media (prefers-color-scheme: dark) {
-    .stopBtn {
-        background: #fff;
-        color: #000;
-    }
+:global(.dark) .stopBtn {
+    background: #fff;
+    color: #000;
 }
 
 /* Footer Note */
@@ -238,8 +223,6 @@
     margin-top: 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .footerNote {
-        color: #666;
-    }
+:global(.dark) .footerNote {
+    color: #666;
 }

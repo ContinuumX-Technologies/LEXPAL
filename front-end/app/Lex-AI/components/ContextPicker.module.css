@@ -157,52 +157,50 @@
 }
 
 /* Dark Mode Updates for ChatGPT Theme */
-@media (prefers-color-scheme: dark) {
-    .popover {
-        background: #2f2f2f;
-        /* ChatGPT Menu Dark */
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    }
+:global(.dark) .popover {
+    background: #2f2f2f;
+    /* ChatGPT Menu Dark */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
 
-    .header {
-        border-color: rgba(255, 255, 255, 0.1);
-    }
+:global(.dark) .header {
+    border-color: rgba(255, 255, 255, 0.1);
+}
 
-    .title,
-    .itemName {
-        color: #fff;
-    }
+:global(.dark) .title,
+:global(.dark) .itemName {
+    color: #fff;
+}
 
-    .tabs {
-        background: #171717;
-        /* Darker bg for tabs container */
-    }
+:global(.dark) .tabs {
+    background: #171717;
+    /* Darker bg for tabs container */
+}
 
-    .tab {
-        color: #aaa;
-    }
+:global(.dark) .tab {
+    color: #aaa;
+}
 
-    .activeTab {
-        background: #424242;
-        /* Lighter active tab */
-        color: #fff;
-    }
+:global(.dark) .activeTab {
+    background: #424242;
+    /* Lighter active tab */
+    color: #fff;
+}
 
-    .item:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
+:global(.dark) .item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
 
-    .iconWrap {
-        background: #333;
-        color: #ccc;
-    }
+:global(.dark) .iconWrap {
+    background: #333;
+    color: #ccc;
+}
 
-    .uploadArea {
-        border-color: #444;
-        color: #aaa;
-    }
+:global(.dark) .uploadArea {
+    border-color: #444;
+    color: #aaa;
+}
 
-    .uploadArea:hover {
-        background: rgba(255, 255, 255, 0.05);
-    }
+:global(.dark) .uploadArea:hover {
+    background: rgba(255, 255, 255, 0.05);
 }

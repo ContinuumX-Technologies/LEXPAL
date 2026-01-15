@@ -7,11 +7,9 @@
     color: #000;
 }
 
-@media (prefers-color-scheme: dark) {
-    .layoutRoot {
-        background-color: #212121;
-        color: #fff;
-    }
+:global(.dark) .layoutRoot {
+    background-color: #212121;
+    color: #fff;
 }
 
 .sidebarContainer {
@@ -22,10 +20,8 @@
     background-color: #f9f9f9;
 }
 
-@media (prefers-color-scheme: dark) {
-    .sidebarContainer {
-        background-color: #171717;
-    }
+:global(.dark) .sidebarContainer {
+    background-color: #171717;
 }
 
 .sidebarInstance {
@@ -63,10 +59,8 @@
     transition: opacity 0.2s;
 }
 
-@media (prefers-color-scheme: dark) {
-    .resizeLine {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
+:global(.dark) .resizeLine {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .mainContent {

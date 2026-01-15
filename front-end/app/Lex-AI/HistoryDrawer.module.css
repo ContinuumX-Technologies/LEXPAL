@@ -168,44 +168,44 @@
 
 /* -------------------- DARK MODE -------------------- */
 
-@media (prefers-color-scheme: dark) {
-  .drawer {
-    background: rgba(30, 30, 30, 0.85);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.05),
-      10px 0 40px rgba(0, 0, 0, 0.5);
-  }
+/* -------------------- DARK MODE -------------------- */
 
-  .title {
-    color: #f5f5f7;
-  }
+:global(.dark) .drawer {
+  background: rgba(30, 30, 30, 0.85);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    10px 0 40px rgba(0, 0, 0, 0.5);
+}
 
-  .item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+:global(.dark) .title {
+  color: #f5f5f7;
+}
 
-  .item:active {
-    background-color: rgba(255, 255, 255, 0.15);
-  }
+:global(.dark) .item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
 
-  .itemTitle {
-    color: #f5f5f7;
-  }
+:global(.dark) .item:active {
+  background-color: rgba(255, 255, 255, 0.15);
+}
 
-  .item:hover .itemTitle {
-    color: #fff;
-  }
+:global(.dark) .itemTitle {
+  color: #f5f5f7;
+}
 
-  .itemSub {
-    color: #98989d;
-  }
+:global(.dark) .item:hover .itemTitle {
+  color: #fff;
+}
 
-  .list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-  }
+:global(.dark) .itemSub {
+  color: #98989d;
+}
 
-  .list::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
-  }
+:global(.dark) .list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+:global(.dark) .list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

@@ -499,9 +499,10 @@
 }
 
 /* Edit Message UI */
+/* Edit Message UI */
 .editContainer {
-  background-color: #2f2f2f;
-  /* Match user bubble dark grey */
+  background-color: #f4f4f4;
+  /* Light mode default */
   border-radius: 24px;
   /* Match message bubble radius */
   padding: 16px;
@@ -511,6 +512,10 @@
   flex-direction: column;
 }
 
+:global(.dark) .editContainer {
+  background-color: #2f2f2f;
+}
+
 .editTextarea {
   width: 100%;
   min-height: 24px;
@@ -518,8 +523,8 @@
   /* Increased to ~7 lines */
   background-color: transparent;
   border: none;
-  color: #fff;
-  /* Always white in this specific dark UI request */
+  color: #0d0d0d;
+  /* Light mode text */
   font-family: inherit;
   font-size: 16px;
   line-height: 1.6;
@@ -529,6 +534,10 @@
   margin-bottom: 16px;
   overflow-y: auto;
   /* Enable scroll if height exceeds max */
+}
+
+:global(.dark) .editTextarea {
+  color: #fff;
 }
 
 .editButtonRow {
@@ -550,12 +559,17 @@
 }
 
 .saveBtn {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+:global(.dark) .saveBtn {
   background-color: #ffffff;
   color: #000000;
 }
 
 .saveBtn:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 
