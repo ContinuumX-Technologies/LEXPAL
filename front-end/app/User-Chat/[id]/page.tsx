@@ -161,7 +161,7 @@ export default function ChatPage() {
         {loadingMore && <div className={styles.dateChip}>Loading…</div>}
 
         {messages.map((msg) => {
-          const outgoing = msg.sender_id !== id;
+          const outgoing = msg.sender_id !== id;//chat page id is reciever id
 
           return (
             <div
