@@ -5,11 +5,11 @@
     flex-direction: column;
     height: 100%;
     position: relative;
-    overflow: hidden;
+    padding-top: 4px;
 }
 
 .header {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,21 +23,24 @@
 }
 
 .badge {
-    padding: 4px 10px;
-    background: rgba(0, 122, 255, 0.1);
+    padding: 6px 12px;
+    background: rgba(0, 122, 255, 0.12);
     color: #007aff;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     border-radius: 20px;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(8px);
 }
 
 .timelineContent {
     flex: 1;
     overflow-y: auto;
-    padding-right: 4px;
+    padding-right: 8px;
     /* Space for scrollbar */
+    padding-left: 4px;
+    /* Space for dot shadow */
     position: relative;
 }
 
@@ -58,7 +61,7 @@
 .step {
     display: flex;
     position: relative;
-    padding-bottom: 24px;
+    padding-bottom: 32px;
 }
 
 .step:last-child {
@@ -69,13 +72,19 @@
 .step::before {
     content: '';
     position: absolute;
-    left: 11px;
-    /* Align with center of circle (22px width) */
-    top: 24px;
+    left: 14px;
+    /* (30px / 2) - 1px width */
+    top: 30px;
     bottom: 0;
     width: 2px;
     background: #e5e5ea;
     z-index: 1;
+    border-radius: 1px;
+}
+
+.step.completed::before {
+    background: #34c759;
+    /* Green connector for completed */
 }
 
 .step:last-child::before {
@@ -83,24 +92,27 @@
 }
 
 .iconWrapper {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #fff;
     border: 2px solid #e5e5ea;
     z-index: 2;
     flex-shrink: 0;
-    margin-right: 16px;
+    margin-right: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 /* States */
 .step.completed .iconWrapper {
     background: #34c759;
     border-color: #34c759;
+    box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
+    color: white;
 }
 
 .step.current .iconWrapper {
@@ -110,36 +122,56 @@
 }
 
 .step.upcoming .iconWrapper {
-    background: #f2f2f7;
+    background: #f5f5f7;
     border-color: #e5e5ea;
 }
 
 /* Checkmark CSS */
 .checkIcon {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     fill: #fff;
+    stroke: #fff;
+    stroke-width: 1;
 }
 
 /* Dot for current */
 .currentDot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: #007aff;
     border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 122, 255, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(0, 122, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 122, 255, 0);
+    }
 }
 
 .stepContent {
     flex: 1;
-    padding-top: 2px;
-    /* Align with icon visual center */
+    padding-top: 3px;
 }
 
 .stepTitle {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     color: #1d1d1f;
     margin-bottom: 4px;
+}
+
+.step.current .stepTitle {
+    color: #007aff;
 }
 
 .step.upcoming .stepTitle {
@@ -147,15 +179,19 @@
 }
 
 .stepDate {
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 500;
     color: #86868b;
     margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 .stepDescription {
-    font-size: 13px;
+    font-size: 14px;
     color: #424245;
-    line-height: 1.4;
+    line-height: 1.5;
+    font-weight: 400;
 }
 
 .step.upcoming .stepDescription {
@@ -165,115 +201,111 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .header {
-        margin-bottom: 16px;
-    }
-
-    .title {
-        font-size: 18px;
+        margin-bottom: 20px;
     }
 
     .step {
-        padding-bottom: 20px;
+        padding-bottom: 24px;
     }
 
     .iconWrapper {
-        width: 20px;
-        height: 20px;
-        margin-right: 12px;
+        width: 24px;
+        height: 24px;
+        margin-right: 14px;
     }
 
     .step::before {
-        left: 9px;
-        /* Center of 20px is 10px, minus 1px for border width -> 9px */
+        left: 11px;
     }
 
     .checkIcon {
+        width: 12px;
+        height: 12px;
+    }
+
+    .currentDot {
         width: 10px;
         height: 10px;
     }
 
-    .currentDot {
-        width: 8px;
-        height: 8px;
-    }
-
     .stepTitle {
-        font-size: 14px;
-    }
-
-    .stepDate {
-        font-size: 12px;
-    }
-
-    .stepDescription {
-        font-size: 12px;
+        font-size: 15px;
     }
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    .title {
-        color: #f5f5f7;
-    }
+/* Dark Mode Override */
+:global(.dark) .title {
+    color: #f5f5f7;
+}
 
-    .badge {
-        background: rgba(10, 132, 255, 0.15);
-        color: #0a84ff;
-    }
+:global(.dark) .badge {
+    background: rgba(10, 132, 255, 0.15);
+    color: #0a84ff;
+    border: 1px solid rgba(10, 132, 255, 0.2);
+}
 
-    .timelineContent::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.15);
-    }
+:global(.dark) .timelineContent::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+}
 
-    .step::before {
-        background: #38383a;
-    }
+:global(.dark) .step::before {
+    background: #38383a;
+}
 
-    .iconWrapper {
-        background: #1c1c1e;
-        border-color: #38383a;
-    }
+:global(.dark) .step.completed::before {
+    background: #30d158;
+}
 
-    /* Completed (Green) */
-    .step.completed .iconWrapper {
-        background: #30d158;
-        border-color: #30d158;
-    }
+:global(.dark) .iconWrapper {
+    background: #1c1c1e;
+    border-color: #38383a;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
 
-    /* Current (Blue) */
-    .step.current .iconWrapper {
-        background: #1c1c1e;
-        border-color: #0a84ff;
-        box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.25);
-    }
+/* Completed (Green) */
+:global(.dark) .step.completed .iconWrapper {
+    background: #30d158;
+    border-color: #30d158;
+    box-shadow: 0 0 12px rgba(48, 209, 88, 0.3);
+}
 
-    .currentDot {
-        background: #0a84ff;
-    }
+/* Current (Blue) */
+:global(.dark) .step.current .iconWrapper {
+    background: #1c1c1e;
+    border-color: #0a84ff;
+    box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.2);
+}
 
-    /* Upcoming */
-    .step.upcoming .iconWrapper {
-        background: #2c2c2e;
-        border-color: #38383a;
-    }
+:global(.dark) .currentDot {
+    background: #0a84ff;
+}
 
-    .stepTitle {
-        color: #f5f5f7;
-    }
+/* Upcoming */
+:global(.dark) .step.upcoming .iconWrapper {
+    background: #2c2c2e;
+    border-color: #38383a;
+}
 
-    .step.upcoming .stepTitle {
-        color: #8e8e93;
-    }
+:global(.dark) .stepTitle {
+    color: #f5f5f7;
+}
 
-    .stepDate {
-        color: #8e8e93;
-    }
+:global(.dark) .step.current .stepTitle {
+    color: #0a84ff;
+}
 
-    .stepDescription {
-        color: #e5e5ea;
-    }
+:global(.dark) .step.upcoming .stepTitle {
+    color: #8e8e93;
+}
 
-    .step.upcoming .stepDescription {
-        color: #636366;
-    }
+:global(.dark) .stepDate {
+    color: #8e8e93;
+}
+
+:global(.dark) .stepDescription {
+    color: #e5e5ea;
+}
+
+:global(.dark) .step.upcoming .stepDescription {
+    color: #636366;
 }

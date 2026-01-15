@@ -525,143 +525,142 @@
    DARK MODE
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  .navbar {
-    background: rgba(28, 28, 30, 0.6);
-    border-bottom-color: rgba(255, 255, 255, 0.08);
-  }
+/* Dark Mode Override */
+:global(.dark) .navbar {
+  background: rgba(28, 28, 30, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
 
-  .navbarScrolled {
-    background: rgba(28, 28, 30, 0.85);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.05),
-      0 4px 16px -8px rgba(0, 0, 0, 0.5);
-  }
+:global(.dark) .navbarScrolled {
+  background: rgba(28, 28, 30, 0.85);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 16px -8px rgba(0, 0, 0, 0.5);
+}
 
-  .burger span {
-    background: rgba(255, 255, 255, 0.85);
-  }
+:global(.dark) .burger span {
+  background: rgba(255, 255, 255, 0.85);
+}
 
-  .greetingLabel {
-    color: rgba(255, 255, 255, 0.45);
-  }
+:global(.dark) .greetingLabel {
+  color: rgba(255, 255, 255, 0.45);
+}
 
-  .greetingName {
-    color: rgba(255, 255, 255, 0.9);
-  }
+:global(.dark) .greetingName {
+  color: rgba(255, 255, 255, 0.9);
+}
 
-  .pill {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.2);
-  }
+:global(.dark) .pill {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
 
-  .pillIndicator {
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.3),
-      0 2px 8px rgba(0, 0, 0, 0.2);
-  }
+:global(.dark) .pillIndicator {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
 
-  .pillItem {
-    color: rgba(255, 255, 255, 0.5);
-  }
+:global(.dark) .pillItem {
+  color: rgba(255, 255, 255, 0.5);
+}
 
-  .pillItem:hover:not(.pillItemActive) {
-    color: rgba(255, 255, 255, 0.7);
-  }
+:global(.dark) .pillItem:hover:not(.pillItemActive) {
+  color: rgba(255, 255, 255, 0.7);
+}
 
-  .pillItemActive {
-    color: rgba(255, 255, 255, 0.95);
-  }
+:global(.dark) .pillItemActive {
+  color: rgba(255, 255, 255, 0.95);
+}
 
-  .actionBtn {
-    color: rgba(255, 255, 255, 0.65);
-  }
+:global(.dark) .actionBtn {
+  color: rgba(255, 255, 255, 0.65);
+}
 
-  .actionBtn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.9);
-  }
+:global(.dark) .actionBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+}
 
-  .badge {
-    border-color: rgba(28, 28, 30, 0.9);
-  }
+:global(.dark) .badge {
+  border-color: rgba(28, 28, 30, 0.9);
+}
 
-  .avatarText {
-    box-shadow:
-      0 2px 6px rgba(0, 0, 0, 0.5),
-      inset 0 1px 1px rgba(255, 255, 255, 0.15);
-  }
+:global(.dark) .avatarText {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
 
-  .overlay {
-    background: rgba(0, 0, 0, 0.5);
-  }
+:global(.dark) .overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
 
-  .drawer {
-    background: rgba(28, 28, 30, 0.95);
-    border-right-color: rgba(255, 255, 255, 0.08);
-  }
+:global(.dark) .drawer {
+  background: rgba(28, 28, 30, 0.95);
+  border-right-color: rgba(255, 255, 255, 0.08);
+}
 
-  .drawerHeader {
-    border-bottom-color: rgba(255, 255, 255, 0.06);
-  }
+:global(.dark) .drawerHeader {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
 
-  .drawerName {
-    color: rgba(255, 255, 255, 0.92);
-  }
+:global(.dark) .drawerName {
+  color: rgba(255, 255, 255, 0.92);
+}
 
-  .drawerSub {
-    color: rgba(255, 255, 255, 0.4);
-  }
+:global(.dark) .drawerSub {
+  color: rgba(255, 255, 255, 0.4);
+}
 
-  .drawerItem {
-    color: rgba(255, 255, 255, 0.75);
-  }
+:global(.dark) .drawerItem {
+  color: rgba(255, 255, 255, 0.75);
+}
 
-  .drawerItem:hover {
-    background: rgba(255, 255, 255, 0.06);
-  }
+:global(.dark) .drawerItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
 
-  .drawerItem:active {
-    background: rgba(255, 255, 255, 0.1);
-  }
+:global(.dark) .drawerItem:active {
+  background: rgba(255, 255, 255, 0.1);
+}
 
-  .drawerItemActive {
-    color: #0077ed;
-    background: rgba(0, 119, 237, 0.12);
-  }
+:global(.dark) .drawerItemActive {
+  color: #0077ed;
+  background: rgba(0, 119, 237, 0.12);
+}
 
-  .drawerItem .material-symbols-outlined {
-    color: rgba(255, 255, 255, 0.5);
-  }
+:global(.dark) .drawerItem .material-symbols-outlined {
+  color: rgba(255, 255, 255, 0.5);
+}
 
-  .drawerItemActive .material-symbols-outlined {
-    color: #0077ed;
-  }
+:global(.dark) .drawerItemActive .material-symbols-outlined {
+  color: #0077ed;
+}
 
-  .drawerFooter {
-    border-top-color: rgba(255, 255, 255, 0.06);
-  }
+:global(.dark) .drawerFooter {
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
 
-  .drawerFooterBtn {
-    color: rgba(255, 255, 255, 0.6);
-  }
+:global(.dark) .drawerFooterBtn {
+  color: rgba(255, 255, 255, 0.6);
+}
 
-  .drawerFooterBtn:hover {
-    background: rgba(255, 255, 255, 0.06);
-  }
+:global(.dark) .drawerFooterBtn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
 
-  .drawerFooterBtn .material-symbols-outlined {
-    color: rgba(255, 255, 255, 0.4);
-  }
+:global(.dark) .drawerFooterBtn .material-symbols-outlined {
+  color: rgba(255, 255, 255, 0.4);
+}
 
-  .drawerLogout {
-    color: #ff453a;
-  }
+:global(.dark) .drawerLogout {
+  color: #ff453a;
+}
 
-  .drawerLogout .material-symbols-outlined {
-    color: #ff453a;
-  }
+:global(.dark) .drawerLogout .material-symbols-outlined {
+  color: #ff453a;
 }
 
 /* ============================================

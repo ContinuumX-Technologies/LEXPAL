@@ -19,13 +19,12 @@
 }
 
 /* Dark Mode Override */
-@media (prefers-color-scheme: dark) {
-    .sidebar {
-        background-color: #171717;
-        /* ChatGPT Dark Sidebar */
-        color: #ececec;
-        border-right: 1px solid rgba(255, 255, 255, 0.05);
-    }
+/* Dark Mode Override */
+:global(.dark) .sidebar {
+    background-color: #171717;
+    /* ChatGPT Dark Sidebar */
+    color: #ececec;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Header Area */
@@ -70,18 +69,15 @@
     color: #000;
 }
 
-@media (prefers-color-scheme: dark) {
+:global(.dark) .sidebarToggleBtn,
+:global(.dark) .newChatIconBtn {
+    color: #9b9b9b;
+}
 
-    .sidebarToggleBtn,
-    .newChatIconBtn {
-        color: #9b9b9b;
-    }
-
-    .sidebarToggleBtn:hover,
-    .newChatIconBtn:hover {
-        background-color: #212121;
-        color: #ececec;
-    }
+:global(.dark) .sidebarToggleBtn:hover,
+:global(.dark) .newChatIconBtn:hover {
+    background-color: #212121;
+    color: #ececec;
 }
 
 /* Main Navigation Links */
@@ -120,14 +116,12 @@
     font-weight: 500;
 }
 
-@media (prefers-color-scheme: dark) {
-    .navItem:hover {
-        background-color: #212121;
-    }
+:global(.dark) .navItem:hover {
+    background-color: #212121;
+}
 
-    .navItem.active {
-        background-color: #212121;
-    }
+:global(.dark) .navItem.active {
+    background-color: #212121;
 }
 
 /* Icons */
@@ -153,11 +147,9 @@
     color: inherit;
 }
 
-@media (prefers-color-scheme: dark) {
-    .gptIcon {
-        background-color: #fff;
-        color: #000;
-    }
+:global(.dark) .gptIcon {
+    background-color: #fff;
+    color: #000;
 }
 
 /* Scrollable History List */
@@ -171,10 +163,8 @@
     scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-    .historyList {
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-    }
+:global(.dark) .historyList {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 /* Date Group Headers */
@@ -185,10 +175,8 @@
     margin: 24px 0 8px 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .dateGroup {
-        color: #8e8e8e;
-    }
+:global(.dark) .dateGroup {
+    color: #8e8e8e;
 }
 
 .dateGroup:first-child {
@@ -226,20 +214,16 @@
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-    .historyItem:hover {
-        background-color: #212121;
-    }
+:global(.dark) .historyItem:hover {
+    background-color: #212121;
 }
 
 .historyItem.active {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-    .historyItem.active {
-        background-color: #212121;
-    }
+:global(.dark) .historyItem.active {
+    background-color: #212121;
 }
 
 .historyItemTitle {
@@ -265,10 +249,8 @@
     border-radius: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-    .itemOptionsBtn {
-        color: #9b9b9b;
-    }
+:global(.dark) .itemOptionsBtn {
+    color: #9b9b9b;
 }
 
 .historyItemWrapper:hover .itemOptionsBtn {
@@ -284,10 +266,8 @@
     color: #000;
 }
 
-@media (prefers-color-scheme: dark) {
-    .itemOptionsBtn:hover {
-        color: #fff;
-    }
+:global(.dark) .itemOptionsBtn:hover {
+    color: #fff;
 }
 
 /* Delete Confirm Overlay */
@@ -304,10 +284,8 @@
     z-index: 10;
 }
 
-@media (prefers-color-scheme: dark) {
-    .deleteConfirm {
-        background: #212121;
-    }
+:global(.dark) .deleteConfirm {
+    background: #212121;
 }
 
 .checkIconBtn,
@@ -326,17 +304,14 @@
     color: #000;
 }
 
-@media (prefers-color-scheme: dark) {
+:global(.dark) .checkIconBtn,
+:global(.dark) .closeIconBtn {
+    color: #9b9b9b;
+}
 
-    .checkIconBtn,
-    .closeIconBtn {
-        color: #9b9b9b;
-    }
-
-    .checkIconBtn:hover,
-    .closeIconBtn:hover {
-        color: #fff;
-    }
+:global(.dark) .checkIconBtn:hover,
+:global(.dark) .closeIconBtn:hover {
+    color: #fff;
 }
 
 /* Footer Profile */
@@ -363,10 +338,8 @@
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-    .userProfileBtn:hover {
-        background-color: #212121;
-    }
+:global(.dark) .userProfileBtn:hover {
+    background-color: #212121;
 }
 
 .avatar {
@@ -382,10 +355,8 @@
     color: #fff;
 }
 
-@media (prefers-color-scheme: dark) {
-    .avatar {
-        background-color: #333;
-    }
+:global(.dark) .avatar {
+    background-color: #333;
 }
 
 .userName {
@@ -403,11 +374,9 @@
     font-weight: 500;
 }
 
-@media (prefers-color-scheme: dark) {
-    .planTag {
-        background: #333;
-        color: #ececec;
-    }
+:global(.dark) .planTag {
+    background: #333;
+    color: #ececec;
 }
 
 /* Loading / Empty States */
@@ -469,11 +438,9 @@
     z-index: 100;
 }
 
-@media (prefers-color-scheme: dark) {
-    .menuPopover {
-        background: #2f2f2f;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    }
+:global(.dark) .menuPopover {
+    background: #2f2f2f;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .menuItem {
@@ -503,14 +470,12 @@
     background: rgba(255, 77, 77, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-    .menuItem {
-        color: #ececec;
-    }
+:global(.dark) .menuItem {
+    color: #ececec;
+}
 
-    .menuItem:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
+:global(.dark) .menuItem:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .menuIcon {
@@ -536,14 +501,12 @@
     box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-    .renameInput {
-        border-color: rgba(255, 255, 255, 0.2);
-    }
+:global(.dark) .renameInput {
+    border-color: rgba(255, 255, 255, 0.2);
+}
 
-    .renameInput:focus {
-        border-color: #0a84ff;
-    }
+:global(.dark) .renameInput:focus {
+    border-color: #0a84ff;
 }
 
 
@@ -563,10 +526,8 @@
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    .miniSidebar {
-        background-color: #171717;
-    }
+:global(.dark) .miniSidebar {
+    background-color: #171717;
 }
 
 .miniHeader {
@@ -604,13 +565,11 @@
     color: #000;
 }
 
-@media (prefers-color-scheme: dark) {
-    .miniIconBtn {
-        color: #9b9b9b;
-    }
+:global(.dark) .miniIconBtn {
+    color: #9b9b9b;
+}
 
-    .miniIconBtn:hover {
-        background-color: #212121;
-        color: #ececec;
-    }
+:global(.dark) .miniIconBtn:hover {
+    background-color: #212121;
+    color: #ececec;
 }

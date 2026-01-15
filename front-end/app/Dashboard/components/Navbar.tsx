@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import styles from "./Navbar.module.css";
+import { useTheme } from "../../ThemeContext";
 
 interface NavItem {
   id: string;
@@ -23,6 +24,7 @@ const NAV_ITEMS: NavItem[] = [
 const SCROLL_OFFSET = 120;
 
 export default function Navbar({ firstName }: props) {
+  const { theme, toggleTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pillRef = useRef<HTMLDivElement | null>(null);
   const indicatorRef = useRef<HTMLDivElement | null>(null);
@@ -194,6 +196,12 @@ export default function Navbar({ firstName }: props) {
 
           {/* Right - Actions */}
           <div className={styles.navRight}>
+            <button className={styles.actionBtn} onClick={toggleTheme} aria-label="Toggle Theme">
+              <span className="material-symbols-outlined">
+                {theme === "dark" ? "light_mode" : "dark_mode"}
+              </span>
+            </button>
+
             <button className={styles.actionBtn} aria-label="Search">
               <span className="material-symbols-outlined">search</span>
             </button>

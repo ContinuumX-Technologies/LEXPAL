@@ -720,151 +720,152 @@
    DARK MODE
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  .heroCard {
-    background: linear-gradient(135deg,
-        rgba(0, 113, 227, 0.12) 0%,
-        rgba(0, 91, 181, 0.12) 50%,
-        rgba(0, 113, 227, 0.12) 100%);
-    border-color: rgba(0, 113, 227, 0.2);
-  }
-
-  .heroGlow {
-    background: radial-gradient(circle,
-        rgba(0, 91, 181, 0.2) 0%,
-        transparent 70%);
-  }
-
-  .heroSubtitle {
-    color: rgba(255, 255, 255, 0.55);
-  }
-
-  .quickPromptBtn {
-    color: rgba(0, 119, 237, 0.95);
-    background: rgba(0, 113, 227, 0.15);
-    border-color: rgba(0, 113, 227, 0.25);
-  }
-
-  .quickPromptBtn:hover {
-    background: rgba(0, 113, 227, 0.2);
-    border-color: rgba(0, 113, 227, 0.35);
-  }
-
-  .recentIcon {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .recentTitle {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .viewAllBtn {
-    color: #0077ed;
-  }
-
-  .viewAllBtn:hover {
-    background: rgba(0, 119, 237, 0.12);
-  }
-
-  .card {
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.2),
-      0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .card:hover {
-    border-color: rgba(0, 119, 237, 0.3);
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.3),
-      0 12px 28px rgba(0, 119, 237, 0.12);
-  }
-
-  .cardIconWrap {
-    background: rgba(0, 119, 237, 0.15);
-  }
-
-  .cardIconWrap .material-symbols-outlined {
-    color: #0077ed;
-  }
-
-  .cardTime {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .cardTitle {
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .cardDesc {
-    color: rgba(255, 255, 255, 0.55);
-  }
-
-  .cardMeta {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .continueBtn {
-    color: #0077ed;
-    background: rgba(0, 119, 237, 0.12);
-  }
-
-  .continueBtn:hover {
-    background: rgba(0, 119, 237, 0.2);
-  }
-
-  .skeletonCard {
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.06);
-  }
-
-  .skeletonLine {
-    background: linear-gradient(90deg,
-        rgba(255, 255, 255, 0.06) 0%,
-        rgba(255, 255, 255, 0.12) 50%,
-        rgba(255, 255, 255, 0.06) 100%);
-    background-size: 200% 100%;
-  }
-
-  .errorWrap {
-    background: rgba(239, 68, 68, 0.08);
-    border-color: rgba(239, 68, 68, 0.15);
-  }
-
-  .errorText {
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .emptyWrap {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .emptyIcon {
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  .emptyIcon .material-symbols-outlined {
-    color: rgba(255, 255, 255, 0.25);
-  }
-
-  .emptyTitle {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .emptyText {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .dividerLine {
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.08) 20%,
-        rgba(255, 255, 255, 0.08) 80%,
-        transparent 100%);
-  }
+/* Dark Mode Override */
+:global(.dark) .heroCard {
+  background: linear-gradient(135deg,
+      rgba(0, 113, 227, 0.12) 0%,
+      rgba(0, 91, 181, 0.12) 50%,
+      rgba(0, 113, 227, 0.12) 100%);
+  border-color: rgba(0, 113, 227, 0.2);
 }
+
+:global(.dark) .heroGlow {
+  background: radial-gradient(circle,
+      rgba(0, 91, 181, 0.2) 0%,
+      transparent 70%);
+}
+
+:global(.dark) .heroSubtitle {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+:global(.dark) .quickPromptBtn {
+  color: rgba(0, 119, 237, 0.95);
+  background: rgba(0, 113, 227, 0.15);
+  border-color: rgba(0, 113, 227, 0.25);
+}
+
+:global(.dark) .quickPromptBtn:hover {
+  background: rgba(0, 113, 227, 0.2);
+  border-color: rgba(0, 113, 227, 0.35);
+}
+
+:global(.dark) .recentIcon {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:global(.dark) .recentTitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global(.dark) .viewAllBtn {
+  color: #0077ed;
+}
+
+:global(.dark) .viewAllBtn:hover {
+  background: rgba(0, 119, 237, 0.12);
+}
+
+:global(.dark) .card {
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+:global(.dark) .card:hover {
+  border-color: rgba(0, 119, 237, 0.3);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 12px 28px rgba(0, 119, 237, 0.12);
+}
+
+:global(.dark) .cardIconWrap {
+  background: rgba(0, 119, 237, 0.15);
+}
+
+:global(.dark) .cardIconWrap .material-symbols-outlined {
+  color: #0077ed;
+}
+
+:global(.dark) .cardTime {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:global(.dark) .cardTitle {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+:global(.dark) .cardDesc {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+:global(.dark) .cardMeta {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:global(.dark) .continueBtn {
+  color: #0077ed;
+  background: rgba(0, 119, 237, 0.12);
+}
+
+:global(.dark) .continueBtn:hover {
+  background: rgba(0, 119, 237, 0.2);
+}
+
+:global(.dark) .skeletonCard {
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+:global(.dark) .skeletonLine {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.06) 100%);
+  background-size: 200% 100%;
+}
+
+:global(.dark) .errorWrap {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+:global(.dark) .errorText {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:global(.dark) .emptyWrap {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .emptyIcon {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+:global(.dark) .emptyIcon .material-symbols-outlined {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+:global(.dark) .emptyTitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global(.dark) .emptyText {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:global(.dark) .dividerLine {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 20%,
+      rgba(255, 255, 255, 0.08) 80%,
+      transparent 100%);
+}
+
+/* End Dark Mode */
 
 /* ============================================
    RESPONSIVE

@@ -1,3 +1,5 @@
+/* QuickActions.module.css */
+
 .container {
     height: 100%;
     display: flex;
@@ -5,10 +7,11 @@
 }
 
 .title {
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 20px;
     color: #1d1d1f;
+    letter-spacing: -0.01em;
 }
 
 .grid {
@@ -19,67 +22,121 @@
 }
 
 .actionBtn {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #f5f5f7;
-    border-radius: 16px;
-    padding: 16px;
+    padding: 20px;
+
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
     text-decoration: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid transparent;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.03),
+        0 1px 2px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.actionBtn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 .actionBtn:hover {
-    background: #fff;
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    border-color: rgba(0, 0, 0, 0.05);
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.08),
+        0 4px 8px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.actionBtn:hover::before {
+    opacity: 1;
 }
 
 .actionBtn:active {
-    transform: scale(0.98);
+    transform: scale(0.96);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .iconCircle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    /* Squircle */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+
+    /* Subtle gradient based on inherit color handling in JS or default here */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.actionBtn:hover .iconCircle {
+    transform: scale(1.1);
 }
 
 .iconCircle span {
-    font-size: 24px;
-    font-variation-settings: 'FILL' 1;
+    font-size: 28px;
+    font-variation-settings: 'FILL' 1, 'wght' 500;
 }
 
 .label {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: #1d1d1f;
     text-align: center;
+    letter-spacing: -0.01em;
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    .title {
-        color: #f5f5f7;
-    }
+/* Dark Mode Override */
+:global(.dark) .title {
+    color: #f5f5f7;
+}
 
-    .actionBtn {
-        background: rgba(255, 255, 255, 0.05);
-    }
+:global(.dark) .actionBtn {
+    background: rgba(44, 44, 46, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
 
-    .actionBtn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
+:global(.dark) .actionBtn::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+}
 
-    .label {
-        color: #f5f5f7;
-    }
+:global(.dark) .actionBtn:hover {
+    background: rgba(58, 58, 60, 0.7);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow:
+        0 14px 40px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+:global(.dark) .iconCircle {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

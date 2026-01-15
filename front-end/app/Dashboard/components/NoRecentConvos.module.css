@@ -16,13 +16,13 @@
 .card {
   position: relative;
   padding: 48px 24px;
-  
+
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 24px;
   overflow: hidden;
-  
-  box-shadow: 
+
+  box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.04),
     0 6px 16px rgba(0, 0, 0, 0.04);
 }
@@ -41,11 +41,9 @@
   right: -30%;
   width: 300px;
   height: 300px;
-  background: radial-gradient(
-    circle,
-    rgba(0, 113, 227, 0.08) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(0, 113, 227, 0.08) 0%,
+      transparent 70%);
   animation: floatSlow 8s ease-in-out infinite;
 }
 
@@ -55,11 +53,9 @@
   left: -20%;
   width: 250px;
   height: 250px;
-  background: radial-gradient(
-    circle,
-    rgba(0, 91, 181, 0.06) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(0, 91, 181, 0.06) 0%,
+      transparent 70%);
   animation: floatSlow 8s ease-in-out infinite 2s;
 }
 
@@ -69,19 +65,20 @@
   left: 50%;
   width: 150px;
   height: 150px;
-  background: radial-gradient(
-    circle,
-    rgba(0, 113, 227, 0.04) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(0, 113, 227, 0.04) 0%,
+      transparent 70%);
   animation: floatSlow 8s ease-in-out infinite 4s;
 }
 
 @keyframes floatSlow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) scale(1);
     opacity: 0.8;
   }
+
   50% {
     transform: translateY(-20px) scale(1.1);
     opacity: 1;
@@ -116,14 +113,12 @@
   justify-content: center;
   width: 72px;
   height: 72px;
-  
-  background: linear-gradient(
-    135deg,
-    rgba(0, 113, 227, 0.1) 0%,
-    rgba(0, 91, 181, 0.1) 100%
-  );
+
+  background: linear-gradient(135deg,
+      rgba(0, 113, 227, 0.1) 0%,
+      rgba(0, 91, 181, 0.1) 100%);
   border-radius: 22px;
-  
+
   transition: transform 0.3s ease;
 }
 
@@ -145,8 +140,13 @@
 }
 
 @keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Animated dots inside icon */
@@ -174,10 +174,13 @@
 }
 
 @keyframes dotPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(0.8);
   }
+
   50% {
     opacity: 1;
     transform: scale(1);
@@ -219,29 +222,29 @@
   gap: 12px;
   height: 52px;
   padding: 0 8px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 16px;
   font-weight: 600;
-  
+
   color: white;
   background: linear-gradient(135deg, #0071e3 0%, #005bb5 100%);
   border: none;
   border-radius: 16px;
   cursor: pointer;
-  
-  box-shadow: 
+
+  box-shadow:
     0 4px 16px rgba(0, 113, 227, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  
-  transition: 
+
+  transition:
     transform 0.2s ease,
     box-shadow 0.3s ease;
 }
 
 .ctaButton:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 8px 28px rgba(0, 113, 227, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
@@ -320,16 +323,16 @@
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
-  
+
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
   cursor: pointer;
   text-align: left;
-  
+
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  
-  transition: 
+
+  transition:
     background 0.2s ease,
     border-color 0.2s ease,
     box-shadow 0.2s ease,
@@ -339,7 +342,7 @@
 .suggestionCard:hover {
   background: rgba(0, 113, 227, 0.02);
   border-color: rgba(0, 113, 227, 0.15);
-  box-shadow: 
+  box-shadow:
     0 2px 8px rgba(0, 113, 227, 0.08),
     0 4px 12px rgba(0, 0, 0, 0.04);
   transform: translateX(4px);
@@ -356,23 +359,19 @@
   width: 44px;
   height: 44px;
   flex-shrink: 0;
-  
-  background: linear-gradient(
-    135deg,
-    rgba(0, 113, 227, 0.08) 0%,
-    rgba(0, 91, 181, 0.08) 100%
-  );
+
+  background: linear-gradient(135deg,
+      rgba(0, 113, 227, 0.08) 0%,
+      rgba(0, 91, 181, 0.08) 100%);
   border-radius: 12px;
-  
+
   transition: background 0.2s ease;
 }
 
 .suggestionCard:hover .suggestionIcon {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 113, 227, 0.12) 0%,
-    rgba(0, 91, 181, 0.12) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(0, 113, 227, 0.12) 0%,
+      rgba(0, 91, 181, 0.12) 100%);
 }
 
 .suggestionIcon .material-symbols-outlined {
@@ -400,7 +399,7 @@
   font-size: 13px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.45);
-  
+
   /* Truncate */
   white-space: nowrap;
   overflow: hidden;
@@ -411,7 +410,7 @@
   font-size: 18px;
   color: rgba(0, 0, 0, 0.25);
   flex-shrink: 0;
-  transition: 
+  transition:
     color 0.2s ease,
     transform 0.2s ease;
 }
@@ -434,18 +433,18 @@
   align-items: center;
   gap: 6px;
   padding: 8px 14px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  
+
   color: rgba(0, 0, 0, 0.45);
   background: transparent;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  
-  transition: 
+
+  transition:
     color 0.2s ease,
     background 0.2s ease;
 }
@@ -463,129 +462,116 @@
    DARK MODE
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  .card {
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 
-      0 1px 3px rgba(0, 0, 0, 0.2),
-      0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .bgCircle1 {
-    background: radial-gradient(
-      circle,
+/* Dark Mode Override */
+:global(.dark) .card {
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .bgCircle1 {
+  background: radial-gradient(circle,
       rgba(0, 113, 227, 0.12) 0%,
-      transparent 70%
-    );
-  }
-  
-  .bgCircle2 {
-    background: radial-gradient(
-      circle,
+      transparent 70%);
+}
+
+:global(.dark) .bgCircle2 {
+  background: radial-gradient(circle,
       rgba(0, 91, 181, 0.1) 0%,
-      transparent 70%
-    );
-  }
-  
-  .bgCircle3 {
-    background: radial-gradient(
-      circle,
+      transparent 70%);
+}
+
+:global(.dark) .bgCircle3 {
+  background: radial-gradient(circle,
       rgba(0, 113, 227, 0.08) 0%,
-      transparent 70%
-    );
-  }
-  
-  .iconInner {
-    background: linear-gradient(
-      135deg,
+      transparent 70%);
+}
+
+:global(.dark) .iconInner {
+  background: linear-gradient(135deg,
       rgba(0, 113, 227, 0.15) 0%,
-      rgba(0, 91, 181, 0.15) 100%
-    );
-  }
-  
-  .iconInner .material-symbols-outlined {
-    color: #0077ed;
-  }
-  
-  .iconRing {
-    border-color: rgba(0, 119, 237, 0.25);
-  }
-  
-  .dot {
-    background: #0077ed;
-  }
-  
-  .title {
-    color: rgba(255, 255, 255, 0.92);
-  }
-  
-  .subtitle {
-    color: rgba(255, 255, 255, 0.5);
-  }
-  
-  .suggestionsLabel {
-    color: rgba(255, 255, 255, 0.4);
-  }
-  
-  .suggestionCard {
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  }
-  
-  .suggestionCard:hover {
-    background: rgba(0, 119, 237, 0.06);
-    border-color: rgba(0, 119, 237, 0.2);
-    box-shadow: 
-      0 2px 8px rgba(0, 119, 237, 0.1),
-      0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .suggestionIcon {
-    background: linear-gradient(
-      135deg,
+      rgba(0, 91, 181, 0.15) 100%);
+}
+
+:global(.dark) .iconInner .material-symbols-outlined {
+  color: #0077ed;
+}
+
+:global(.dark) .iconRing {
+  border-color: rgba(0, 119, 237, 0.25);
+}
+
+:global(.dark) .dot {
+  background: #0077ed;
+}
+
+:global(.dark) .title {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+:global(.dark) .subtitle {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:global(.dark) .suggestionsLabel {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:global(.dark) .suggestionCard {
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+:global(.dark) .suggestionCard:hover {
+  background: rgba(0, 119, 237, 0.06);
+  border-color: rgba(0, 119, 237, 0.2);
+  box-shadow:
+    0 2px 8px rgba(0, 119, 237, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .suggestionIcon {
+  background: linear-gradient(135deg,
       rgba(0, 113, 227, 0.12) 0%,
-      rgba(0, 91, 181, 0.12) 100%
-    );
-  }
-  
-  .suggestionCard:hover .suggestionIcon {
-    background: linear-gradient(
-      135deg,
+      rgba(0, 91, 181, 0.12) 100%);
+}
+
+:global(.dark) .suggestionCard:hover .suggestionIcon {
+  background: linear-gradient(135deg,
       rgba(0, 113, 227, 0.18) 0%,
-      rgba(0, 91, 181, 0.18) 100%
-    );
-  }
-  
-  .suggestionIcon .material-symbols-outlined {
-    color: #0077ed;
-  }
-  
-  .suggestionTitle {
-    color: rgba(255, 255, 255, 0.9);
-  }
-  
-  .suggestionDesc {
-    color: rgba(255, 255, 255, 0.45);
-  }
-  
-  .suggestionArrow {
-    color: rgba(255, 255, 255, 0.25);
-  }
-  
-  .suggestionCard:hover .suggestionArrow {
-    color: #0077ed;
-  }
-  
-  .helpLink {
-    color: rgba(255, 255, 255, 0.45);
-  }
-  
-  .helpLink:hover {
-    color: #0077ed;
-    background: rgba(0, 119, 237, 0.1);
-  }
+      rgba(0, 91, 181, 0.18) 100%);
+}
+
+:global(.dark) .suggestionIcon .material-symbols-outlined {
+  color: #0077ed;
+}
+
+:global(.dark) .suggestionTitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global(.dark) .suggestionDesc {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+:global(.dark) .suggestionArrow {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+:global(.dark) .suggestionCard:hover .suggestionArrow {
+  color: #0077ed;
+}
+
+:global(.dark) .helpLink {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+:global(.dark) .helpLink:hover {
+  color: #0077ed;
+  background: rgba(0, 119, 237, 0.1);
 }
 
 /* ============================================
@@ -598,57 +584,57 @@
     padding: 56px 32px;
     border-radius: 28px;
   }
-  
+
   .iconWrap {
     width: 100px;
     height: 100px;
   }
-  
+
   .iconInner {
     width: 80px;
     height: 80px;
     border-radius: 24px;
   }
-  
+
   .iconInner .material-symbols-outlined {
     font-size: 40px;
   }
-  
+
   .iconRing {
     border-radius: 30px;
   }
-  
+
   .title {
     font-size: 26px;
   }
-  
+
   .subtitle {
     font-size: 16px;
   }
-  
+
   .textWrap {
     max-width: 380px;
   }
-  
+
   .ctaButton {
     height: 56px;
     padding: 0 10px;
     font-size: 17px;
     border-radius: 18px;
   }
-  
+
   .ctaIcon,
   .ctaArrow {
     width: 40px;
     height: 40px;
     border-radius: 12px;
   }
-  
+
   .suggestionsGrid {
     flex-direction: row;
     gap: 12px;
   }
-  
+
   .suggestionCard {
     flex: 1;
     flex-direction: column;
@@ -656,39 +642,39 @@
     padding: 18px;
     border-radius: 18px;
   }
-  
+
   .suggestionIcon {
     width: 48px;
     height: 48px;
     border-radius: 14px;
     margin-bottom: 8px;
   }
-  
+
   .suggestionText {
     gap: 4px;
   }
-  
+
   .suggestionDesc {
     white-space: normal;
     -webkit-line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
   }
-  
+
   .suggestionArrow {
     position: absolute;
     top: 18px;
     right: 18px;
   }
-  
+
   .suggestionCard {
     position: relative;
   }
-  
+
   .suggestionCard:hover {
     transform: translateY(-4px);
   }
-  
+
   .suggestionCard:active {
     transform: translateY(-4px) scale(0.99);
   }
@@ -700,53 +686,53 @@
     padding: 64px 40px;
     border-radius: 32px;
   }
-  
+
   .content {
     gap: 28px;
   }
-  
+
   .iconWrap {
     width: 112px;
     height: 112px;
   }
-  
+
   .iconInner {
     width: 88px;
     height: 88px;
     border-radius: 26px;
   }
-  
+
   .iconInner .material-symbols-outlined {
     font-size: 44px;
   }
-  
+
   .title {
     font-size: 28px;
   }
-  
+
   .textWrap {
     max-width: 420px;
     gap: 10px;
   }
-  
+
   .suggestionsGrid {
     gap: 16px;
   }
-  
+
   .suggestionCard {
     padding: 22px;
     border-radius: 20px;
   }
-  
+
   .suggestionIcon {
     width: 52px;
     height: 52px;
   }
-  
+
   .suggestionTitle {
     font-size: 16px;
   }
-  
+
   .suggestionDesc {
     font-size: 14px;
   }
@@ -758,63 +744,63 @@
     padding: 36px 20px;
     border-radius: 20px;
   }
-  
+
   .iconWrap {
     width: 76px;
     height: 76px;
   }
-  
+
   .iconInner {
     width: 64px;
     height: 64px;
     border-radius: 18px;
   }
-  
+
   .iconInner .material-symbols-outlined {
     font-size: 32px;
   }
-  
+
   .title {
     font-size: 20px;
   }
-  
+
   .subtitle {
     font-size: 14px;
   }
-  
+
   .ctaButton {
     width: 100%;
     height: 48px;
     font-size: 15px;
     border-radius: 14px;
   }
-  
+
   .ctaIcon,
   .ctaArrow {
     width: 32px;
     height: 32px;
     border-radius: 8px;
   }
-  
+
   .suggestionCard {
     padding: 12px 14px;
     border-radius: 14px;
   }
-  
+
   .suggestionIcon {
     width: 40px;
     height: 40px;
     border-radius: 10px;
   }
-  
+
   .suggestionIcon .material-symbols-outlined {
     font-size: 20px;
   }
-  
+
   .suggestionTitle {
     font-size: 14px;
   }
-  
+
   .suggestionDesc {
     font-size: 12px;
   }
@@ -825,6 +811,7 @@
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
+
   .bgCircle1,
   .bgCircle2,
   .bgCircle3,
@@ -832,7 +819,7 @@
   .dot {
     animation: none;
   }
-  
+
   .iconInner,
   .ctaButton,
   .ctaArrow,
@@ -855,21 +842,21 @@
   .card {
     border: 2px solid CanvasText;
   }
-  
+
   .suggestionCard {
     border: 1px solid CanvasText;
   }
-  
+
   .ctaButton {
     background: Highlight;
     color: HighlightText;
   }
-  
+
   .iconInner {
     border: 2px solid CanvasText;
     background: Canvas;
   }
-  
+
   .iconRing {
     border-style: solid;
   }

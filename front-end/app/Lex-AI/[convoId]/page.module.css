@@ -19,19 +19,17 @@
   /* Minimal/No header usage in main view usually */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #212121;
-    /* Main chat background */
-    --bg-secondary: #171717;
-    /* Sidebar match if needed */
-    --text-primary: #ececec;
-    --text-secondary: #b4b4b4;
-    --bubble-user: #2f2f2f;
-    --text-user: #ececec;
+:global(.dark) {
+  --bg-primary: #212121;
+  /* Main chat background */
+  --bg-secondary: #171717;
+  /* Sidebar match if needed */
+  --text-primary: #ececec;
+  --text-secondary: #b4b4b4;
+  --bubble-user: #2f2f2f;
+  --text-user: #ececec;
 
-    --input-bg: #2f2f2f;
-  }
+  --input-bg: #2f2f2f;
 }
 
 /* Global Layout */
@@ -105,10 +103,8 @@
   color: var(--text-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .iconButton:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+:global(.dark) .iconButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .title {
@@ -276,11 +272,9 @@
   font-size: 13px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .markdownContent pre {
-    background-color: #2f2f2f;
-    /* Lighter dark for code blocks in dark mode */
-  }
+:global(.dark) .markdownContent pre {
+  background-color: #2f2f2f;
+  /* Lighter dark for code blocks in dark mode */
 }
 
 .markdownContent code {
@@ -291,10 +285,8 @@
   border-radius: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .markdownContent code {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+:global(.dark) .markdownContent code {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Input Area "Island" - Using ChatInput component, just positioning here */
@@ -365,10 +357,8 @@
   color: var(--text-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .actionToolbarBtn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+:global(.dark) .actionToolbarBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Scrollbar hiding for cleaner look */
@@ -385,10 +375,8 @@
   background: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  .chatArea::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+:global(.dark) .chatArea::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Toast Notification */
@@ -505,11 +493,9 @@
   transform: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  .chatInterface [data-tooltip]::after {
-    background-color: #000;
-    border: 1px solid #333;
-  }
+:global(.dark) .chatInterface [data-tooltip]::after {
+  background-color: #000;
+  border: 1px solid #333;
 }
 
 /* Edit Message UI */

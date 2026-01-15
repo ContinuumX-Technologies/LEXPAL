@@ -4,7 +4,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import styles from "./Sidebar.module.css";
 import { useRouter, useParams } from "next/navigation";
 import Image from "next/image";
-import { PanelLeftClose, SquarePen, LayoutGrid, Check, X, Search, Image as LucideImage, Share, Archive, Trash2, MoreHorizontal } from "lucide-react";
+import { PanelLeftClose, SquarePen, LayoutGrid, Check, X, Search, Image as LucideImage, Share, Archive, Trash2, MoreHorizontal, Sun, Moon } from "lucide-react";
 
 interface Conversation {
     _id: string;
@@ -47,9 +47,11 @@ function getRelativeDateLabel(dateInput: Date | string): string {
 }
 
 import { useSidebar } from "../SidebarContext";
+import { useTheme } from "../../ThemeContext";
 
 export default function Sidebar({ onNewChat, className }: SidebarProps) {
     const { toggleSidebar, isSidebarOpen, setSidebarOpen } = useSidebar();
+    const { theme, toggleTheme } = useTheme();
     const [conversations, setConversations] = useState<Conversation[]>([]);
     const [loading, setLoading] = useState(false);
     const [userName, setUserName] = useState("User");
@@ -252,6 +254,10 @@ export default function Sidebar({ onNewChat, className }: SidebarProps) {
                     <div className={styles.topActions}>
                         <button className={styles.sidebarToggleBtn} title="Close Sidebar" onClick={toggleSidebar}>
                             <PanelLeftClose size={20} />
+                        </button>
+                        <div style={{ flex: 1 }} />
+                        <button className={styles.newChatIconBtn} onClick={toggleTheme} title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}>
+                            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
                         <button className={styles.newChatIconBtn} onClick={onNewChat} title="New Chat">
                             <SquarePen size={20} />

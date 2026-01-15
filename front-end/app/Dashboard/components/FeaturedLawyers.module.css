@@ -528,108 +528,109 @@
    DARK MODE
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  .title {
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .subtitle {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .navBtn {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .navBtn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .card {
-    background: rgba(44, 44, 46, 1);
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      0 8px 24px rgba(0, 0, 0, 0.3);
-  }
-
-  .card:hover {
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.3),
-      0 16px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .availableBadge {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  .specialtyTag {
-    color: #0077ed;
-    background: rgba(0, 119, 237, 0.15);
-  }
-
-  .cardName {
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .cardTitle {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .ratingScore {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .ratingCount {
-    color: rgba(255, 255, 255, 0.45);
-  }
-
-  .starEmpty {
-    color: rgba(255, 255, 255, 0.2);
-  }
-
-  .cardQuote {
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .secondaryBtn {
-    color: rgba(255, 255, 255, 0.85);
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .secondaryBtn:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  .dot {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .dot:hover {
-    background: rgba(255, 255, 255, 0.35);
-  }
-
-  .ctaButton {
-    background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
-    color: rgba(0, 0, 0, 0.9);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  }
-
-  .ctaIcon {
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .dividerLine {
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.08) 20%,
-        rgba(255, 255, 255, 0.08) 80%,
-        transparent 100%);
-  }
+/* Dark Mode Override */
+:global(.dark) .title {
+  color: rgba(255, 255, 255, 0.95);
 }
+
+:global(.dark) .subtitle {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:global(.dark) .navBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:global(.dark) .navBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+:global(.dark) .card {
+  background: rgba(44, 44, 46, 1);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+:global(.dark) .card:hover {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+:global(.dark) .availableBadge {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+:global(.dark) .specialtyTag {
+  color: #0077ed;
+  background: rgba(0, 119, 237, 0.15);
+}
+
+:global(.dark) .cardName {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+:global(.dark) .cardTitle {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:global(.dark) .ratingScore {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global(.dark) .ratingCount {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+:global(.dark) .starEmpty {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+:global(.dark) .cardQuote {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:global(.dark) .secondaryBtn {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+:global(.dark) .dot {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+:global(.dark) .dot:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+:global(.dark) .ctaButton {
+  background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
+  color: rgba(0, 0, 0, 0.9);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+:global(.dark) .ctaIcon {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark) .dividerLine {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 20%,
+      rgba(255, 255, 255, 0.08) 80%,
+      transparent 100%);
+}
+
+/* End Dark Mode */
 
 /* ============================================
    RESPONSIVE

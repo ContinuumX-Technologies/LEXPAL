@@ -625,130 +625,131 @@
    DARK MODE
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  .titleIcon {
-    color: #fbbf24;
-  }
-
-  .title {
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .count {
-    color: #fbbf24;
-    background: rgba(251, 191, 36, 0.15);
-  }
-
-  .navBtn {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .navBtn:hover:not(.navBtnDisabled) {
-    background: rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .seeAllBtn {
-    color: #fbbf24;
-  }
-
-  .seeAllBtn:hover {
-    background: rgba(251, 191, 36, 0.12);
-  }
-
-  .fadeLeft {
-    background: linear-gradient(90deg, rgb(28, 28, 30) 0%, transparent 100%);
-  }
-
-  .fadeRight {
-    background: linear-gradient(-90deg, rgb(28, 28, 30) 0%, transparent 100%);
-  }
-
-  .card {
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.2),
-      0 8px 24px rgba(0, 0, 0, 0.25);
-  }
-
-  .card:hover {
-    border-color: rgba(251, 191, 36, 0.2);
-    box-shadow:
-      0 8px 20px rgba(0, 0, 0, 0.3),
-      0 20px 40px rgba(251, 191, 36, 0.1);
-  }
-
-  .statusBadge {
-    background: rgba(52, 199, 89, 0.85);
-  }
-
-  .statusOffline {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .saveBtn {
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  .saveBtn:hover {
-    background: rgba(0, 0, 0, 0.7);
-  }
-
-  .saveBtn .material-symbols-outlined {
-    color: #fbbf24;
-  }
-
-  .cardName {
-    color: rgba(255, 255, 255, 0.95);
-  }
-
-  .cardSpecialty {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .ratingScore {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .ratingCount {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .profileBtn {
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .profileBtn:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  .skeletonCard {
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.06);
-  }
-
-  .skeletonImage,
-  .skeletonLine,
-  .skeletonBtn {
-    background: linear-gradient(90deg,
-        rgba(255, 255, 255, 0.06) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        rgba(255, 255, 255, 0.06) 100%);
-    background-size: 200% 100%;
-  }
-
-  .errorWrap {
-    background: rgba(239, 68, 68, 0.08);
-    border-color: rgba(239, 68, 68, 0.15);
-  }
-
-  .errorText {
-    color: rgba(255, 255, 255, 0.6);
-  }
+/* Dark Mode Override */
+:global(.dark) .titleIcon {
+  color: #fbbf24;
 }
+
+:global(.dark) .title {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+:global(.dark) .count {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.15);
+}
+
+:global(.dark) .navBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:global(.dark) .navBtn:hover:not(.navBtnDisabled) {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+:global(.dark) .seeAllBtn {
+  color: #fbbf24;
+}
+
+:global(.dark) .seeAllBtn:hover {
+  background: rgba(251, 191, 36, 0.12);
+}
+
+:global(.dark) .fadeLeft {
+  background: linear-gradient(90deg, rgb(28, 28, 30) 0%, transparent 100%);
+}
+
+:global(.dark) .fadeRight {
+  background: linear-gradient(-90deg, rgb(28, 28, 30) 0%, transparent 100%);
+}
+
+:global(.dark) .card {
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+:global(.dark) .card:hover {
+  border-color: rgba(251, 191, 36, 0.2);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    0 20px 40px rgba(251, 191, 36, 0.1);
+}
+
+:global(.dark) .statusBadge {
+  background: rgba(52, 199, 89, 0.85);
+}
+
+:global(.dark) .statusOffline {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+:global(.dark) .saveBtn {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+:global(.dark) .saveBtn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+:global(.dark) .saveBtn .material-symbols-outlined {
+  color: #fbbf24;
+}
+
+:global(.dark) .cardName {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+:global(.dark) .cardSpecialty {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:global(.dark) .ratingScore {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global(.dark) .ratingCount {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:global(.dark) .profileBtn {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .profileBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+:global(.dark) .skeletonCard {
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+:global(.dark) .skeletonImage,
+:global(.dark) .skeletonLine,
+:global(.dark) .skeletonBtn {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.06) 100%);
+  background-size: 200% 100%;
+}
+
+:global(.dark) .errorWrap {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+:global(.dark) .errorText {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* End Dark Mode */
 
 /* ============================================
    RESPONSIVE

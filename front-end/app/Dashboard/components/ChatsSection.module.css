@@ -515,155 +515,154 @@
    DARK MODE
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  .titleIcon {
-    background: linear-gradient(135deg, #30d158 0%, #34c759 100%);
-    box-shadow:
-      0 2px 8px rgba(48, 209, 88, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
+/* Dark Mode Override */
+:global(.dark) .titleIcon {
+  background: linear-gradient(135deg, #30d158 0%, #34c759 100%);
+  box-shadow:
+    0 2px 8px rgba(48, 209, 88, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
 
-  .title {
-    color: rgba(255, 255, 255, 0.95);
-  }
+:global(.dark) .title {
+  color: rgba(255, 255, 255, 0.95);
+}
 
-  .unreadBadge {
-    color: #30d158;
-    background: rgba(48, 209, 88, 0.15);
-  }
+:global(.dark) .unreadBadge {
+  color: #30d158;
+  background: rgba(48, 209, 88, 0.15);
+}
 
-  .composeBtn {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.7);
-  }
+:global(.dark) .composeBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
 
-  .composeBtn:hover {
-    background: rgba(48, 209, 88, 0.15);
-    color: #30d158;
-  }
+:global(.dark) .composeBtn:hover {
+  background: rgba(48, 209, 88, 0.15);
+  color: #30d158;
+}
 
-  .seeAllBtn {
-    color: #30d158;
-  }
+:global(.dark) .seeAllBtn {
+  color: #30d158;
+}
 
-  .seeAllBtn:hover {
-    background: rgba(48, 209, 88, 0.12);
-  }
+:global(.dark) .seeAllBtn:hover {
+  background: rgba(48, 209, 88, 0.12);
+}
 
-  .chatItem {
-    background: rgba(44, 44, 46, 0.6);
-  }
+:global(.dark) .chatItem {
+  background: rgba(44, 44, 46, 0.6);
+}
 
-  .chatItem:hover {
-    background: rgba(44, 44, 46, 0.9);
-  }
+:global(.dark) .chatItem:hover {
+  background: rgba(44, 44, 46, 0.9);
+}
 
-  .chatItem:active {
-    background: rgba(44, 44, 46, 1);
-  }
+:global(.dark) .chatItem:active {
+  background: rgba(44, 44, 46, 1);
+}
 
-  .chatItemUnread {
-    background: rgba(48, 209, 88, 0.08);
-  }
+:global(.dark) .chatItemUnread {
+  background: rgba(48, 209, 88, 0.08);
+}
 
-  .chatItemUnread:hover {
-    background: rgba(48, 209, 88, 0.12);
-  }
+:global(.dark) .chatItemUnread:hover {
+  background: rgba(48, 209, 88, 0.12);
+}
 
-  .avatar {
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.3),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-  }
+:global(.dark) .avatar {
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
 
-  .onlineDot {
-    background: #30d158;
-    border-color: rgba(44, 44, 46, 1);
-    box-shadow: 0 2px 4px rgba(48, 209, 88, 0.4);
-  }
+:global(.dark) .onlineDot {
+  background: #30d158;
+  border-color: rgba(44, 44, 46, 1);
+  box-shadow: 0 2px 4px rgba(48, 209, 88, 0.4);
+}
 
-  .chatName {
-    color: rgba(255, 255, 255, 0.95);
-  }
+:global(.dark) .chatName {
+  color: rgba(255, 255, 255, 0.95);
+}
 
-  .chatItemUnread .chatName {
-    color: rgba(255, 255, 255, 1);
-  }
+:global(.dark) .chatItemUnread .chatName {
+  color: rgba(255, 255, 255, 1);
+}
 
-  .chatTime {
-    color: rgba(255, 255, 255, 0.4);
-  }
+:global(.dark) .chatTime {
+  color: rgba(255, 255, 255, 0.4);
+}
 
-  .chatItemUnread .chatTime {
-    color: #30d158;
-  }
+:global(.dark) .chatItemUnread .chatTime {
+  color: #30d158;
+}
 
-  .chatMessage {
-    color: rgba(255, 255, 255, 0.5);
-  }
+:global(.dark) .chatMessage {
+  color: rgba(255, 255, 255, 0.5);
+}
 
-  .chatItemUnread .chatMessage {
-    color: rgba(255, 255, 255, 0.75);
-  }
+:global(.dark) .chatItemUnread .chatMessage {
+  color: rgba(255, 255, 255, 0.75);
+}
 
-  .chatBadge {
-    background: #30d158;
-  }
+:global(.dark) .chatBadge {
+  background: #30d158;
+}
 
-  .chatChevron {
-    color: rgba(255, 255, 255, 0.2);
-  }
+:global(.dark) .chatChevron {
+  color: rgba(255, 255, 255, 0.2);
+}
 
-  .chatItem:hover .chatChevron {
-    color: rgba(255, 255, 255, 0.4);
-  }
+:global(.dark) .chatItem:hover .chatChevron {
+  color: rgba(255, 255, 255, 0.4);
+}
 
-  .skeletonItem {
-    background: rgba(44, 44, 46, 0.6);
-  }
+:global(.dark) .skeletonItem {
+  background: rgba(44, 44, 46, 0.6);
+}
 
-  .skeletonAvatar,
-  .skeletonLine {
-    background: linear-gradient(90deg,
-        rgba(255, 255, 255, 0.06) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        rgba(255, 255, 255, 0.06) 100%);
-    background-size: 200% 100%;
-  }
+:global(.dark) .skeletonAvatar,
+:global(.dark) .skeletonLine {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.06) 100%);
+  background-size: 200% 100%;
+}
 
-  .errorWrap {
-    background: rgba(255, 59, 48, 0.08);
-    border-color: rgba(255, 59, 48, 0.15);
-  }
+:global(.dark) .errorWrap {
+  background: rgba(255, 59, 48, 0.08);
+  border-color: rgba(255, 59, 48, 0.15);
+}
 
-  .errorIcon {
-    background: rgba(255, 59, 48, 0.15);
-  }
+:global(.dark) .errorIcon {
+  background: rgba(255, 59, 48, 0.15);
+}
 
-  .errorIcon .material-symbols-outlined {
-    color: #ff453a;
-  }
+:global(.dark) .errorIcon .material-symbols-outlined {
+  color: #ff453a;
+}
 
-  .errorText {
-    color: rgba(255, 255, 255, 0.6);
-  }
+:global(.dark) .errorText {
+  color: rgba(255, 255, 255, 0.6);
+}
 
-  .retryBtn {
-    color: #ff453a;
-    background: rgba(255, 69, 58, 0.12);
-  }
+:global(.dark) .retryBtn {
+  color: #ff453a;
+  background: rgba(255, 69, 58, 0.12);
+}
 
-  .retryBtn:hover {
-    background: rgba(255, 69, 58, 0.2);
-  }
+:global(.dark) .retryBtn:hover {
+  background: rgba(255, 69, 58, 0.2);
+}
 
-  .dividerLine {
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.08) 20%,
-        rgba(255, 255, 255, 0.08) 80%,
-        transparent 100%);
-  }
+:global(.dark) .dividerLine {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 20%,
+      rgba(255, 255, 255, 0.08) 80%,
+      transparent 100%);
 }
 
 /* ============================================

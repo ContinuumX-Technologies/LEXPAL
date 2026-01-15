@@ -71,6 +71,10 @@ export const metadata: Metadata = {
 }
 
 
+import { ThemeProvider } from "./ThemeContext";
+
+// ... existing imports ...
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -81,12 +85,13 @@ export default function RootLayout({
       <head>
         {googleFonts}
         {ExplorePagelinks}
-
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
