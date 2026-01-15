@@ -602,8 +602,81 @@
   cursor: default;
 }
 
+/* Mobile Responsiveness */
 .versionText {
   min-width: 24px;
   text-align: center;
   font-feature-settings: "tnum";
+}
+
+@media (max-width: 768px) {
+
+  /* Adjust container padding */
+  .chatArea {
+    padding-top: 10px;
+    padding-bottom: 100px;
+    /* Slightly less space needed */
+  }
+
+  .messageWrapper {
+    padding: 0 16px;
+    /* Tighter side margins */
+    gap: 16px;
+    /* Reduce gap between messages */
+  }
+
+  /* Increase bubble width utilization */
+  .userMessageBubble,
+  .userContentGroup {
+    max-width: 90%;
+    /* Use more screen real estate */
+  }
+
+  /* User Actions: Always visible on touch devices */
+  .userMsgActions {
+    opacity: 1;
+    /* Force visible */
+    pointer-events: auto;
+    margin-top: 6px;
+    /* Ensure gap is consistent */
+  }
+
+  .userActionBtn {
+    /* Ensure touch targets are reasonable */
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Input Area adjustments */
+  .inputArea {
+    padding-bottom: 16px;
+  }
+
+  /* Edit container optimization */
+  .editContainer {
+    padding: 12px;
+  }
+
+  .editTextarea {
+    font-size: 15px;
+    /* Prevent zoom on iOS input focus if needed, usually >16px is safer but 15 is standard text */
+  }
+
+  /* Header adjustments */
+  .header {
+    height: 44px;
+    padding: 0 8px;
+  }
+}
+
+/* Mobile Menu Button */
+.mobileMenuBtn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileMenuBtn {
+    display: flex;
+    margin-right: 8px;
+  }
 }

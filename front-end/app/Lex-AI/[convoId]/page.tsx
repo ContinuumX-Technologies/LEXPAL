@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 import { useParams, useRouter } from "next/navigation";
 import { TextShimmer } from "@/components/motion-primitives/text-shimmer";
 import ReactMarkdown from 'react-markdown';
-import { Copy, RotateCw, Share, MoreHorizontal, ChevronLeft, ChevronRight, Sparkles, MessageSquare, FileText, SquarePen, Pencil } from "lucide-react";
+import { Copy, RotateCw, Share, MoreHorizontal, ChevronLeft, ChevronRight, Sparkles, MessageSquare, FileText, SquarePen, Pencil, PanelLeft } from "lucide-react";
 
 type ChatMessage = {
   id?: string;
@@ -513,6 +513,15 @@ const MainChatPage = () => {
       <section className={styles.chatInterface}>
         <div className={styles.header}>
           <div className={styles.headerLeft}>
+            {/* Mobile Sidebar Toggle */}
+            <button
+              className={`${styles.iconButton} ${styles.mobileMenuBtn}`}
+              onClick={toggleSidebar}
+              data-tooltip="Open Menu"
+              aria-label="Open Menu"
+            >
+              <PanelLeft size={24} />
+            </button>
             {/* Back button */}
             <button
               className={styles.iconButton}

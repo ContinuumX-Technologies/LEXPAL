@@ -76,3 +76,13 @@
     /* Context for absolute toggle button */
     overflow: hidden;
 }
+
+/* Mobile: Sidebar container should not take space */
+@media (max-width: 768px) {
+    .sidebarContainer {
+        width: 0 !important;
+        overflow: visible;
+        background-color: transparent;
+        border: none;
+    }
+}

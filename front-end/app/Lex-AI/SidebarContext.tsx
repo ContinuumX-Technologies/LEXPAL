@@ -21,7 +21,15 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const savedOpen = localStorage.getItem("lexpal_sidebar_open");
         const savedWidth = localStorage.getItem("lexpal_sidebar_width");
-        if (savedOpen !== null) setIsSidebarOpen(savedOpen === "true");
+
+        const isMobile = window.innerWidth < 768;
+
+        if (savedOpen !== null) {
+            setIsSidebarOpen(isMobile ? false : savedOpen === "true");
+        } else {
+            setIsSidebarOpen(!isMobile); // Default open on desktop, closed on mobile
+        }
+
         if (savedWidth) setSidebarWidth(parseInt(savedWidth));
     }, []);
 

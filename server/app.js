@@ -23,7 +23,7 @@ const app = express();
 // }));
 
 app.use(cors({
-  origin: "https://lexpal.in",
+  origin: ["http://localhost:3000", "https://lexpal.in"],
   credentials: true,
 }));
 
@@ -34,7 +34,7 @@ app.use(cookieParser());
 //routes
 app.use("/api/auth", authRouter);
 app.use("/api/upload", uploadRouter);
-app.use("/api/AI",AIRouter);
+app.use("/api/AI", AIRouter);
 app.use("/api/user", userRouter);
 app.use("/api/explore", exploreRouter);
 

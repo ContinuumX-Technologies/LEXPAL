@@ -426,12 +426,30 @@
         left: 0;
         top: 0;
         bottom: 0;
+        width: 260px !important;
+        /* Fixed drawer width */
         z-index: 100;
         transform: translateX(-100%);
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
     }
 
     .sidebar.mobileOpen {
         transform: translateX(0);
+    }
+
+    .mobileOverlay {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 90;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+    }
+
+    .mobileOverlay.visible {
+        opacity: 1;
+        pointer-events: auto;
     }
 }
 
@@ -537,6 +555,12 @@
     overflow: hidden;
     /* Hide scrollbars if any */
     background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    .miniSidebar {
+        display: none !important;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
