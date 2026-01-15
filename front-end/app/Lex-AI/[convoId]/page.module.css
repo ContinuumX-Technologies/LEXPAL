@@ -1,592 +1,609 @@
-/* /app/Lex-AI/[convoId]/page.module.css */
+/* /app/Lex-AI/[convoId]/page.module.css - ChatGPT Replica */
 
-/* ─────────────────────────────────────────────
-   APPLE DESIGN SYSTEM TOKENS - REFINED
-   ───────────────────────────────────────────── */
 :root {
-  /* Dynamic Backgrounds */
-  --bg-primary: #f5f5f7;
-  /* Apple System Gray 6 */
-  --bg-secondary: #ffffff;
-  --bg-glass: rgba(245, 245, 247, 0.85);
-  /* For headers */
+  /* ChatGPT Web Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9f9f9;
+  --text-primary: #0d0d0d;
+  --text-secondary: #666666;
+  --bubble-user: #f4f4f4;
+  --text-user: #0d0d0d;
 
-  /* Text Colors */
-  --text-primary: #1d1d1f;
-  --text-secondary: #86868b;
-  --text-tertiary: #6e6e73;
-
-  /* Accents */
-  --accent-blue: #0071e3;
-  --accent-blue-hover: #0077ed;
-
-  /* AI Glow Gradient */
-  --ai-glow: linear-gradient(135deg, rgba(0, 113, 227, 0.15) 0%, rgba(142, 142, 147, 0.1) 100%);
-
-  /* Bubbles */
-  --bubble-user: linear-gradient(135deg, #0071e3 0%, #0077ed 100%);
-  --bubble-ai: #ffffff;
-  --bubble-text-user: #ffffff;
-  --bubble-text-ai: #1d1d1f;
-
-  /* Borders & Shadows */
-  --border-light: rgba(0, 0, 0, 0.06);
-  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.03);
-  --shadow-float: 0 12px 32px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  /* Input Area */
+  --input-bg: #f4f4f4;
 
   /* Layout */
-  --header-height: 60px;
-  --max-width: 860px;
-  /* Optimized reading width */
-  --radius-bubble: 22px;
-  --radius-input: 28px;
+  --max-width: 768px;
+  /* ChatGPT standard width */
+  --header-height: 0px;
+  /* Minimal/No header usage in main view usually */
 }
 
-/* Dark Mode Overrides */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-primary: #000000;
-    --bg-secondary: #1c1c1e;
-    --bg-glass: rgba(28, 28, 30, 0.85);
+    --bg-primary: #212121;
+    /* Main chat background */
+    --bg-secondary: #171717;
+    /* Sidebar match if needed */
+    --text-primary: #ececec;
+    --text-secondary: #b4b4b4;
+    --bubble-user: #2f2f2f;
+    --text-user: #ececec;
 
-    --text-primary: #f5f5f7;
-    --text-secondary: #98989d;
-
-    --ai-glow: linear-gradient(135deg, rgba(10, 132, 255, 0.15) 0%, rgba(99, 99, 102, 0.1) 100%);
-
-    --bubble-user: linear-gradient(135deg, #0a84ff 0%, #0077ed 100%);
-    --bubble-ai: #2c2c2e;
-    --bubble-text-ai: #f5f5f7;
-
-    --border-light: rgba(255, 255, 255, 0.12);
-    --shadow-float: 0 12px 32px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+    --input-bg: #2f2f2f;
   }
 }
 
-/* ─────────────────────────────────────────────
-   GLOBAL LAYOUT
-   ───────────────────────────────────────────── */
-
+/* Global Layout */
 .root {
   display: flex;
-  flex-direction: row;
-  /* Changed to row for Sidebar */
-  height: 100dvh;
+  flex-direction: column;
+  /* Changed to column since Layout handles row */
+  height: 100%;
+  /* Fill parent */
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-  letter-spacing: -0.011em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   overflow: hidden;
+  /* Keep hidden here, let chatArea scroll */
 }
 
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   position: relative;
+  background-color: var(--bg-primary);
+  height: 100%;
+  overflow: hidden;
 }
 
 .chatInterface {
   flex: 1;
   display: flex;
   flex-direction: column;
-  position: relative;
   height: 100%;
+  position: relative;
+  overflow: hidden;
+  /* Ensure it stays within bounds */
 }
 
-/* ─────────────────────────────────────────────
-   GLASS HEADER
-   ───────────────────────────────────────────── */
-
+/* Header - Minimal / Hidden largely */
 .header {
-  /* Floating Header Effect for "Island" feel or just super clean bar */
-  height: 64px;
-  /* Slightly taller for elegance */
-  padding: 0 24px;
+  height: 48px;
+  /* Very short, mostly for mobile button */
+  padding: 0 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  justify-content: flex-start;
+  /* Align left */
+  /* No background or blur */
   z-index: 50;
-
-  /* Sophisticated Glass */
-  background: rgba(255, 255, 255, 0.65);
-  /* More transparent */
-  backdrop-filter: saturate(180%) blur(40px);
-  /* Deeper blur */
-  -webkit-backdrop-filter: saturate(180%) blur(40px);
-
-  /* Subtle border separator instead of heavy line */
-  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.05);
-}
-
-@media (prefers-color-scheme: dark) {
-  .header {
-    background: rgba(28, 28, 30, 0.65);
-    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.08);
-    /* Dark subtle divider */
-  }
 }
 
 .headerLeft {
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-width: 80px;
-  /* Balance for center title */
+  gap: 8px;
 }
 
-/* Custom Header specific button */
 .iconButton {
-  background: rgba(0, 0, 0, 0.04);
+  background: transparent;
   border: none;
-  border-radius: 12px;
-  /* Squrcle */
-  width: 38px;
-  height: 38px;
-
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  border-radius: 6px;
   cursor: pointer;
-
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .iconButton:hover {
-  background: rgba(0, 0, 0, 0.08);
-  transform: scale(0.98);
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
 }
 
-
-/* Dark Mode Button overrides */
 @media (prefers-color-scheme: dark) {
-  .iconButton {
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-  }
-
   .iconButton:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  /* Often hidden or very subtle */
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text-primary);
-  opacity: 0.9;
+  margin-left: 8px;
 }
 
-/* ─────────────────────────────────────────────
-   CHAT AREA
-   ───────────────────────────────────────────── */
-
+/* Chat Area */
 .chatArea {
   flex: 1;
   overflow-y: auto;
-
-  /* Important padding to clear header and float input */
-  padding-top: calc(var(--header-height) + 24px);
-  padding-bottom: 140px;
-  padding-left: 20px;
-  padding-right: 20px;
-
+  padding-top: 20px;
+  padding-bottom: 120px;
+  /* Space for input */
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  /* More breathing room between messages */
-
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
 }
 
-.chatArea::-webkit-scrollbar {
-  width: 0px;
-  /* Hide sticky scrollbar */
-}
-
-/* ─────────────────────────────────────────────
-   MESSAGES
-   ───────────────────────────────────────────── */
-
+/* Messages Container */
 .messageWrapper {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  gap: 24px;
-}
-
-.aiMessage,
-.userMessage {
-  padding: 14px 20px;
-  font-size: 16px;
-  line-height: 1.5;
-  position: relative;
-  word-wrap: break-word;
-  max-width: 80%;
-
-  /* Smooth entry animation */
-  animation: messageEnter 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-@keyframes messageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* AI Configuration */
-.aiMessage {
-  align-self: flex-start;
-  background: var(--bubble-ai);
-  color: var(--bubble-text-ai);
-  border-radius: var(--radius-bubble);
-  border-bottom-left-radius: 6px;
-
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 0 0 1px var(--border-light);
-  /* Subtle border */
-
-  /* For "Thinking" state or just nice texture */
-  backdrop-filter: blur(10px);
-}
-
-/* User Configuration */
-.userMessage {
-  align-self: flex-end;
-  background: var(--bubble-user);
-  color: var(--bubble-text-user);
-  border-radius: var(--radius-bubble);
-  border-bottom-right-radius: 6px;
-
-  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.15);
-  font-weight: 400;
-
-  /* Flex col for context display */
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 24px;
+  /* Loose spacing */
 }
 
-.attachedContextDisplay {
+/* Common Message Style */
+.aiMessage,
+.userMessage {
+  font-size: 16px;
+  line-height: 1.6;
+  width: 100%;
+  position: relative;
+}
+
+/* User Message */
+/* User Message Wrapper (Layout & Hover Target) */
+/* User Message Wrapper (Layout & Hover Target) */
+.userMessageWrapper {
+  align-self: flex-end;
+  width: 100%;
+  /* Full width for hover area */
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 8px;
+  flex-direction: column;
+  /* align-items: flex-end; <-- Removed, let Group handle it */
 }
 
-.contextChipStatic {
+/* Inner Anchor Group */
+.userContentGroup {
+  margin-left: auto;
+  /* Align Right */
+  width: fit-content;
+  max-width: 70%;
+  position: relative;
+  /* Anchor for icons */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* The visual bubble */
+.userMessageBubble {
+  background-color: var(--bubble-user);
+  color: var(--text-user);
+  padding: 10px 20px;
+  border-radius: 24px;
+  /* max-width removed here, moved to group */
+  width: 100%;
+  word-wrap: break-word;
+}
+
+/* Full width container when editing */
+.userMessageEditing {
+  align-self: flex-start;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--text-user);
+  position: relative;
+}
+
+.userMsgActions {
+  /* Position below bubble, in flow */
+  margin-top: 8px;
+  display: flex;
+
+
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  /* Prevent wrapping */
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.userMessageWrapper:hover .userMsgActions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.userActionBtn {
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  /* Rounded rect, not circle */
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.2);
-  /* Subtle pill on blue bg */
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 500;
-  color: white;
+  justify-content: center;
+  cursor: pointer;
+  color: #b4b4b4;
+  /* Subtle grey */
+  transition: all 0.2s;
 }
 
-.errorMessage {
-  align-self: center;
-  background: rgba(255, 59, 48, 0.1);
-  color: #ff3b30;
+.userActionBtn:hover {
+  background-color: #424242;
+  /* Darker grey hover */
+  color: #ffffff;
+}
+
+
+/* AI Message */
+.aiMessage {
+  align-self: flex-start;
+  background: transparent;
+  /* No bubble for AI */
+  color: var(--text-primary);
+  padding: 0;
+  /* No padding */
+  max-width: 100%;
+}
+
+/* Markdown Content - Typography */
+.markdownContent p {
+  margin-bottom: 16px;
+}
+
+.markdownContent *:last-child {
+  margin-bottom: 0;
+}
+
+/* Code Blocks */
+.markdownContent pre {
+  background-color: #0d0d0d;
+  color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   font-size: 13px;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 20px;
-  margin-top: 12px;
 }
 
-.loading {
-  text-align: center;
-  color: var(--text-tertiary);
-  font-size: 13px;
-  padding: 12px;
-  font-weight: 500;
+@media (prefers-color-scheme: dark) {
+  .markdownContent pre {
+    background-color: #2f2f2f;
+    /* Lighter dark for code blocks in dark mode */
+  }
 }
 
-/* ─────────────────────────────────────────────
-   FLOATING INPUT "ISLAND"
-   ───────────────────────────────────────────── */
+.markdownContent code {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
 
-/* Removed inputArea styles as they are now in ChatInput component or we can repurpose to position it */
+@media (prefers-color-scheme: dark) {
+  .markdownContent code {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Input Area "Island" - Using ChatInput component, just positioning here */
 .inputArea {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 0 20px 24px;
+  padding: 0 0 24px 0;
+  /* Let ChatInput handle internal padding/max-width */
+  background: linear-gradient(to top, var(--bg-primary) 40%, transparent 100%);
   z-index: 60;
-  pointer-events: none;
-  /* gradient mask */
-  background: linear-gradient(to top, var(--bg-primary) 20%, rgba(245, 245, 247, 0) 100%);
-}
-
-/* Make sure children react to pointer events */
-.inputArea>* {
-  pointer-events: auto;
-}
-
-@media (prefers-color-scheme: dark) {
-  .inputArea {
-    background: linear-gradient(to top, var(--bg-primary) 20%, rgba(0, 0, 0, 0) 100%);
-  }
-}
-
-.inputWrapper {
-  pointer-events: auto;
-  width: 100%;
-  max-width: 720px;
-  position: relative;
   display: flex;
-  align-items: flex-end;
-  /* Align to bottom for multiline growth */
-  gap: 8px;
-
-  background: var(--bg-secondary);
-  /* Solid background for input island */
-  border-radius: var(--radius-input);
-  padding: 8px;
-
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-float);
-
-  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+  justify-content: center;
 }
 
-.inputWrapper:focus-within {
-  transform: translateY(-2px);
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.12),
-    0 0 0 1px rgba(0, 113, 227, 0.15);
-}
-
-.input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  padding: 14px 16px;
-  min-height: 24px;
-  max-height: 120px;
-
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--text-primary);
-
-  resize: none;
-  /* No manual resize */
-  outline: none;
-  font-family: inherit;
-}
-
-.input::placeholder {
+/* Loaders / Errors */
+.loading {
+  text-align: center;
   color: var(--text-secondary);
-  opacity: 0.8;
+  font-size: 13px;
+  padding: 20px;
 }
 
-.sendButton {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: var(--bubble-user);
-  color: white;
+.errorMessage {
+  align-self: center;
+  background-color: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
 
+/* Action Toolbar (Copy, Like etc) */
+.actionToolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  /* Tighter gap */
+  margin-top: 8px;
+  opacity: 1;
+  /* Always visible */
+  transition: opacity 0.2s;
+}
+
+/* Removed hover logic since it is always visible */
+
+.actionToolbarBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px;
+  /* Smaller padding */
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-bottom: 2px;
-  /* optical alignment */
-
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
 }
 
-.sendButton:hover:not(:disabled) {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
+.actionToolbarBtn span {
+  font-size: 18px;
+  /* Smaller icons */
 }
 
-.sendButton:active:not(:disabled) {
-  transform: scale(0.92);
-}
-
-.sendButton:disabled {
-  background: #e5e5ea;
-  color: #aeaeb2;
-  box-shadow: none;
-  cursor: default;
+.actionToolbarBtn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
 }
 
 @media (prefers-color-scheme: dark) {
-  .sendButton:disabled {
-    background: #3a3a3c;
-    color: #636366;
+  .actionToolbarBtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
 
-.sendButton span {
-  font-size: 20px;
-  font-variation-settings: 'wght' 600;
+/* Scrollbar hiding for cleaner look */
+.chatArea::-webkit-scrollbar {
+  width: 8px;
 }
 
-.connectionWarning {
-  position: absolute;
-  top: -48px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 59, 48, 0.12);
-  backdrop-filter: blur(8px);
-  color: #ff3b30;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  pointer-events: none;
-  white-space: nowrap;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-/* Markdown Styles */
-.markdownContent {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.markdownContent>*:first-child {
-  margin-top: 0;
-}
-
-.markdownContent>*:last-child {
-  margin-bottom: 0;
-}
-
-.markdownContent p {
-  margin-bottom: 12px;
-}
-
-.markdownContent h1,
-.markdownContent h2,
-.markdownContent h3,
-.markdownContent h4 {
-  font-weight: 600;
-  margin-top: 24px;
-  margin-bottom: 8px;
-  color: inherit;
-}
-
-.markdownContent h1 {
-  font-size: 1.4em;
-}
-
-.markdownContent h2 {
-  font-size: 1.25em;
-}
-
-.markdownContent h3 {
-  font-size: 1.1em;
-}
-
-.markdownContent ul,
-.markdownContent ol {
-  margin-bottom: 16px;
-  padding-left: 24px;
-  list-style-type: disc;
-}
-
-.markdownContent ol {
-  list-style-type: decimal;
-}
-
-.markdownContent li {
-  margin-bottom: 4px;
-}
-
-.markdownContent code {
-  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
-  font-size: 0.9em;
-  padding: 2px 4px;
-  background: rgba(0, 0, 0, 0.05);
+.chatArea::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
 
-.markdownContent pre {
-  margin: 16px 0;
-  padding: 16px;
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 12px;
-  overflow-x: auto;
-}
-
-.markdownContent pre code {
+.chatArea::-webkit-scrollbar-track {
   background: transparent;
-  padding: 0;
-  font-size: 0.85em;
-  color: inherit;
-  white-space: pre;
-}
-
-.markdownContent blockquote {
-  border-left: 3px solid var(--accent-blue);
-  margin: 16px 0;
-  padding-left: 16px;
-  color: var(--text-secondary);
-}
-
-.markdownContent a {
-  color: var(--accent-blue);
-  text-decoration: underline;
-}
-
-.markdownContent strong {
-  font-weight: 600;
-}
-
-/* AI Message Specifics for Markdown */
-.aiMessage .markdownContent code {
-  background: rgba(0, 0, 0, 0.06);
 }
 
 @media (prefers-color-scheme: dark) {
-  .aiMessage .markdownContent code {
-    background: rgba(255, 255, 255, 0.1);
+  .chatArea::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Toast Notification */
+.toast {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeInOut 2s ease-in-out forwards;
+  border: 1px solid var(--border-color);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -10px);
   }
 
-  .markdownContent pre {
-    background: rgba(255, 255, 255, 0.05);
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
+
+  90% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+}
+
+/* Action Menu Popover */
+.actionMenuPopover {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  padding: 4px;
+  z-index: 50;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.actionMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 13px;
+  transition: background 0.2s;
+}
+
+.actionMenuItem:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Custom Tooltips */
+.chatInterface [data-tooltip] {
+  position: relative;
+}
+
+.chatInterface [data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -30px;
+  /* Adjusted for smaller size */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  transition-delay: 0.5s;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.chatInterface [data-tooltip]:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .chatInterface [data-tooltip]::after {
+    background-color: #000;
+    border: 1px solid #333;
+  }
+}
+
+/* Edit Message UI */
+.editContainer {
+  background-color: #2f2f2f;
+  /* Match user bubble dark grey */
+  border-radius: 24px;
+  /* Match message bubble radius */
+  padding: 16px;
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.editTextarea {
+  width: 100%;
+  min-height: 24px;
+  max-height: 180px;
+  /* Increased to ~7 lines */
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  /* Always white in this specific dark UI request */
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  padding: 0;
+  margin-bottom: 16px;
+  overflow-y: auto;
+  /* Enable scroll if height exceeds max */
+}
+
+.editButtonRow {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.saveBtn,
+.cancelBtn {
+  padding: 8px 20px;
+  border-radius: 24px;
+  /* Pill shape */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.saveBtn {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.saveBtn:hover {
+  opacity: 0.9;
+}
+
+
+/* Version Controller */
+.versionController {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Increased spacing between arrows and text */
+  margin-left: 8px;
+  /* Increased spacing from action buttons */
+  color: #b4b4b4;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.versionBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #b4b4b4;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.versionBtn:hover:not(:disabled) {
+  background-color: #424242;
+  color: #ffffff;
+}
+
+.versionBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.versionText {
+  min-width: 24px;
+  text-align: center;
+  font-feature-settings: "tnum";
 }

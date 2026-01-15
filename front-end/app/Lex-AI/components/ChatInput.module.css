@@ -1,6 +1,9 @@
+/* ChatInput.module.css - ChatGPT Replica */
+
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 768px;
+    /* ChatGPT standard width */
     margin: 0 auto;
     position: relative;
     display: flex;
@@ -10,21 +13,40 @@
 
 .inputWrapper {
     background: #f4f4f4;
+    /* Light mode bubble bg */
     border-radius: 26px;
-    padding: 10px;
+    /* Pill shape */
+    padding: 10px 14px;
+    /* Balanced padding */
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    transition: box-shadow 0.2s;
+    gap: 8px;
+    transition: background 0.2s, box-shadow 0.2s;
     border: 1px solid transparent;
+    box-shadow: none;
+    /* Flat by default usually */
+}
+
+/* Dark mode override */
+@media (prefers-color-scheme: dark) {
+    .inputWrapper {
+        background: #2f2f2f;
+        /* ChatGPT Dark Input */
+    }
 }
 
 .inputWrapper:focus-within {
-    background: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    /* Slight variation or shadow if needed, but ChatGPT is quite flat */
     border-color: rgba(0, 0, 0, 0.1);
 }
 
+@media (prefers-color-scheme: dark) {
+    .inputWrapper:focus-within {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Context Chips (Internal) */
 .contextChips {
     display: flex;
     flex-wrap: wrap;
@@ -36,12 +58,19 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #e5e5e5;
+    border: none;
     padding: 4px 8px;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 13px;
     color: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+    .chip {
+        background: #424242;
+        color: #ececec;
+    }
 }
 
 .chipName {
@@ -53,7 +82,8 @@
 
 .chip :global(.chipIcon) {
     font-size: 16px;
-    color: #666;
+    color: inherit;
+    opacity: 0.7;
 }
 
 .removeChip {
@@ -62,40 +92,51 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #999;
-}
-
-.removeChip span {
-    font-size: 14px;
+    color: inherit;
+    opacity: 0.5;
 }
 
 .removeChip:hover {
-    color: #d00;
+    opacity: 1;
 }
 
+/* Input Row */
 .inputRow {
     display: flex;
     align-items: flex-end;
-    gap: 8px;
+    gap: 12px;
 }
 
 .attachBtn {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: none;
     background: transparent;
     color: #666;
+    /* Muted icon */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.2s;
+    transition: background 0.2s, color 0.2s;
+    margin-bottom: 2px;
 }
 
 .attachBtn:hover {
-    color: #000;
     background: rgba(0, 0, 0, 0.05);
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+    .attachBtn {
+        color: #b4b4b4;
+    }
+
+    .attachBtn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+    }
 }
 
 .input {
@@ -103,100 +144,102 @@
     background: transparent;
     border: none;
     resize: none;
-    padding: 8px 0;
+    padding: 6px 0;
+    /* Align with buttons */
     font-family: inherit;
     font-size: 16px;
-    line-height: 1.4;
+    line-height: 1.5;
     outline: none;
-    max-height: 150px;
+    max-height: 200px;
+    /* Allow nice expansion */
     overflow-y: auto;
-}
-
-.sendBtn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: none;
-    background: #000;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s;
-}
-
-.sendBtn:disabled {
-    background: #ccc;
-    cursor: default;
-}
-
-.stopBtn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: none;
-    background: #000;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s;
-}
-
-.stopBtn span {
-    font-size: 18px;
-    /* Slightly adjusted for optical balance */
-}
-
-.footerNote {
-    text-align: center;
-    font-size: 11px;
-    color: #999;
+    color: #0d0d0d;
 }
 
 @media (prefers-color-scheme: dark) {
-    .inputWrapper {
-        background: #2c2c2e;
-    }
-
-    .inputWrapper:focus-within {
-        background: #1c1c1e;
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .chip {
-        background: #333;
-        color: #fff;
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .chip :global(.chipIcon) {
-        color: #aaa;
-    }
-
-    .attachBtn {
-        color: #aaa;
-    }
-
-    .attachBtn:hover {
-        color: #fff;
-        background: rgba(255, 255, 255, 0.1);
-    }
-
     .input {
-        color: #fff;
+        color: #ececec;
     }
 
+    .input::placeholder {
+        color: #8e8e8e;
+    }
+}
+
+/* Send Button */
+.sendBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #000;
+    /* Black send button in light mode */
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+    margin-bottom: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
     .sendBtn {
         background: #fff;
-        /* Invert for dark mode like chatgpt? or keep accent brand color? */
+        /* White send button in dark mode */
         color: #000;
     }
+}
 
+.sendBtn:disabled {
+    background: #e5e5e5;
+    color: #b4b4b4;
+    cursor: default;
+}
+
+@media (prefers-color-scheme: dark) {
     .sendBtn:disabled {
-        background: #444;
-        color: #777;
+        background: #424242;
+        color: #666;
+    }
+}
+
+/* Stop Button */
+.stopBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #000;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.stopBtn:hover {
+    opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .stopBtn {
+        background: #fff;
+        color: #000;
+    }
+}
+
+/* Footer Note */
+.footerNote {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .footerNote {
+        color: #666;
     }
 }

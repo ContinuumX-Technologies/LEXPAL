@@ -1,5 +1,5 @@
 import AIConversation from "../../../models/AIConversation.model.js"
-import  saveChatMessage  from "../../../services/conversation/chatPersistence.service.js";
+import saveChatMessage from "../../../services/conversation/chatPersistence.service.js";
 import { generateAIResponse } from "../../../services/ai/ai.service.js";
 import generateConversationTitle from "../../../services/ai/titleGenerator.service.js";
 
@@ -8,10 +8,12 @@ export async function handleMessage(socket, raw) {
   console.log('📨 Raw WebSocket data:', raw);
   console.log('📨 Raw WebSocket data as string:', raw.toString());
   const payload = JSON.parse(raw.toString());  //ws msgs are bytecode
-  
+
   // DECLARE userPrompt with const or let
   const userPrompt = payload.content;  // <-- FIXED HERE
-  
+  const messageId = payload.message_id;
+  const snapshot = payload.snapshot;
+
   socket.msg_count++;
 
   // Save user message
@@ -19,6 +21,8 @@ export async function handleMessage(socket, raw) {
     convo_id: socket.convo_id,
     sender: "User",
     content: userPrompt,  // <-- Use the declared variable
+    message_id: messageId, // Pass ID if it's an edit
+    snapshot: snapshot // Pass snapshot for versioning
   });
 
   // 3️⃣ ASYNC TITLE GENERATION (fire & forget)
@@ -50,14 +54,14 @@ export async function handleMessage(socket, raw) {
           }
         }
       } catch (err) {
-        
+
         console.error('Title generation error:', err.message);
       }
     })();
   }
 
   // Generate AI response
-  const aiText = await generateAIResponse( userPrompt);
+  const aiText = await generateAIResponse(userPrompt);
 
   // Save AI message
   saveChatMessage({

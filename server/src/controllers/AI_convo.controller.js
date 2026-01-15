@@ -91,4 +91,32 @@ export const deleteConversation = async (req, res) => {
     console.error("Error deleting conversation:", err);
     return res.status(500).json({ message: "Internal server error" });
   }
+
+};
+
+export const renameConversation = async (req, res) => {
+  try {
+    const convoId = req.params.convoId;
+    const { title } = req.body;
+    const userId = req.client_data.id;
+
+    if (!convoId || !title) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const result = await AIConversation.findOneAndUpdate(
+      { _id: convoId, user_id: userId },
+      { title: title },
+      { new: true }
+    );
+
+    if (!result) {
+      return res.status(404).json({ message: "Conversation not found" });
+    }
+
+    return res.json({ message: "Renamed successfully", conversation: result });
+  } catch (err) {
+    console.error("Renaming error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
 };

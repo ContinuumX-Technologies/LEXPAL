@@ -1,223 +1,348 @@
-/* OpenAI-like Sidebar Dark Theme */
+/* Sidebar.module.css - ChatGPT Replica */
+
+/* Main Sidebar Container */
 .sidebar {
-    width: 260px;
-    background-color: #000000;
-    /* Deep black/dark gray like standard ChatGPT sidebar */
+    width: 100%;
+    /* Fill wrapper */
+    background-color: #f9f9f9;
+    /* Light mode default */
+    color: #0d0d0d;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
     flex-shrink: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #ECECEC;
-    /* transition: width 0.3s ease; allows collapse later */
+    transition: background-color 0.3s ease;
+    /* No width transition here, handled by layout */
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Header with New Chat */
+/* Dark Mode Override */
+@media (prefers-color-scheme: dark) {
+    .sidebar {
+        background-color: #171717;
+        /* ChatGPT Dark Sidebar */
+        color: #ececec;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* Header Area */
 .header {
-    padding: 14px 12px;
+    padding: 12px 12px 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 20;
+    background-color: inherit;
+    /* Matches sidebar bg */
 }
 
-/* "New Chat" mimics the header tools or top button */
-.newChatBtn {
-    width: 100%;
+/* Top Action Buttons */
+.topActions {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    padding: 10px 12px;
+    margin-bottom: 0;
+}
 
-    background: transparent;
-    border: none;
+.sidebarToggleBtn,
+.newChatIconBtn {
+    width: 40px;
+    height: 40px;
     border-radius: 8px;
-
-    color: #ECECEC;
-    font-size: 14px;
-    font-weight: 400;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.newChatBtn:hover {
-    background-color: #212121;
-}
-
-.newChatContent {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
 }
 
-/* List Area */
-.list {
-    flex: 1;
+.sidebarToggleBtn:hover,
+.newChatIconBtn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .sidebarToggleBtn,
+    .newChatIconBtn {
+        color: #9b9b9b;
+    }
+
+    .sidebarToggleBtn:hover,
+    .newChatIconBtn:hover {
+        background-color: #212121;
+        color: #ececec;
+    }
+}
+
+/* Main Navigation Links */
+.navLinks {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    padding-top: 10px;
+    gap: 4px;
+    margin-bottom: 20px;
 }
 
-.dateGroup {
-    font-size: 12px;
-    font-weight: 500;
-    color: #8e8ea0;
-    padding: 8px 24px;
-    margin-top: 8px;
-}
-
-.scrollArea {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 12px;
-}
-
-/* Scrollbar styling for webkit */
-.scrollArea::-webkit-scrollbar {
-    width: 6px;
-}
-
-.scrollArea::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-
-.scrollArea::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-
-/* Chat Item */
-.item {
-    width: 100%;
+.navItem {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 10px 12px;
+    border-radius: 8px;
+    background: transparent;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    transition: background-color 0.2s;
+}
 
+.navItem:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.navItem.active {
+    background-color: rgba(0, 0, 0, 0.08);
+    /* Slightly darker for active */
+    font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+    .navItem:hover {
+        background-color: #212121;
+    }
+
+    .navItem.active {
+        background-color: #212121;
+    }
+}
+
+/* Icons */
+.gptIcon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #000;
+    /* Light mode icon bg */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.exploreIcon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+    .gptIcon {
+        background-color: #fff;
+        color: #000;
+    }
+}
+
+/* Scrollable History List */
+.historyList {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+    .historyList {
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    }
+}
+
+/* Date Group Headers */
+.dateGroup {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+    margin: 24px 0 8px 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dateGroup {
+        color: #8e8e8e;
+    }
+}
+
+.dateGroup:first-child {
+    margin-top: 8px;
+}
+
+/* History Items */
+.historyItemWrapper {
+    position: relative;
+    margin-bottom: 2px;
+}
+
+.historyItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 8px;
     border: none;
     background: transparent;
-    border-radius: 8px;
-
-    color: #ECECEC;
-    cursor: pointer;
+    color: inherit;
+    font-size: 14px;
     text-align: left;
-    transition: background 0.15s ease;
-
+    cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
+    transition: background-color 0.15s ease;
+
+    /* Fade mask for long text */
     mask-image: linear-gradient(to right, black 85%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
 }
 
-.itemWrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: 2px;
+.historyItem:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
-.itemWrapper:hover .deleteBtn {
-    opacity: 1;
-    pointer-events: auto;
+@media (prefers-color-scheme: dark) {
+    .historyItem:hover {
+        background-color: #212121;
+    }
 }
 
-.deleteBtn {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    border: none;
-    background: #212121;
-    /* Match hover bg */
-    color: #8e8ea0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s, color 0.2s;
-    cursor: pointer;
-    z-index: 5;
-    box-shadow: -10px 0 10px -5px #212121;
-    /* Soft blend */
+.historyItem.active {
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
-.deleteBtn:hover {
-    color: #ff4d4d;
-    background: #2a2a2a;
+@media (prefers-color-scheme: dark) {
+    .historyItem.active {
+        background-color: #212121;
+    }
 }
 
-.confirmActions {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    gap: 6px;
-    z-index: 10;
-}
-
-.confirmBtn,
-.cancelBtn {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: white;
-}
-
-.confirmBtn {
-    background: #212121;
-    color: #10a37f;
-    /* OpenAI Green */
-}
-
-.confirmBtn:hover {
-    background: #10a37f;
-    color: white;
-}
-
-.cancelBtn {
-    background: #212121;
-    color: #ECECEC;
-}
-
-.cancelBtn:hover {
-    background: #40414f;
-}
-
-.item:hover {
-    background-color: #212121;
-}
-
-.item.active {
-    background-color: #212121;
-    /* Optional: subtle border or different shade */
-}
-
-.itemTitle {
-    font-size: 14px;
-    font-weight: 400;
+.historyItemTitle {
+    flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Footer (User Profile) */
+/* Options / Delete Trigger */
+.itemOptionsBtn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    background: transparent;
+    border: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .itemOptionsBtn {
+        color: #9b9b9b;
+    }
+}
+
+.historyItemWrapper:hover .itemOptionsBtn {
+    display: flex;
+}
+
+.historyItemWrapper:hover .historyItem {
+    mask-image: linear-gradient(to right, black 75%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 75%, transparent 100%);
+}
+
+.itemOptionsBtn:hover {
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+    .itemOptionsBtn:hover {
+        color: #fff;
+    }
+}
+
+/* Delete Confirm Overlay */
+.deleteConfirm {
+    position: absolute;
+    inset: 0;
+    background: #e5e5e5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    gap: 8px;
+    z-index: 10;
+}
+
+@media (prefers-color-scheme: dark) {
+    .deleteConfirm {
+        background: #212121;
+    }
+}
+
+.checkIconBtn,
+.closeIconBtn {
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkIconBtn:hover,
+.closeIconBtn:hover {
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .checkIconBtn,
+    .closeIconBtn {
+        color: #9b9b9b;
+    }
+
+    .checkIconBtn:hover,
+    .closeIconBtn:hover {
+        color: #fff;
+    }
+}
+
+/* Footer Profile */
 .footer {
     padding: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* border-top: 1px solid rgba(0,0,0,0.05); optional */
 }
 
 .userProfileBtn {
@@ -225,96 +350,243 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px;
+    padding: 12px;
     background: transparent;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    color: #ECECEC;
+    color: inherit;
     text-align: left;
-    transition: background 0.2s;
 }
 
 .userProfileBtn:hover {
-    background-color: #212121;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
-.avatarPlaceholder {
+@media (prefers-color-scheme: dark) {
+    .userProfileBtn:hover {
+        background-color: #212121;
+    }
+}
+
+.avatar {
     width: 32px;
     height: 32px;
-    background: linear-gradient(135deg, #FF9500, #FF5E3A);
-    /* User placeholder color */
-    border-radius: 6px;
-    /* Squircle */
+    border-radius: 50%;
+    background-color: #ccc;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
     font-size: 14px;
-    color: white;
+    font-weight: 500;
+    color: #fff;
 }
 
-.userInfo {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+@media (prefers-color-scheme: dark) {
+    .avatar {
+        background-color: #333;
+    }
 }
 
 .userName {
     font-size: 14px;
     font-weight: 500;
+    flex: 1;
 }
 
-.userPlan {
+.planTag {
+    background: #e0e0e0;
+    color: #000;
     font-size: 11px;
-    color: #8e8ea0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
-/* States */
-.loading {
-    padding: 24px;
-    display: flex;
-    justify-content: center;
-}
-
-.spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
+@media (prefers-color-scheme: dark) {
+    .planTag {
+        background: #333;
+        color: #ececec;
     }
 }
 
-.emptyState {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    color: #444;
-    gap: 8px;
-    opacity: 0.5;
-}
-
-.emptyState p {
+/* Loading / Empty States */
+.loading,
+.empty {
+    padding: 24px;
+    text-align: center;
+    color: #999;
     font-size: 13px;
 }
 
-/* Responsive Hide (simple assumption) */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     .sidebar {
-        display: none;
-        /* User can toggle */
-        position: absolute;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
         z-index: 100;
-        height: 100%;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.mobileOpen {
+        transform: translateX(0);
+    }
+}
+
+/* Dropdown Menu */
+.menuPopover {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    /* Below the dots */
+    width: 180px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+@media (prefers-color-scheme: dark) {
+    .menuPopover {
+        background: #2f2f2f;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: #333;
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.menuItem:hover {
+    background: #f5f5f7;
+}
+
+.menuItem.delete {
+    color: #ff4d4d;
+}
+
+.menuItem.delete:hover {
+    background: rgba(255, 77, 77, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .menuItem {
+        color: #ececec;
+    }
+
+    .menuItem:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.menuIcon {
+    font-size: 16px;
+    color: inherit;
+    opacity: 0.8;
+}
+
+/* Rename Input */
+.renameInput {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 4px 6px;
+    color: inherit;
+    font-size: inherit;
+    width: 100%;
+    outline: none;
+}
+
+.renameInput:focus {
+    border-color: #0071e3;
+    box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .renameInput {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .renameInput:focus {
+        border-color: #0a84ff;
+    }
+}
+
+
+/* Mini Sidebar (Rail) Styles */
+.miniSidebar {
+    width: 60px !important;
+    align-items: center;
+    padding: 12px 0;
+    overflow: hidden;
+    /* Hide scrollbars if any */
+    background-color: #f9f9f9;
+}
+
+@media (prefers-color-scheme: dark) {
+    .miniSidebar {
+        background-color: #171717;
+    }
+}
+
+.miniHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.miniFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.miniIconBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    transition: background 0.2s, color 0.2s;
+}
+
+.miniIconBtn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+    .miniIconBtn {
+        color: #9b9b9b;
+    }
+
+    .miniIconBtn:hover {
+        background-color: #212121;
+        color: #ececec;
     }
 }

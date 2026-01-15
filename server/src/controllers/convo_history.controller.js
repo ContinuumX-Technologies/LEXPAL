@@ -60,9 +60,12 @@ export async function getConversationHistory(req, res) {
 
     return res.json({
       messages: messages.map((m) => ({
+        _id: m._id,
         sender: m.sender,
         content: m.content,
         createdAt: m.createdAt,
+        versions: m.versions,
+        currentVersion: m.currentVersion,
       })),
       nextCursor,
       hasMore,
