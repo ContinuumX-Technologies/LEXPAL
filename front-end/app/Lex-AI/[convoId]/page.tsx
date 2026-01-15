@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 import { useParams, useRouter } from "next/navigation";
 import { TextShimmer } from "@/components/motion-primitives/text-shimmer";
 import ReactMarkdown from 'react-markdown';
-import { Copy, RotateCw, Share, MoreHorizontal, ChevronLeft, ChevronRight, Sparkles, MessageSquare, FileText, SquarePen, Pencil, PanelLeft } from "lucide-react";
+import { Copy, RotateCw, Share, MoreHorizontal, ChevronLeft, ChevronRight, Sparkles, MessageSquare, FileText, SquarePen, Pencil, PanelLeft, LayoutDashboard } from "lucide-react";
 
 type ChatMessage = {
   id?: string;
@@ -522,15 +522,15 @@ const MainChatPage = () => {
             >
               <PanelLeft size={24} />
             </button>
-            {/* Back button */}
+            {/* Dashboard button */}
             <button
               className={styles.iconButton}
-              onClick={() => router.back()}
+              onClick={() => router.push('/Dashboard')}
               suppressHydrationWarning
               data-tooltip="Back to Dashboard"
               aria-label="Back to Dashboard"
             >
-              <ChevronLeft size={24} />
+              <LayoutDashboard size={20} />
             </button>
           </div>
 

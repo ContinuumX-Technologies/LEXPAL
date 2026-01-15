@@ -16,7 +16,7 @@
 
 /* -------------------- MAIN CONTENT GRID -------------------- */
 
-:global(main) {
+.mainContent {
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 32px;
@@ -167,7 +167,7 @@
 
 /* Mobile (below 768px) */
 @media (max-width: 768px) {
-    :global(main) {
+    .mainContent {
         padding: 0 16px;
     }
 

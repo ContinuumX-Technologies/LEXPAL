@@ -102,7 +102,7 @@ export default function DashboardPage() {
     <div className={styles.dashboardRoot}>
       <Navbar firstName={firstName} />
 
-      <main>
+      <main className={styles.mainContent}>
         {/* Intro / Header */}
         <section className={styles.introSection}>
           <div className={styles.date}>{today}</div>

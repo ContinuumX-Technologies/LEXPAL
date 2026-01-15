@@ -499,6 +499,12 @@
   opacity: 1;
 }
 
+/* Fix header tooltips being covered by sidebar */
+.header [data-tooltip]::after {
+  left: 0;
+  transform: none;
+}
+
 @media (prefers-color-scheme: dark) {
   .chatInterface [data-tooltip]::after {
     background-color: #000;

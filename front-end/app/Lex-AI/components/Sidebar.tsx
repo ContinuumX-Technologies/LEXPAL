@@ -52,6 +52,8 @@ export default function Sidebar({ onNewChat, className }: SidebarProps) {
     const { toggleSidebar, isSidebarOpen, setSidebarOpen } = useSidebar();
     const [conversations, setConversations] = useState<Conversation[]>([]);
     const [loading, setLoading] = useState(false);
+    const [userName, setUserName] = useState("User");
+    const [userInitials, setUserInitials] = useState("U");
 
     // State for interactions
     const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
@@ -86,8 +88,29 @@ export default function Sidebar({ onNewChat, className }: SidebarProps) {
         }
     };
 
+    const fetchUserDetails = async () => {
+        try {
+            const res = await fetch(`${server_url}/api/user/username`, {
+                method: "GET",
+                credentials: "include",
+            });
+            if (res.ok) {
+                const data = await res.json();
+                const first = data.name || "User";
+                // data.last_name might be undefined if not in DB or old controller. 
+                // We updated controller to return last_name.
+                const last = data.last_name || "";
+                setUserName(`${first} ${last}`.trim());
+                if (first && first.length > 0) setUserInitials(first[0].toUpperCase());
+            }
+        } catch (err) {
+            console.error("Failed to fetch user details", err);
+        }
+    };
+
     useEffect(() => {
         fetchRecentConvos();
+        fetchUserDetails();
 
         // Click outside to close menu
         const handleClickOutside = (event: MouseEvent) => {
@@ -213,7 +236,7 @@ export default function Sidebar({ onNewChat, className }: SidebarProps) {
 
                 <div className={styles.miniFooter}>
                     <button className={styles.miniIconBtn} title="User Profile">
-                        <div className={styles.avatar}>S</div>
+                        <div className={styles.avatar}>{userInitials}</div>
                     </button>
                 </div>
             </aside>
@@ -349,8 +372,8 @@ export default function Sidebar({ onNewChat, className }: SidebarProps) {
                 {/* Footer */}
                 <div className={styles.footer}>
                     <button className={styles.userProfileBtn}>
-                        <div className={styles.avatar}>S</div>
-                        <span className={styles.userName}>Sarat Behera</span>
+                        <div className={styles.avatar}>{userInitials}</div>
+                        <span className={styles.userName}>{userName}</span>
                         <span className={styles.planTag}>PLUS</span>
                     </button>
                 </div>
