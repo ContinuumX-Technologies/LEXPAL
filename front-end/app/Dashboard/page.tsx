@@ -11,6 +11,9 @@ import CaseStatusOverview from "./components/CaseStatusOverview";
 import QuickActions from "./components/QuickActions";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
+import "./walkthrough.css"; // Import Apple-style theme
 
 type SavedLawyer = any; // refine types to your schema
 type Conversation = any; // refine types to your schema
@@ -24,6 +27,7 @@ export default function DashboardPage() {
   const [savedLawyers, setSavedLawyers] = useState<SavedLawyer[] | null>(null);
   const [savedLoading, setSavedLoading] = useState(false);
   const [savedError, setSavedError] = useState<string | null>(null);
+  const [hasSeenWalkthrough, setHasSeenWalkthrough] = useState<boolean | null>(null);
 
   const [recentConvos, setRecentConvos] = useState<Conversation[] | null>(null);
   const [recentLoading, setRecentLoading] = useState(false);
@@ -52,6 +56,7 @@ export default function DashboardPage() {
         // assume response shape { saved: [...] } or adjust as needed
         setSavedLawyers(data.saved_lawyers ?? data);
         setFirstName(data.name);
+        setHasSeenWalkthrough(data.has_seen_walkthrough);
       } catch (err: any) {
         if (err.name !== "AbortError") setSavedError(err.message || "Unknown error");
       } finally {
@@ -90,6 +95,97 @@ export default function DashboardPage() {
 
     return () => ac.abort();
   }, [server_url]);
+
+  const markWalkthroughSeen = async () => {
+    try {
+      await fetch(`${server_url}/api/user/walkthrough-seen`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      });
+      setHasSeenWalkthrough(true);
+    } catch (err) {
+      console.error("Failed to mark walkthrough as seen", err);
+    }
+  };
+
+  useEffect(() => {
+    if (hasSeenWalkthrough === false) {
+      const driverObj = driver({
+        showProgress: true,
+        animate: true,
+        allowClose: true,
+        doneBtnText: "Done",
+        nextBtnText: "Next",
+        prevBtnText: "Previous",
+        stagePadding: 4, // Add padding around highlighted element
+        popoverOffset: 20, // Distance from element
+        steps: [
+          {
+            popover: {
+              title: `Welcome to LexPal${firstName ? ", " + firstName : ""}!`,
+              description: "Let's take a quick tour of your new legal dashboard to help you get started."
+            }
+          },
+          {
+            element: "#lexpal-ai",
+            popover: {
+              title: "AI Legal Assistant",
+              description: "Ask complex legal questions and get instant, AI-powered answers. Start a new conversation here."
+            }
+          },
+          {
+            element: "#case-timeline",
+            popover: {
+              title: "Case Timeline",
+              description: "Visual timeline of your legal journey. See upcoming events and past milestones."
+            }
+          },
+          {
+            element: "#all-cases",
+            popover: {
+              title: "Case Overview",
+              description: "Track the status of all your ongoing cases. See what's active, pending, or resolved at a glance."
+            }
+          },
+          {
+            element: "#saved-lawyers",
+            popover: {
+              title: "Saved Lawyers",
+              description: "Quickly access profiles of lawyers you've bookmarked. Perfect for shortlisting potential candidates."
+            }
+          },
+          {
+            element: "#chats",
+            popover: {
+              title: "Recent Messages",
+              description: "Stay connected. Your latest conversations with lawyers appear here for easy access."
+            }
+          },
+          {
+            element: "#featured-lawyers",
+            popover: {
+              title: "Find Experts",
+              description: "Discover top-rated legal professionals tailored to your needs. Browse and connect with experts."
+            }
+          },
+        ],
+        onDestroyed: () => {
+          markWalkthroughSeen();
+        },
+      });
+
+      // valid steps are only those that exist in DOM. driver.js handles missing elements gracefully usually, but waiting for data load is key.
+      // fetchSavedLawyers sets loading false *after* data is set. But we depend on hasSeenWalkthrough which is set at same time.
+      // A small timeout helps ensure DOM is rendered.
+
+      const timer = setTimeout(() => {
+        driverObj.drive();
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [hasSeenWalkthrough, firstName]);
 
   // Date formatter
   const today = new Date().toLocaleDateString("en-US", {

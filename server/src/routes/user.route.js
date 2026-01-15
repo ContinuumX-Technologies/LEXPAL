@@ -6,18 +6,19 @@ import { isLawyerSaved, savedLawyerLoader, saveLawyer, unsaveLawyer } from "../c
 import { getChatProfile } from "../controllers/chatProfile.controller.js";
 import { getChatHistory } from "../controllers/userChatHistory.controller.js";
 import { getChatList } from "../controllers/chatList.controller.js";
-import getName from "../controllers/userDetails.controller.js";
+import getName, { setHasSeenWalkthrough } from "../controllers/userDetails.controller.js";
 
 
-const userRouter= express.Router();
+const userRouter = express.Router();
 
-userRouter.get("/saved-lawyers/fetch/all-saved",protectRoute,noCacheMiddleware,savedLawyerLoader);
-userRouter.post("/saved-lawyers/update/new-save/:lawyerId",protectRoute,saveLawyer);
-userRouter.delete("/saved-lawyers/update/delete-saved-lawyer/:lawyerId",protectRoute,unsaveLawyer);
-userRouter.get("/saved-lawyers/fetch/isLawyerSaved/:lawyerId",protectRoute,isLawyerSaved);
+userRouter.get("/saved-lawyers/fetch/all-saved", protectRoute, noCacheMiddleware, savedLawyerLoader);
+userRouter.post("/saved-lawyers/update/new-save/:lawyerId", protectRoute, saveLawyer);
+userRouter.delete("/saved-lawyers/update/delete-saved-lawyer/:lawyerId", protectRoute, unsaveLawyer);
+userRouter.get("/saved-lawyers/fetch/isLawyerSaved/:lawyerId", protectRoute, isLawyerSaved);
 userRouter.get("/chat/profile/:id", protectRoute, getChatProfile);
-userRouter.get("/chat/list", protectRoute,noCacheMiddleware, getChatList);
-userRouter.get("/username",protectRoute,getName);
+userRouter.get("/chat/list", protectRoute, noCacheMiddleware, getChatList);
+userRouter.get("/username", protectRoute, getName);
+userRouter.post("/walkthrough-seen", protectRoute, setHasSeenWalkthrough);
 
 userRouter.get(
   "/chat/history/:receiverId",

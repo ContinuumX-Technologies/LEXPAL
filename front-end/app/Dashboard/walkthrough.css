@@ -1,0 +1,159 @@
+/* Apple-Style Walkthrough Theme for Driver.js */
+
+/* Global container override to ensure high z-index and font smoothing */
+.driver-popover {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    /* Glass effect base */
+    backdrop-filter: saturate(180%) blur(20px) !important;
+    /* The localized blur */
+    -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+    color: #1d1d1f !important;
+    border-radius: 24px !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.03),
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        0 10px 20px rgba(0, 0, 0, 0.04) !important;
+    padding: 24px !important;
+    min-width: 320px !important;
+    max-width: 400px !important;
+
+    /* Smooth Transitions for position/size changes */
+    transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        left 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        top 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+    /* Entry Animation */
+    animation: popover-enter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes popover-enter {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Ensure the active element overlay transitions smoothly */
+.driver-active-element {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Title Styling - crisp, bold, dark */
+.driver-popover-title {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #1d1d1f !important;
+    margin-bottom: 12px !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+}
+
+/* Description - smooth readable gray */
+.driver-popover-description {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    color: #86868b !important;
+    font-weight: 400 !important;
+    margin-bottom: 24px !important;
+}
+
+/* Progress Text */
+.driver-popover-progress-text {
+    font-size: 13px !important;
+    color: #86868b !important;
+    font-weight: 500 !important;
+}
+
+/* Footer Action Area */
+.driver-popover-footer {
+    margin-top: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+}
+
+/* Navigation Buttons - Common */
+.driver-popover-btn {
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    padding: 10px 20px !important;
+    border-radius: 999px !important;
+    /* Pill shape */
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+    text-shadow: none !important;
+}
+
+/* Previous / Close Buttons - Subtle Ghost/Gray */
+.driver-popover-prev-btn,
+.driver-popover-close-btn {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: #1d1d1f !important;
+    border: 1px solid transparent !important;
+}
+
+.driver-popover-prev-btn:hover,
+.driver-popover-close-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Next / Done Buttons - Primary Apple Blue/Black */
+.driver-popover-next-btn {
+    background-color: #000000 !important;
+    /* Or Apple Blue #0071e3 */
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.driver-popover-next-btn:hover {
+    background-color: #333333 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* The Close "x" button top right */
+.driver-popover-close-btn {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    color: #86868b !important;
+    background: transparent !important;
+}
+
+.driver-popover-close-btn:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #1d1d1f !important;
+}
+
+/* Arrow Tip */
+.driver-popover-arrow {
+    border-color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Overlay Mask Customization - Softer Dark */
+.driver-overlay-path {
+    fill: rgba(0, 0, 0, 0.6) !important;
+}

@@ -33,4 +33,15 @@ const getName = async (req, res) => {
   }
 }
 
+export const setHasSeenWalkthrough = async (req, res) => {
+  try {
+    const { id } = req.client_data;
+    await User.findByIdAndUpdate(id, { has_seen_dashboard_walkthrough: true });
+    return res.json({ success: true });
+  } catch (err) {
+    console.error("Error setting walkthrough seen:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 export default getName;

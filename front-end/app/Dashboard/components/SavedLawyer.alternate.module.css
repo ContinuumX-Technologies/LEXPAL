@@ -17,13 +17,13 @@
 .card {
   position: relative;
   padding: 48px 24px;
-  
+
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 24px;
   overflow: hidden;
-  
-  box-shadow: 
+
+  box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.04),
     0 6px 16px rgba(0, 0, 0, 0.04);
 }
@@ -42,20 +42,21 @@
   right: -30%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(
-    circle,
-    rgba(251, 191, 36, 0.08) 0%,
-    rgba(245, 158, 11, 0.04) 40%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(251, 191, 36, 0.08) 0%,
+      rgba(245, 158, 11, 0.04) 40%,
+      transparent 70%);
   animation: gradientFloat 10s ease-in-out infinite;
 }
 
 @keyframes gradientFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.8;
   }
+
   50% {
     transform: translate(-30px, 20px) scale(1.1);
     opacity: 1;
@@ -74,12 +75,41 @@
   animation: bookmarkFloat 12s ease-in-out infinite;
 }
 
-.bgBookmark:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-.bgBookmark:nth-child(2) { top: 60%; left: 10%; animation-delay: 2s; }
-.bgBookmark:nth-child(3) { top: 20%; right: 15%; animation-delay: 4s; }
-.bgBookmark:nth-child(4) { top: 70%; right: 8%; animation-delay: 1s; }
-.bgBookmark:nth-child(5) { top: 40%; left: 20%; animation-delay: 3s; }
-.bgBookmark:nth-child(6) { top: 80%; right: 25%; animation-delay: 5s; }
+.bgBookmark:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.bgBookmark:nth-child(2) {
+  top: 60%;
+  left: 10%;
+  animation-delay: 2s;
+}
+
+.bgBookmark:nth-child(3) {
+  top: 20%;
+  right: 15%;
+  animation-delay: 4s;
+}
+
+.bgBookmark:nth-child(4) {
+  top: 70%;
+  right: 8%;
+  animation-delay: 1s;
+}
+
+.bgBookmark:nth-child(5) {
+  top: 40%;
+  left: 20%;
+  animation-delay: 3s;
+}
+
+.bgBookmark:nth-child(6) {
+  top: 80%;
+  right: 25%;
+  animation-delay: 5s;
+}
 
 .bgBookmark .material-symbols-outlined {
   font-size: 32px;
@@ -87,10 +117,13 @@
 }
 
 @keyframes bookmarkFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
     opacity: 0.04;
   }
+
   50% {
     transform: translateY(-15px) rotate(5deg);
     opacity: 0.08;
@@ -130,14 +163,12 @@
   justify-content: center;
   width: 80px;
   height: 80px;
-  
-  background: linear-gradient(
-    135deg,
-    rgba(251, 191, 36, 0.12) 0%,
-    rgba(245, 158, 11, 0.12) 100%
-  );
+
+  background: linear-gradient(135deg,
+      rgba(251, 191, 36, 0.12) 0%,
+      rgba(245, 158, 11, 0.12) 100%);
   border-radius: 24px;
-  
+
   transition: transform 0.3s ease;
 }
 
@@ -159,10 +190,13 @@
 }
 
 @keyframes pulseBorder {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.6;
   }
+
   50% {
     transform: scale(1.08);
     opacity: 0.2;
@@ -204,29 +238,29 @@
   gap: 12px;
   height: 52px;
   padding: 0 8px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 16px;
   font-weight: 600;
-  
+
   color: white;
   background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
   border: none;
   border-radius: 16px;
   cursor: pointer;
-  
-  box-shadow: 
+
+  box-shadow:
     0 4px 16px rgba(245, 158, 11, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  
-  transition: 
+
+  transition:
     transform 0.2s ease,
     box-shadow 0.3s ease;
 }
 
 .ctaButton:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 8px 28px rgba(245, 158, 11, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
@@ -287,14 +321,14 @@
   align-items: center;
   gap: 14px;
   padding: 14px 18px;
-  
+
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
-  
+
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  
-  transition: 
+
+  transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
@@ -303,7 +337,7 @@
 .featurePill:hover {
   transform: translateX(4px);
   border-color: rgba(245, 158, 11, 0.2);
-  box-shadow: 
+  box-shadow:
     0 2px 8px rgba(245, 158, 11, 0.08),
     0 4px 12px rgba(0, 0, 0, 0.04);
 }
@@ -315,15 +349,13 @@
   width: 44px;
   height: 44px;
   flex-shrink: 0;
-  
+
   font-size: 22px;
   color: #f59e0b;
-  
-  background: linear-gradient(
-    135deg,
-    rgba(251, 191, 36, 0.1) 0%,
-    rgba(245, 158, 11, 0.1) 100%
-  );
+
+  background: linear-gradient(135deg,
+      rgba(251, 191, 36, 0.1) 0%,
+      rgba(245, 158, 11, 0.1) 100%);
   border-radius: 12px;
 }
 
@@ -376,20 +408,20 @@
 
 .categoryTag {
   padding: 10px 16px;
-  
+
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 500;
-  
+
   color: rgba(0, 0, 0, 0.7);
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
   cursor: pointer;
-  
+
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
-  
-  transition: 
+
+  transition:
     background 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease,
@@ -411,98 +443,91 @@
    DARK MODE
    ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  .card {
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 
-      0 1px 3px rgba(0, 0, 0, 0.2),
-      0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .bgGradient {
-    background: radial-gradient(
-      circle,
+/* Dark Mode Override using global class */
+:global(.dark) .card {
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .bgGradient {
+  background: radial-gradient(circle,
       rgba(251, 191, 36, 0.1) 0%,
       rgba(245, 158, 11, 0.06) 40%,
-      transparent 70%
-    );
-  }
-  
-  .bgBookmark .material-symbols-outlined {
-    color: rgba(251, 191, 36, 0.8);
-  }
-  
-  .iconInner {
-    background: linear-gradient(
-      135deg,
+      transparent 70%);
+}
+
+:global(.dark) .bgBookmark .material-symbols-outlined {
+  color: rgba(251, 191, 36, 0.8);
+}
+
+:global(.dark) .iconInner {
+  background: linear-gradient(135deg,
       rgba(251, 191, 36, 0.15) 0%,
-      rgba(245, 158, 11, 0.15) 100%
-    );
-  }
-  
-  .iconInner .material-symbols-outlined {
-    color: #fbbf24;
-  }
-  
-  .iconPulse {
-    border-color: rgba(251, 191, 36, 0.25);
-  }
-  
-  .title {
-    color: rgba(255, 255, 255, 0.92);
-  }
-  
-  .subtitle {
-    color: rgba(255, 255, 255, 0.5);
-  }
-  
-  .featurePill {
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  }
-  
-  .featurePill:hover {
-    border-color: rgba(251, 191, 36, 0.25);
-    box-shadow: 
-      0 2px 8px rgba(251, 191, 36, 0.1),
-      0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .featureIcon {
-    color: #fbbf24;
-    background: linear-gradient(
-      135deg,
+      rgba(245, 158, 11, 0.15) 100%);
+}
+
+:global(.dark) .iconInner .material-symbols-outlined {
+  color: #fbbf24;
+}
+
+:global(.dark) .iconPulse {
+  border-color: rgba(251, 191, 36, 0.25);
+}
+
+:global(.dark) .title {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+:global(.dark) .subtitle {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:global(.dark) .featurePill {
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+:global(.dark) .featurePill:hover {
+  border-color: rgba(251, 191, 36, 0.25);
+  box-shadow:
+    0 2px 8px rgba(251, 191, 36, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .featureIcon {
+  color: #fbbf24;
+  background: linear-gradient(135deg,
       rgba(251, 191, 36, 0.15) 0%,
-      rgba(245, 158, 11, 0.15) 100%
-    );
-  }
-  
-  .featureTitle {
-    color: rgba(255, 255, 255, 0.9);
-  }
-  
-  .featureDesc {
-    color: rgba(255, 255, 255, 0.45);
-  }
-  
-  .categoriesLabel {
-    color: rgba(255, 255, 255, 0.4);
-  }
-  
-  .categoryTag {
-    color: rgba(255, 255, 255, 0.75);
-    background: rgba(44, 44, 46, 1);
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  }
-  
-  .categoryTag:hover {
-    color: #fbbf24;
-    background: rgba(251, 191, 36, 0.1);
-    border-color: rgba(251, 191, 36, 0.3);
-  }
+      rgba(245, 158, 11, 0.15) 100%);
+}
+
+:global(.dark) .featureTitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:global(.dark) .featureDesc {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+:global(.dark) .categoriesLabel {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:global(.dark) .categoryTag {
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(44, 44, 46, 1);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+:global(.dark) .categoryTag:hover {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.3);
 }
 
 /* ============================================
@@ -515,57 +540,57 @@
     padding: 0 32px;
     gap: 24px;
   }
-  
+
   .card {
     padding: 56px 32px;
     border-radius: 28px;
   }
-  
+
   .iconInner {
     width: 88px;
     height: 88px;
     border-radius: 26px;
   }
-  
+
   .iconInner .material-symbols-outlined {
     font-size: 44px;
   }
-  
+
   .iconPulse {
     border-radius: 32px;
   }
-  
+
   .title {
     font-size: 28px;
   }
-  
+
   .subtitle {
     font-size: 16px;
   }
-  
+
   .textWrap {
     max-width: 400px;
   }
-  
+
   .ctaButton {
     height: 56px;
     padding: 0 10px;
     font-size: 17px;
     border-radius: 18px;
   }
-  
+
   .ctaIcon,
   .ctaArrow {
     width: 40px;
     height: 40px;
     border-radius: 12px;
   }
-  
+
   .features {
     flex-direction: row;
     gap: 12px;
   }
-  
+
   .featurePill {
     flex: 1;
     flex-direction: column;
@@ -573,25 +598,25 @@
     padding: 20px;
     border-radius: 18px;
   }
-  
+
   .featurePill:hover {
     transform: translateY(-4px);
   }
-  
+
   .featureIcon {
     width: 48px;
     height: 48px;
     margin-bottom: 8px;
   }
-  
+
   .featureText {
     gap: 4px;
   }
-  
+
   .categoryTags {
     gap: 10px;
   }
-  
+
   .categoryTag {
     padding: 12px 20px;
     font-size: 15px;
@@ -605,54 +630,54 @@
     padding: 0 48px;
     gap: 28px;
   }
-  
+
   .card {
     padding: 64px 48px;
     border-radius: 32px;
   }
-  
+
   .content {
     gap: 28px;
   }
-  
+
   .iconInner {
     width: 96px;
     height: 96px;
     border-radius: 28px;
   }
-  
+
   .iconInner .material-symbols-outlined {
     font-size: 48px;
   }
-  
+
   .title {
     font-size: 32px;
   }
-  
+
   .textWrap {
     max-width: 440px;
     gap: 10px;
   }
-  
+
   .features {
     gap: 16px;
   }
-  
+
   .featurePill {
     padding: 24px;
     border-radius: 20px;
   }
-  
+
   .featureIcon {
     width: 52px;
     height: 52px;
     font-size: 24px;
   }
-  
+
   .featureTitle {
     font-size: 16px;
   }
-  
+
   .featureDesc {
     font-size: 14px;
   }
@@ -664,96 +689,96 @@
     padding: 0 16px;
     gap: 16px;
   }
-  
+
   .card {
     padding: 36px 20px;
     border-radius: 20px;
   }
-  
+
   .iconInner {
     width: 68px;
     height: 68px;
     border-radius: 20px;
   }
-  
+
   .iconInner .material-symbols-outlined {
     font-size: 34px;
   }
-  
+
   .iconPulse {
     inset: -6px;
     border-radius: 24px;
   }
-  
+
   .title {
     font-size: 20px;
   }
-  
+
   .subtitle {
     font-size: 14px;
   }
-  
+
   .textWrap {
     max-width: 280px;
   }
-  
+
   .ctaButton {
     width: 100%;
     height: 48px;
     font-size: 15px;
     border-radius: 14px;
   }
-  
+
   .ctaIcon,
   .ctaArrow {
     width: 32px;
     height: 32px;
     border-radius: 8px;
   }
-  
+
   .ctaIcon .material-symbols-outlined,
   .ctaArrow .material-symbols-outlined {
     font-size: 18px;
   }
-  
+
   .features {
     gap: 8px;
   }
-  
+
   .featurePill {
     padding: 12px 14px;
     border-radius: 14px;
     gap: 12px;
   }
-  
+
   .featureIcon {
     width: 40px;
     height: 40px;
     font-size: 20px;
     border-radius: 10px;
   }
-  
+
   .featureTitle {
     font-size: 14px;
   }
-  
+
   .featureDesc {
     font-size: 12px;
   }
-  
+
   .categories {
     gap: 10px;
     padding-top: 4px;
   }
-  
+
   .categoriesLabel {
     font-size: 11px;
   }
-  
+
   .categoryTags {
     gap: 6px;
   }
-  
+
   .categoryTag {
     padding: 8px 14px;
     font-size: 13px;
@@ -766,12 +791,13 @@
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
+
   .bgGradient,
   .bgBookmark,
   .iconPulse {
     animation: none;
   }
-  
+
   .iconInner,
   .ctaButton,
   .ctaArrow,
@@ -793,31 +819,31 @@
   .card {
     border: 2px solid CanvasText;
   }
-  
+
   .featurePill {
     border: 1px solid CanvasText;
   }
-  
+
   .ctaButton {
     background: Highlight;
     color: HighlightText;
     forced-color-adjust: none;
   }
-  
+
   .categoryTag {
     border: 1px solid CanvasText;
   }
-  
+
   .iconInner {
     border: 2px solid CanvasText;
     background: Canvas;
   }
-  
+
   .iconPulse {
     border-style: solid;
     border-color: CanvasText;
   }
-  
+
   .featureIcon {
     border: 1px solid CanvasText;
     background: Canvas;
@@ -832,28 +858,28 @@
   .container {
     padding: 0;
   }
-  
+
   .card {
     box-shadow: none;
     border: 1px solid #ccc;
   }
-  
+
   .bgGradient,
   .bgPattern,
   .iconPulse {
     display: none;
   }
-  
+
   .ctaButton {
     background: #f59e0b;
     box-shadow: none;
   }
-  
+
   .featurePill {
     box-shadow: none;
     border: 1px solid #ddd;
   }
-  
+
   .categoryTag {
     box-shadow: none;
     border: 1px solid #ddd;

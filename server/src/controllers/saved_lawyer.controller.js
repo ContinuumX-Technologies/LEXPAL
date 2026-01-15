@@ -9,20 +9,21 @@ export const savedLawyerLoader = async (req, res) => {
 
     // 1. Fetch user to get saved lawyer IDs
     const user = await User.findById(userId)
-      .select("saved_lawyers first_name")
+      .select("saved_lawyers first_name has_seen_dashboard_walkthrough")
       .lean();
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     console.log(user);
-    const name= user.first_name;
+    const name = user.first_name;
+    const has_seen_walkthrough = user.has_seen_dashboard_walkthrough;
     console.log(name);
 
     const savedIds = user.saved_lawyers || [];
 
     if (savedIds.length === 0) {
-      return res.json({ saved_lawyers: [],name });
+      return res.json({ saved_lawyers: [], name, has_seen_walkthrough });
     }
 
     // 2. Get all lawyers in one query (project only needed fields)
@@ -30,7 +31,7 @@ export const savedLawyerLoader = async (req, res) => {
       { _id: { $in: savedIds } },
       {
         first_name: 1,
-        last_name:1,
+        last_name: 1,
         profile_picture: 1,
         specialities: 1,
         review_count: 1,
@@ -48,17 +49,19 @@ export const savedLawyerLoader = async (req, res) => {
     // 4. Format all card objects cleanly
     const formatted = lawyers.map(l => ({
       id: String(l._id),
-      name: l.first_name+" "+l.last_name,
+      name: l.first_name + " " + l.last_name,
       profile_pic: l.profile_picture,
       speciality: Array.isArray(l.specialities) ? l.specialities[0] : "",
       review_count: l.review_count || 0,
     }));
 
     // 5. Send final response
-    return res.json({ saved_lawyers: formatted,
-      name:name
-     });
-    
+    return res.json({
+      saved_lawyers: formatted,
+      name: name,
+      has_seen_walkthrough
+    });
+
   } catch (err) {
     console.error("Error loading saved lawyers:", err);
     return res.status(500).json({ message: "Internal server error" });
@@ -100,5 +103,5 @@ export const isLawyerSaved = async (req, res) => {
   const user = await User.findById(userId).select("saved_lawyers");
 
   const save = user.saved_lawyers.includes(lawyerId);
-  res.json({ saved:save });
+  res.json({ saved: save });
 };

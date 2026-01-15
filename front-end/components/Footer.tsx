@@ -99,6 +99,7 @@ export default function Footer({ userType = 'lawyer' }: FooterProps) {
                                     type="email"
                                     placeholder="Enter your email"
                                     className={styles.emailInput}
+                                    suppressHydrationWarning
                                 />
                                 <button className={styles.submitBtn} aria-label="Subscribe">
                                     <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
