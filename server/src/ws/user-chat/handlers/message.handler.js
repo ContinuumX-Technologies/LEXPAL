@@ -24,14 +24,14 @@ export async function handleSendMessage(socket, payload) {
 
   // 2️⃣ Ack sender by sending their msg back to them to update their chat
   socket.send(JSON.stringify({
-      type: "incoming_message",
-      message: {
-        _id: message._id,
-        sender_id:senderId,
-        content,
-        createdAt: message.createdAt,
-      },
-    }));
+    type: "incoming_message",
+    message: {
+      _id: message._id,
+      sender_id: senderId,
+      content,
+      createdAt: message.createdAt,
+    },
+  }));
 
   // 3️⃣ Deliver if receiver online
   const receiverSockets = getUserSockets(receiverId);
@@ -43,7 +43,7 @@ export async function handleSendMessage(socket, payload) {
       type: "incoming_message",
       message: {
         _id: message._id,
-        sender_id:senderId,
+        sender_id: senderId,
         content,
         createdAt: message.createdAt,
       },

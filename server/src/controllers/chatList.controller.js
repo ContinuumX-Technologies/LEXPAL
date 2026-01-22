@@ -12,7 +12,7 @@ export async function getChatList(req, res) {
     const userId = req.client_data.id;
     const role = req.client_data.user_type;
 
-   
+
 
     // Convert userId to ObjectId for proper comparison
     const userObjectId = new mongoose.Types.ObjectId(userId);
@@ -41,13 +41,16 @@ export async function getChatList(req, res) {
         },
       },
 
-      // 3️⃣ Group by other participant FIRST (before sorting)
+      // 3️⃣ Sort by Time BEFORE Grouping to ensure $last works correctly
+      { $sort: { createdAt: 1 } },
+
+      // 4️⃣ Group by other participant
       {
         $group: {
           _id: "$otherUserId",
           lastMessage: { $last: "$content" }, // Get most recent
           lastMessageAt: { $max: "$createdAt" }, // Most recent timestamp
-          lastMessageSender: { 
+          lastMessageSender: {
             $first: {
               $cond: [
                 { $eq: [{ $max: "$createdAt" }, "$createdAt"] },
@@ -131,14 +134,14 @@ export async function getChatList(req, res) {
     // Filter out null results
     const filteredResults = results.filter(chat => chat !== null);
 
-   
+
 
     res.json(filteredResults);
   } catch (err) {
     console.log("Chat list error:", err);
-    res.status(500).json({ 
+    res.status(500).json({
       error: "Server error",
-      message: err.message 
+      message: err.message
     });
   }
 }

@@ -10,8 +10,13 @@ import cookie from "cookie";
 export function authenticateWS(req) {
   // Parse cookies from header
   const cookies = cookie.parse(req.headers.cookie || "");
+  let token = cookies.jwt;
 
-  const token = cookies.jwt;
+  // Fallback: Check query string for token
+  if (!token && req.url) {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    token = url.searchParams.get("token");
+  }
 
   if (!token) {
     throw new Error("Unauthorized: No token");

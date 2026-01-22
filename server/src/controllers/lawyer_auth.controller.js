@@ -52,7 +52,7 @@ export const lawyerSignup = async (req, res) => {
         });
 
         if (lawyer) {
-            const token =  generateToken(lawyer._id, "Lawyer");
+            const token = generateToken(lawyer._id, "Lawyer");
 
             res.cookie("jwt", token, {
                 maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -64,7 +64,9 @@ export const lawyerSignup = async (req, res) => {
 
         return res.status(201).json({
             message: "Lawyer signup successful",
+            token,
             lawyer: {
+                _id: lawyer._id,
                 name: lawyer.first_name,
                 email: lawyer.email,
 
@@ -87,7 +89,7 @@ export const lawyerLogin = async (req, res) => {
         const isMatch = await comparePassword(password, lawyer.password_hash);
         if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
 
-        const token =  generateToken(lawyer._id, "Lawyer");
+        const token = generateToken(lawyer._id, "Lawyer");
 
         res.cookie("jwt", token, {
             maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -98,9 +100,9 @@ export const lawyerLogin = async (req, res) => {
 
         return res.json({
             message: "Login successful",
-
+            token,
             lawyer: {
-
+                _id: lawyer._id,
                 name: lawyer.first_name,
                 email: lawyer.email
             }

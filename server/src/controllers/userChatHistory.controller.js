@@ -22,6 +22,12 @@ export async function getChatHistory(req, res) {
       query.createdAt = { $lt: new Date(cursor) };
     }
 
+    // 0️⃣ Mark invalid/unread messages as read
+    await Message.updateMany(
+      { sender_id: receiverId, receiver_id: userId, read_at: null },
+      { $set: { read_at: new Date() } }
+    );
+
     // fetch newest first
     const messages = await Message.find(query)
       .sort({ createdAt: -1 })

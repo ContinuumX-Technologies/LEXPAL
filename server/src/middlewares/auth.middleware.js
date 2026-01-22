@@ -1,34 +1,36 @@
 import jwt from "jsonwebtoken";
 
 
-const protectRoute= async(req,res,next)=>{
+const protectRoute = async (req, res, next) => {
     try {
 
-        if (!req.cookies) {
-      return res.status(401).json({ message: "No cookies found" });
-    }
-        const token = req.cookies.jwt;
+        let token;
 
-        if(!token){
-            return res.status(401).json({messsage: "Unauthorized access - No token provided"});
+        if (req.cookies && req.cookies.jwt) {
+            token = req.cookies.jwt;
+        } else if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+            token = req.headers.authorization.split(" ")[1];
         }
 
-        const decoded= jwt.verify(token,process.env.JWT_SECRET);
-
-        if(!decoded){
-            return res.status(401).json({message: "Uauthorized access - invalid token - please login"});
-
+        if (!token) {
+            return res.status(401).json({ messsage: "Unauthorized access - No token provided" });
         }
 
-       req.client_data=decoded;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-       next();
+        if (!decoded) {
+            return res.status(401).json({ message: "Uauthorized access - invalid token - please login" });
+        }
+
+        req.client_data = decoded;
+
+        next();
 
 
     } catch (error) {
-        console.log("⚠️ error in protectRoute middleware:"+ error);
-        res.status(500).json({message:"Interenal server error"});
-        
+        console.log("⚠️ error in protectRoute middleware:" + error);
+        res.status(500).json({ message: "Interenal server error" });
+
     }
 }
 

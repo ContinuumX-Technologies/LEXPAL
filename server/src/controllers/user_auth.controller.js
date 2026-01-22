@@ -31,7 +31,7 @@ export const userSignup = async (req, res) => {
         });
 
         if (user) {
-            const token =  generateToken(user._id, "User");
+            const token = generateToken(user._id, "User");
 
             res.cookie("jwt", token, {
                 maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -46,13 +46,13 @@ export const userSignup = async (req, res) => {
 
         return res.status(201).json({
             message: "Signup successful",
-
+            token,
             user: {
+                _id: user._id,
                 name: user.first_name,
                 email: user.email,
                 saved_lawyers: user.saved_lawyers
             }
-
         });
 
     } catch (error) {
@@ -81,7 +81,7 @@ export const userLogin = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
 
         // Generate token
-        const token =  generateToken(user._id, "User");
+        const token = generateToken(user._id, "User");
 
         res.cookie("jwt", token, {
             maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -92,9 +92,9 @@ export const userLogin = async (req, res) => {
 
         return res.json({
             message: "Login successful",
-
+            token,
             user: {
-
+                _id: user._id,
                 name: user.first_name,
                 email: user.email,
                 saved_lawyers: user.saved_lawyers

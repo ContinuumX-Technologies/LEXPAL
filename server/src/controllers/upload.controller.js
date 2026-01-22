@@ -6,14 +6,14 @@ import Lawyer from "../models/lawyer.model.js";
 
 export const profilePicUploader = async (req, res) => {
   try {
-   
+
     if (!req.file) {
       return res.status(400).json({ message: "No image file provided" });
     }
 
-   
-    const { id, role } = req.client_data;  
-   
+
+    const { id, role } = req.client_data;
+
 
     // 3. Convert file buffer → base64 string
     const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString(
@@ -35,14 +35,14 @@ export const profilePicUploader = async (req, res) => {
         { profile_picture: uploadResult.secure_url },
         { new: true }
       );
-    } 
+    }
     else if (role === "lawyer") {
       updatedDoc = await Lawyer.findByIdAndUpdate(
         id,
         { profile_picture: uploadResult.secure_url },
         { new: true }
       );
-    } 
+    }
     else {
       return res.status(400).json({ message: "Invalid role in token" });
     }
