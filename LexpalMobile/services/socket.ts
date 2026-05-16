@@ -12,7 +12,7 @@ class SocketService {
 
     private getBaseUrl() {
         // Use the configured base URL from api instance, fallback if needed
-        let baseUrl = api.defaults.baseURL || 'http://localhost:5001';
+        let baseUrl = api.defaults.baseURL || 'https://api.lexpal.in';
         // Remove trailing slash if present
         baseUrl = baseUrl.replace(/\/$/, "");
         // Replace http/https with ws/wss

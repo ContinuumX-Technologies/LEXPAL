@@ -48,14 +48,13 @@ export default function ChatInput({ onSendMessage, onStop, isProcessing, disable
 
     return (
         <div className={styles.container}>
-            {isPickerOpen && (
-                <ContextPicker
-                    onSelect={addContext}
-                    onClose={() => setIsPickerOpen(false)}
-                />
-            )}
-
             <div className={styles.inputWrapper}>
+                {isPickerOpen && (
+                    <ContextPicker
+                        onSelect={addContext}
+                        onClose={() => setIsPickerOpen(false)}
+                    />
+                )}
                 {attachedContexts.length > 0 && (
                     <div className={styles.contextChips}>
                         {attachedContexts.map((ctx) => (

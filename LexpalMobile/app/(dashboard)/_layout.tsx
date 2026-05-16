@@ -102,12 +102,33 @@ export default function DashboardLayout() {
                 <Tabs.Screen
                     name="profile"
                     options={{
-                        href: null, // Hidden for now
+                        href: null,
                         title: 'Profile',
                         tabBarIcon: ({ color }) => <View style={{ top: Platform.OS === 'ios' ? 10 : 0 }}><User size={24} color={color} strokeWidth={2} /></View>,
                     }}
                     listeners={{
                         tabPress: () => Haptics.selectionAsync(),
+                    }}
+                />
+                <Tabs.Screen
+                    name="my-cases"
+                    options={{
+                        href: null,
+                        tabBarStyle: { display: 'none' },
+                    }}
+                />
+                <Tabs.Screen
+                    name="review-doc"
+                    options={{
+                        href: null,
+                        tabBarStyle: { display: 'none' },
+                    }}
+                />
+                <Tabs.Screen
+                    name="draft-agreement"
+                    options={{
+                        href: null,
+                        tabBarStyle: { display: 'none' },
                     }}
                 />
                 <Tabs.Screen
@@ -122,6 +143,13 @@ export default function DashboardLayout() {
                     options={{
                         href: null,
                         title: 'Notifications',
+                        tabBarStyle: { display: 'none' },
+                    }}
+                />
+                <Tabs.Screen
+                    name="settings"
+                    options={{
+                        href: null,
                         tabBarStyle: { display: 'none' },
                     }}
                 />

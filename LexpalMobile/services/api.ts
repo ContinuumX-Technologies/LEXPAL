@@ -5,7 +5,7 @@ import { Platform } from 'react-native';
 
 // Use localhost for iOS simulator, specific IP for Android
 // UPDATE THIS IP if testing on physical device 
-const DEV_SERVER_URL = 'http://172.20.10.3:5001';
+const DEV_SERVER_URL = 'https://api.lexpal.in';
 
 const api = axios.create({
     baseURL: DEV_SERVER_URL,

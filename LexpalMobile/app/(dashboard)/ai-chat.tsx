@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, KeyboardAvoidingView, Platform, ActivityIndicator, Modal, SafeAreaView, Share, Alert, TouchableWithoutFeedback, Dimensions, Animated, Easing, Keyboard } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, KeyboardAvoidingView, Platform, ActivityIndicator, Modal, SafeAreaView, Share, Alert, TouchableWithoutFeedback, Dimensions, Animated, Easing, Keyboard, Pressable } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { Sparkles, Copy, RotateCw, PanelLeft, SquarePen, X, Share as ShareIcon, MoreHorizontal, Pencil, Clipboard as ClipboardIcon, Trash2, LayoutGrid, Sun, Moon, Check, PanelLeftClose } from 'lucide-react-native';
 import { useAuth } from '../../context/AuthContext';
@@ -12,11 +12,15 @@ import { useTheme } from '../../context/ThemeContext';
 import Markdown from 'react-native-markdown-display';
 import * as SecureStore from 'expo-secure-store';
 import api from '../../services/api';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { UserService } from '../../services/user';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface ChatMessage {
     id?: string;
     sender: 'AI' | 'User';
     content: string;
+    attachedContext?: ContextItem[];
 }
 
 interface Conversation {
@@ -24,6 +28,21 @@ interface Conversation {
     title: string;
     updatedAt: string;
 }
+
+type ContextItem = {
+    id: string;
+    type: 'chat' | 'file';
+    name: string;
+    info?: string;
+};
+
+const MOCK_FILES: ContextItem[] = [
+    { id: 'f1', type: 'file', name: 'NDA_Template_v2.docx', info: '24 KB' },
+    { id: 'f2', type: 'file', name: 'Smith_vs_Jones_Brief.pdf', info: '1.2 MB' },
+    { id: 'f3', type: 'file', name: 'Corporate_Bylaws_2024.pdf', info: '450 KB' },
+    { id: 'f4', type: 'file', name: 'Employment_Agreement.docx', info: '32 KB' },
+    { id: 'f5', type: 'file', name: 'M&A_Strategy_Deck.pptx', info: '5.4 MB' },
+];
 
 // Sub-component to handle measurement safely and animations
 interface MessageItemProps {
@@ -131,6 +150,27 @@ const MessageItem: React.FC<MessageItemProps> = ({ item, index, onLongPress, han
                         : 'bg-transparent px-0 py-0'
                         }`}
                 >
+                    {/* Attached Context (User messages) */}
+                    {item.sender === 'User' && item.attachedContext && item.attachedContext.length > 0 && (
+                        <View className="flex-row flex-wrap gap-2 mb-2">
+                            {item.attachedContext.map((c) => (
+                                <View
+                                    key={`${c.type}:${c.id}`}
+                                    className="flex-row items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/80 dark:bg-white/10 border border-black/5 dark:border-white/10"
+                                >
+                                    <MaterialIcons
+                                        name={c.type === 'chat' ? 'chat' : 'description'}
+                                        size={12}
+                                        color={theme === 'dark' ? '#9ca3af' : '#666'}
+                                    />
+                                    <Text numberOfLines={1} className="text-[11px] font-medium text-[#0d0d0d] dark:text-[#ececec] max-w-[160px]">
+                                        {c.type === 'chat' ? 'Chat' : 'File'}: {c.name}
+                                    </Text>
+                                </View>
+                            ))}
+                        </View>
+                    )}
+
                     {item.sender === 'User' ? (
                         <Text
                             className={`text-[16px] leading-[24px] text-[#0d0d0d] dark:text-[#ececec]`}
@@ -214,9 +254,63 @@ function getRelativeDateLabel(dateInput: Date | string): string {
     }
 }
 
+function parseContextFromContent(fullContent: string): { cleanContent: string, extractedContext: ContextItem[] } {
+    const startMarker = "--- Context Attached ---";
+    const endMarker = "--- End Context ---";
+
+    const startIndex = fullContent.indexOf(startMarker);
+    const endIndex = fullContent.indexOf(endMarker);
+
+    if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
+        return { cleanContent: fullContent, extractedContext: [] };
+    }
+
+    const contextBlock = fullContent.substring(startIndex + startMarker.length, endIndex).trim();
+    let cleanContent = fullContent.substring(endIndex + endMarker.length).trim();
+
+    const extractedContext: ContextItem[] = [];
+    const contextChunks = contextBlock.split("Context Type:").filter(c => c.trim().length > 0);
+
+    contextChunks.forEach((chunk, i) => {
+        const lines = chunk.trim().split("\n");
+        const header = lines[0].trim();
+
+        if (header.startsWith("Chat History with")) {
+            const name = header.replace("Chat History with", "").trim();
+            extractedContext.push({
+                id: `ctx_chat_${Date.now()}_${i}`,
+                type: 'chat',
+                name: name,
+                info: 'History attached'
+            });
+        } else if (header.startsWith("File Metadata -")) {
+            let remaining = header.replace("File Metadata -", "").trim();
+            let info = "";
+            if (remaining.endsWith(")")) {
+                const lastParen = remaining.lastIndexOf("(");
+                if (lastParen !== -1) {
+                    info = remaining.substring(lastParen + 1, remaining.length - 1);
+                    remaining = remaining.substring(0, lastParen).trim();
+                }
+            }
+            extractedContext.push({
+                id: `ctx_file_${Date.now()}_${i}`,
+                type: 'file',
+                name: remaining,
+                info: info
+            });
+        }
+    });
+
+    return { cleanContent, extractedContext };
+}
+
 export default function AIChatScreen() {
+    const insets = useSafeAreaInsets();
     const { user } = useAuth();
+    const router = useRouter();
     const { theme } = useTheme();
+    const params = useLocalSearchParams<{ convoId?: string }>();
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [input, setInput] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
@@ -227,6 +321,97 @@ export default function AIChatScreen() {
 
     // Keyboard Visibility for Layout Adjustment
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+    // Read convoId from route params on mount/update
+    useEffect(() => {
+        if (params.convoId) {
+            setCurrentConvoId(params.convoId);
+        }
+    }, [params.convoId]);
+
+    // Context Picker (Attach Context)
+    const [contextPickerVisible, setContextPickerVisible] = useState(false);
+    const [contextTab, setContextTab] = useState<'chats' | 'files'>('chats');
+    const [contextChats, setContextChats] = useState<ContextItem[]>([]);
+    const [loadingContextChats, setLoadingContextChats] = useState(false);
+    const [selectedContexts, setSelectedContexts] = useState<ContextItem[]>([]);
+
+    useEffect(() => {
+        if (!contextPickerVisible) return;
+        if (contextTab !== 'chats') return;
+        if (contextChats.length > 0) return;
+
+        let cancelled = false;
+        setLoadingContextChats(true);
+        UserService.getChatList()
+            .then((res: any) => {
+                const data = res?.data || [];
+                const mapped: ContextItem[] = (Array.isArray(data) ? data : []).map((c: any) => ({
+                    id: c.userId,
+                    type: 'chat',
+                    name: `${c.first_name ?? ''} ${c.last_name ?? ''}`.trim() || 'Chat',
+                    info: c.lastMessageAt ? new Date(c.lastMessageAt).toLocaleDateString() : undefined,
+                }));
+                if (!cancelled) setContextChats(mapped);
+            })
+            .catch((err: any) => console.log('Failed to load chats for context picker', err))
+            .finally(() => {
+                if (!cancelled) setLoadingContextChats(false);
+            });
+
+        return () => {
+            cancelled = true;
+        };
+    }, [contextPickerVisible, contextTab, contextChats.length]);
+
+    const addContext = (item: ContextItem) => {
+        setSelectedContexts((prev) => {
+            if (prev.some((p) => p.type === item.type && p.id === item.id)) return prev;
+            return [...prev, item];
+        });
+        setContextPickerVisible(false);
+    };
+
+    const removeContext = (item: ContextItem) => {
+        setSelectedContexts((prev) => prev.filter((p) => !(p.type === item.type && p.id === item.id)));
+    };
+
+    // Measure the composer height so the picker can sit right above it
+    const [composerHeight, setComposerHeight] = useState(0);
+
+    const buildContentWithContext = async (text: string, context: ContextItem[]) => {
+        if (!context || context.length === 0) return text;
+
+        const contextBlocks = await Promise.all(
+            context.map(async (c) => {
+                if (c.type === 'chat') {
+                    try {
+                        const res: any = await UserService.getChatHistory(c.id);
+                        const msgs = res?.data?.messages || res?.data || [];
+                        const recent = (Array.isArray(msgs) ? msgs : []).slice(-10);
+                        const formatted = recent
+                            .map((m: any) => {
+                                const senderName = m.sender_id === c.id ? c.name : 'Me';
+                                return `[${senderName}]: ${m.content ?? ''}`.trim();
+                            })
+                            .filter(Boolean)
+                            .join("\n");
+                        return formatted
+                            ? `Context Type: Chat History with ${c.name}\n${formatted}`
+                            : `Context Type: Chat History with ${c.name}\n(No messages found)`;
+                    } catch (e) {
+                        return `Context Type: Chat History with ${c.name}\n(Failed to load chat history)`;
+                    }
+                }
+
+                // file
+                return `Context Type: File Metadata - ${c.name}${c.info ? ` (${c.info})` : ''}`;
+            })
+        );
+
+        const contextStr = contextBlocks.filter(Boolean).join("\n\n");
+        return `--- Context Attached ---\n${contextStr}\n--- End Context ---\n\n${text}`;
+    };
 
     useEffect(() => {
         const keyboardWillShowListener = Keyboard.addListener(
@@ -368,7 +553,8 @@ export default function AIChatScreen() {
             setIsProcessing(true);
 
             if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
-                const payload = { content: targetUserMsg.content };
+                const finalContent = await buildContentWithContext(targetUserMsg.content, targetUserMsg.attachedContext || []);
+                const payload = { content: finalContent };
                 socketRef.current.send(JSON.stringify(payload));
             } else {
                 console.warn("Socket not ready, attempting to reconnect or wait...");
@@ -389,11 +575,11 @@ export default function AIChatScreen() {
                 const token = await SecureStore.getItemAsync('auth_token');
 
                 // Get Base URL dynamically
-                let baseURL = api.defaults.baseURL || "http://192.168.29.2:5001";
+                let baseURL = api.defaults.baseURL || "https://api.lexpal.in";
                 // Ensure no trailing slash
                 baseURL = baseURL.replace(/\/$/, "");
 
-                const wsBase = baseURL.replace(/^http/, 'ws');
+                const wsBase = baseURL.replace(/^http/, 'ws').replace(/^https/, 'wss');
                 const wsUrl = `${wsBase}/ws/ai-chat?convo_id=${currentConvoId || 'new'}&token=${token}`;
 
                 console.log("Connecting AI WS:", wsUrl);
@@ -467,7 +653,20 @@ export default function AIChatScreen() {
         try {
             const res = await AIService.getConversationHistory(id);
             if (res.data?.messages) {
-                setMessages(res.data.messages);
+                const parsedMessages = (res.data.messages as ChatMessage[]).map(msg => {
+                    if (msg.sender === 'User' && (!msg.attachedContext || msg.attachedContext.length === 0)) {
+                        const { cleanContent, extractedContext } = parseContextFromContent(msg.content);
+                        if (extractedContext.length > 0) {
+                            return {
+                                ...msg,
+                                content: cleanContent,
+                                attachedContext: extractedContext
+                            };
+                        }
+                    }
+                    return msg;
+                });
+                setMessages(parsedMessages);
             }
         } catch (e) {
             console.error("Failed to load history", e);
@@ -487,7 +686,7 @@ export default function AIChatScreen() {
         }
     };
 
-    const sendMessage = () => {
+    const sendMessage = async () => {
         if (!input.trim()) return;
 
         if (!socketReady) {
@@ -496,24 +695,32 @@ export default function AIChatScreen() {
         }
 
         const text = input.trim();
+        const ctxToSend =
+            editingMessageIndex !== null && selectedContexts.length === 0
+                ? (messages[editingMessageIndex]?.attachedContext || [])
+                : selectedContexts;
 
         if (editingMessageIndex !== null) {
             // Editing Mode: truncate logic
             setMessages(prev => [
                 ...prev.slice(0, editingMessageIndex),
-                { sender: 'User', content: text }
+                { sender: 'User', content: text, attachedContext: ctxToSend.length > 0 ? ctxToSend : undefined }
             ]);
             setEditingMessageIndex(null);
         } else {
             // Normal Mode
-            setMessages(prev => [...prev, { sender: 'User', content: text }]);
+            setMessages(prev => [...prev, { sender: 'User', content: text, attachedContext: ctxToSend.length > 0 ? ctxToSend : undefined }]);
         }
 
         setInput('');
         setIsProcessing(true);
 
-        const payload = { content: text };
+        const finalContent = await buildContentWithContext(text, ctxToSend);
+        const payload = { content: finalContent };
         socketRef.current?.send(JSON.stringify(payload));
+
+        // mimic ChatGPT: clear selected contexts after send
+        setSelectedContexts([]);
     };
 
     const openHistory = () => {
@@ -646,15 +853,15 @@ export default function AIChatScreen() {
 
                         <View className="w-full flex-row flex-wrap justify-between gap-y-3">
                             {[
-                                { label: "Summarize contract", sub: "Analyze key terms", icon: "description", text: "Please summarize this contract and highlight any risky clauses." },
-                                { label: "Find a lawyer", sub: "For property dispute", icon: "person-search", text: "I need to find a lawyer specializing in property disputes." },
-                                { label: "Draft agreement", sub: "Rental or NDA", icon: "edit", text: "Help me draft a standard rental agreement." },
-                                { label: "Legal rights", sub: "Tenant laws", icon: "gavel", text: "What are my rights as a tenant regarding eviction?" }
+                                { label: "Summarize contract", sub: "Analyze key terms", icon: "description", action: () => router.push('/(dashboard)/review-doc' as any) },
+                                { label: "Find a lawyer", sub: "For property dispute", icon: "person-search", action: () => router.push('/(dashboard)/search' as any) },
+                                { label: "Draft agreement", sub: "Rental or NDA", icon: "edit", action: () => router.push('/(dashboard)/draft-agreement' as any) },
+                                { label: "Legal rights", sub: "Tenant laws", icon: "gavel", action: () => setInput("What are my rights as a tenant regarding eviction?") }
                             ].map((s, i) => (
                                 <TouchableOpacity
                                     key={i}
                                     className="w-[48%] bg-white dark:bg-[#2f2f2f] border border-gray-200 dark:border-white/5 rounded-2xl p-4 h-28 justify-between active:bg-gray-50 dark:active:bg-[#383838]"
-                                    onPress={() => setInput(s.text)}
+                                    onPress={s.action}
                                 >
                                     <View>
                                         <Text className="text-[13px] font-semibold text-slate-800 dark:text-[#ececec] mb-0.5">{s.label}</Text>
@@ -692,18 +899,155 @@ export default function AIChatScreen() {
                 className={`bg-white dark:bg-[#212121] px-4 pt-2 ${isKeyboardVisible ? 'pb-2' : 'pb-6'}`}
                 style={{ marginBottom: isKeyboardVisible ? 0 : (Platform.OS === 'ios' ? 70 : 50) }}
             >
-                <View className="bg-[#f4f4f4] dark:bg-[#2f2f2f] flex-row items-end rounded-[26px] pl-4 pr-2 py-2 min-h-[52px] border border-transparent focus:border-gray-200 dark:focus:border-gray-700">
-                    <TouchableOpacity className="p-2 mr-1" disabled={isProcessing}>
+                {/* Context Picker Popover */}
+                <Modal visible={contextPickerVisible} animationType="fade" transparent onRequestClose={() => setContextPickerVisible(false)}>
+                    <View className="flex-1">
+                        {/* backdrop */}
+                        <Pressable onPress={() => setContextPickerVisible(false)} className="flex-1 bg-black/10" />
+
+                        {/* anchored sheet (sits above composer) */}
+                        <View
+                            pointerEvents="box-none"
+                            style={{
+                                position: 'absolute',
+                                left: 16,
+                                right: 16,
+                                bottom: Math.max(12, composerHeight + insets.bottom + 8),
+                            }}
+                        >
+                            <View
+                                className="bg-white dark:bg-[#2f2f2f] border border-black/5 dark:border-white/10"
+                                style={{
+                                    borderRadius: 18,
+                                    overflow: 'hidden',
+                                    shadowColor: '#000',
+                                    shadowOpacity: 0.12,
+                                    shadowRadius: 18,
+                                    shadowOffset: { width: 0, height: 8 },
+                                    elevation: 12,
+                                }}
+                            >
+                                {/* Header */}
+                                <View className="px-4 py-3 flex-row items-center justify-between border-b border-black/5 dark:border-white/10">
+                                    <Text className="text-[14px] font-semibold text-[#0d0d0d] dark:text-[#ececec]">Attach Context</Text>
+                                    <TouchableOpacity onPress={() => setContextPickerVisible(false)} className="p-1 rounded-md active:bg-black/5 dark:active:bg-white/10">
+                                        <MaterialIcons name="close" size={18} color={theme === 'dark' ? '#9ca3af' : '#666'} />
+                                    </TouchableOpacity>
+                                </View>
+
+                                {/* Tabs */}
+                                <View className="mx-4 mt-3 mb-2 p-1 rounded-lg bg-[#f5f5f7] dark:bg-[#171717] flex-row">
+                                    <TouchableOpacity
+                                        onPress={() => setContextTab('chats')}
+                                        className={`flex-1 py-2 rounded-md ${contextTab === 'chats' ? 'bg-white dark:bg-[#424242]' : ''}`}
+                                    >
+                                        <Text className={`text-center text-[13px] font-medium ${contextTab === 'chats' ? 'text-black dark:text-white' : 'text-[#666] dark:text-[#aaa]'}`}>
+                                            Chats
+                                        </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        onPress={() => setContextTab('files')}
+                                        className={`flex-1 py-2 rounded-md ${contextTab === 'files' ? 'bg-white dark:bg-[#424242]' : ''}`}
+                                    >
+                                        <Text className={`text-center text-[13px] font-medium ${contextTab === 'files' ? 'text-black dark:text-white' : 'text-[#666] dark:text-[#aaa]'}`}>
+                                            Files
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                                {/* List */}
+                                <View className="px-2 pb-3" style={{ maxHeight: 240 }}>
+                                    {contextTab === 'chats' && loadingContextChats && (
+                                        <View className="py-6">
+                                            <Text className="text-center text-[13px] text-gray-400">Loading chats...</Text>
+                                        </View>
+                                    )}
+
+                                    {(contextTab === 'chats' ? contextChats : MOCK_FILES).map((item) => (
+                                        <TouchableOpacity
+                                            key={`${item.type}:${item.id}`}
+                                            onPress={() => addContext(item)}
+                                            className="flex-row items-center gap-3 px-3 py-2 rounded-lg active:bg-black/5 dark:active:bg-white/10"
+                                        >
+                                            <View className="w-8 h-8 rounded-full bg-[#eee] dark:bg-[#333] items-center justify-center">
+                                                <MaterialIcons
+                                                    name={item.type === 'chat' ? 'chat' : 'description'}
+                                                    size={16}
+                                                    color={theme === 'dark' ? '#ccc' : '#666'}
+                                                />
+                                            </View>
+                                            <View className="flex-1">
+                                                <Text numberOfLines={1} className="text-[14px] font-medium text-[#333] dark:text-white">
+                                                    {item.name}
+                                                </Text>
+                                                {!!item.info && (
+                                                    <Text className="text-[12px] text-gray-400">
+                                                        {item.info}
+                                                    </Text>
+                                                )}
+                                            </View>
+                                            <MaterialIcons name="add-circle" size={18} color="#2563eb" />
+                                        </TouchableOpacity>
+                                    ))}
+
+                                    {contextTab === 'files' && (
+                                        <TouchableOpacity
+                                            onPress={() => Alert.alert('Upload', 'Upload new file is coming soon on mobile.')}
+                                            className="mt-2 mx-2 px-3 py-3 rounded-lg border border-dashed border-gray-300 dark:border-[#444] flex-row items-center justify-center gap-2"
+                                        >
+                                            <MaterialIcons name="upload-file" size={18} color={theme === 'dark' ? '#aaa' : '#666'} />
+                                            <Text className="text-[13px] text-[#666] dark:text-[#aaa]">Upload new file</Text>
+                                        </TouchableOpacity>
+                                    )}
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+
+                <View
+                    onLayout={(e) => setComposerHeight(e.nativeEvent.layout.height)}
+                    className="bg-[#f4f4f4] dark:bg-[#2f2f2f] flex-row items-end rounded-[26px] pl-4 pr-2 py-2 min-h-[52px] border border-transparent focus:border-gray-200 dark:focus:border-gray-700"
+                >
+                    <TouchableOpacity
+                        className="p-2 mr-1"
+                        disabled={isProcessing}
+                        onPress={() => setContextPickerVisible(true)}
+                    >
                         <MaterialIcons name="add-circle-outline" size={24} color={theme === 'dark' ? "#9ca3af" : "#666"} />
                     </TouchableOpacity>
 
                     <View className="flex-1">
+                        {/* Selected Context Chips */}
+                        {selectedContexts.length > 0 && (
+                            <View className="flex-row flex-wrap gap-2 mb-2 pr-2">
+                                {selectedContexts.map((c) => (
+                                    <View
+                                        key={`${c.type}:${c.id}`}
+                                        className="flex-row items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 dark:bg-white/10 border border-black/5 dark:border-white/10"
+                                    >
+                                        <MaterialIcons
+                                            name={c.type === 'chat' ? 'chat' : 'description'}
+                                            size={14}
+                                            color={theme === 'dark' ? '#9ca3af' : '#666'}
+                                        />
+                                        <Text numberOfLines={1} className="text-[12px] font-medium text-[#0d0d0d] dark:text-[#ececec] max-w-[180px]">
+                                            {c.name}
+                                        </Text>
+                                        <TouchableOpacity onPress={() => removeContext(c)} className="ml-1 p-0.5 rounded-full active:bg-black/5 dark:active:bg-white/10">
+                                            <MaterialIcons name="close" size={14} color={theme === 'dark' ? '#9ca3af' : '#666'} />
+                                        </TouchableOpacity>
+                                    </View>
+                                ))}
+                            </View>
+                        )}
+
                         {editingMessageIndex !== null && (
-                            <View className="bg-white rounded-full px-4 py-2 mb-2 self-start flex-row items-center gap-2 shadow-sm border border-gray-100">
+                            <View className="bg-white dark:bg-[#333] rounded-full px-4 py-2 mb-2 self-start flex-row items-center gap-2 shadow-sm border border-gray-100 dark:border-white/10">
                                 <SquarePen size={16} color="#3b82f6" />
                                 <Text className="text-[#3b82f6] text-sm font-semibold">Edit</Text>
-                                <TouchableOpacity onPress={handleCancelEdit} className="ml-2 bg-gray-100 rounded-full p-0.5">
-                                    <X size={14} color="#666" />
+                                <TouchableOpacity onPress={handleCancelEdit} className="ml-2 bg-gray-100 dark:bg-[#444] rounded-full p-0.5">
+                                    <X size={14} color={theme === 'dark' ? '#ccc' : '#666'} />
                                 </TouchableOpacity>
                             </View>
                         )}
@@ -723,7 +1067,7 @@ export default function AIChatScreen() {
                     <TouchableOpacity
                         onPress={sendMessage}
                         disabled={!input.trim() || isProcessing}
-                        className={`w-8 h-8 rounded-full items-center justify-center mb-1 ml-2 ${input.trim() && !isProcessing ? 'bg-black' : 'bg-[#e5e5e5]'
+                        className={`w-8 h-8 rounded-full items-center justify-center mb-1 ml-2 ${input.trim() && !isProcessing ? 'bg-black' : 'bg-[#e5e5e5] dark:bg-[#333]'
                             }`}
                     >
                         {isProcessing ? (
@@ -792,19 +1136,19 @@ export default function AIChatScreen() {
                                             return (
                                                 <View key={convo._id} className="mb-0.5 relative">
                                                     {isDeleting ? (
-                                                        <View className="absolute inset-0 bg-[#e5e5e5] rounded-lg flex-row items-center justify-end pr-2 gap-2 z-10 w-full h-full">
-                                                            <Text className="text-xs text-gray-700 mr-1">Delete?</Text>
+                                                        <View className="absolute inset-0 bg-[#e5e5e5] dark:bg-[#333] rounded-lg flex-row items-center justify-end pr-2 gap-2 z-10 w-full h-full">
+                                                            <Text className="text-xs text-gray-700 dark:text-gray-300 mr-1">Delete?</Text>
                                                             <TouchableOpacity onPress={() => confirmDelete(convo._id)} className="p-1">
-                                                                <Check size={16} color="#666" />
+                                                                <Check size={16} color={theme === 'dark' ? '#ccc' : '#666'} />
                                                             </TouchableOpacity>
                                                             <TouchableOpacity onPress={() => setDeletingId(null)} className="p-1">
-                                                                <X size={16} color="#666" />
+                                                                <X size={16} color={theme === 'dark' ? '#ccc' : '#666'} />
                                                             </TouchableOpacity>
                                                         </View>
                                                     ) : isRenaming ? (
                                                         <View className="px-3 py-1.5 w-full">
                                                             <TextInput
-                                                                className="border border-blue-500/30 rounded px-2 py-1 text-sm text-[#0d0d0d] bg-white"
+                                                                className="border border-blue-500/50 rounded px-2 py-1 text-sm text-[#0d0d0d] dark:text-white bg-white dark:bg-[#2f2f2f]"
                                                                 value={renameValue}
                                                                 onChangeText={setRenameValue}
                                                                 onBlur={handleSubmitRename}
@@ -927,6 +1271,6 @@ export default function AIChatScreen() {
                     )}
                 </TouchableOpacity>
             </Modal>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }

@@ -58,7 +58,7 @@ export const StickyHeader = ({ firstName = "Client", onLogout }: { firstName?: s
                     )}
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => router.push('/(dashboard)/profile' as any)}>
+                <TouchableOpacity onPress={() => router.push('/(dashboard)/settings' as any)}>
                     <View className="w-8 h-8 rounded-full bg-blue-600 items-center justify-center">
                         <Text className="text-white font-semibold text-xs">{firstName.charAt(0)}</Text>
                     </View>
@@ -162,48 +162,64 @@ export const AIWidget = ({ onPress }: { onPress?: () => void }) => {
 };
 
 // === Quick Actions Grid ===
-export const QuickActionsWidget = () => (
-    <View className="mb-4">
-        <Text className="text-lg font-bold text-slate-900 dark:text-white mb-4">Quick Actions</Text>
-        <View className="flex-row gap-4 mb-4">
-            {/* Find Lawyer */}
-            <TouchableOpacity className="flex-1 bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 items-center shadow-sm border border-gray-100 dark:border-white/10 h-40 justify-center">
-                <View className="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-2xl items-center justify-center mb-3">
-                    <MaterialIcons name="gavel" size={28} color="#3b82f6" />
-                </View>
-                <Text className="text-slate-900 dark:text-white font-semibold text-center">Find a Lawyer</Text>
-            </TouchableOpacity>
+export const QuickActionsWidget = () => {
+    const router = useRouter(); // Fix: Add hook
 
-            {/* Review Doc */}
-            <TouchableOpacity className="flex-1 bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 items-center shadow-sm border border-gray-100 dark:border-white/10 h-40 justify-center">
-                <View className="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 rounded-2xl items-center justify-center mb-3">
-                    <MaterialIcons name="description" size={28} color="#f97316" />
-                </View>
-                <Text className="text-slate-900 dark:text-white font-semibold text-center">Review Doc</Text>
-            </TouchableOpacity>
-        </View>
-
-        <View className="flex-row gap-4">
-            {/* My Cases */}
-            <TouchableOpacity className="flex-1 bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 items-center shadow-sm border border-gray-100 dark:border-white/10 h-40 justify-center">
-                <View className="w-14 h-14 bg-green-50 dark:bg-green-900/20 rounded-2xl items-center justify-center mb-3">
-                    <View className="bg-green-100 dark:bg-green-900/40 p-1 rounded-lg">
-                        <MaterialIcons name="folder-open" size={24} color="#22c55e" />
+    return (
+        <View className="mb-4">
+            <Text className="text-lg font-bold text-slate-900 dark:text-white mb-4">Quick Actions</Text>
+            <View className="flex-row gap-4 mb-4">
+                {/* Find Lawyer */}
+                <TouchableOpacity
+                    onPress={() => router.push('/(dashboard)/search' as any)}
+                    className="flex-1 bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 items-center shadow-sm border border-gray-100 dark:border-white/10 h-40 justify-center"
+                >
+                    <View className="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-2xl items-center justify-center mb-3">
+                        <MaterialIcons name="gavel" size={28} color="#3b82f6" />
                     </View>
-                </View>
-                <Text className="text-slate-900 dark:text-white font-semibold text-center">My Cases</Text>
-            </TouchableOpacity>
+                    <Text className="text-slate-900 dark:text-white font-semibold text-center">Find a Lawyer</Text>
+                </TouchableOpacity>
 
-            {/* Settings */}
-            <TouchableOpacity className="flex-1 bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 items-center shadow-sm border border-gray-100 dark:border-white/10 h-40 justify-center">
-                <View className="w-14 h-14 bg-gray-50 dark:bg-gray-800 rounded-2xl items-center justify-center mb-3">
-                    <Ionicons name="settings" size={28} color="#64748b" />
-                </View>
-                <Text className="text-slate-900 dark:text-white font-semibold text-center">Settings</Text>
-            </TouchableOpacity>
+                {/* Review Doc */}
+                <TouchableOpacity
+                    onPress={() => router.push('/(dashboard)/review-doc' as any)}
+                    className="flex-1 bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 items-center shadow-sm border border-gray-100 dark:border-white/10 h-40 justify-center"
+                >
+                    <View className="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 rounded-2xl items-center justify-center mb-3">
+                        <MaterialIcons name="description" size={28} color="#f97316" />
+                    </View>
+                    <Text className="text-slate-900 dark:text-white font-semibold text-center">Review Doc</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View className="flex-row gap-4">
+                {/* My Cases */}
+                <TouchableOpacity
+                    onPress={() => router.push('/(dashboard)/my-cases' as any)}
+                    className="flex-1 bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 items-center shadow-sm border border-gray-100 dark:border-white/10 h-40 justify-center"
+                >
+                    <View className="w-14 h-14 bg-green-50 dark:bg-green-900/20 rounded-2xl items-center justify-center mb-3">
+                        <View className="bg-green-100 dark:bg-green-900/40 p-1 rounded-lg">
+                            <MaterialIcons name="folder-open" size={24} color="#22c55e" />
+                        </View>
+                    </View>
+                    <Text className="text-slate-900 dark:text-white font-semibold text-center">My Cases</Text>
+                </TouchableOpacity>
+
+                {/* Settings */}
+                <TouchableOpacity
+                    onPress={() => router.push('/(dashboard)/settings' as any)}
+                    className="flex-1 bg-white dark:bg-[#1C1C1E] rounded-3xl p-6 items-center shadow-sm border border-gray-100 dark:border-white/10 h-40 justify-center"
+                >
+                    <View className="w-14 h-14 bg-gray-50 dark:bg-gray-800 rounded-2xl items-center justify-center mb-3">
+                        <Ionicons name="settings" size={28} color="#64748b" />
+                    </View>
+                    <Text className="text-slate-900 dark:text-white font-semibold text-center">Settings</Text>
+                </TouchableOpacity>
+            </View>
         </View>
-    </View>
-);
+    );
+};
 
 // === Recent AI Conversations Widget ===
 export const RecentAIWidget = ({ chats = [], onContinue }: { chats?: any[], onContinue?: (id: string) => void }) => {

@@ -10,6 +10,7 @@ export const UserService = {
     // Profile & User Data
     getUsername: () => api.get('/api/user/username'),
     markWalkthroughSeen: () => api.post('/api/user/walkthrough-seen'),
+    getCases: () => api.get('/api/user/cases'), // Stub for now
 
     // Chat Related (User Side)
     getChatList: () => api.get('/api/user/chat/list'),

@@ -25,7 +25,7 @@ interface Message {
 // --- WS Helper ---
 const getWSUrl = (receiverId: string) => {
     // Dynamically get the base URL from the API config
-    const baseURL = api.defaults.baseURL || "http://192.168.29.2:5001";
+    const baseURL = api.defaults.baseURL || "https://api.lexpal.in";
     const wsBase = baseURL.replace(/^http/, 'ws');
     return `${wsBase}/ws/user-chat?receiver_id=${receiverId}`;
 };

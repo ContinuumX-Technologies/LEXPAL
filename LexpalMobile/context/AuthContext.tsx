@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 if (token && storedUser && storedType) {
                     setUser(JSON.parse(storedUser));
                     setUserType(storedType as UserType);
-                    // Optional: Validate token with backend here
                 }
             } catch (e) {
                 console.error('Failed to load session', e);
@@ -48,6 +47,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         };
 
         loadSession();
+
+        // Setup interceptor for 401s
+        const interceptor = api.interceptors.response.use(
+            (response) => response,
+            async (error) => {
+                if (error.response?.status === 401) {
+                    console.log("Auto-logout due to 401");
+                    await signOut();
+                }
+                return Promise.reject(error);
+            }
+        );
+
+        return () => {
+            api.interceptors.response.eject(interceptor);
+        };
     }, []);
 
     const signIn = async (type: 'client' | 'lawyer', token: string, userData: any) => {
