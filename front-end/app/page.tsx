@@ -4,7 +4,6 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState, useCallback } from "react"
 import Image from "next/image"
-import Footer from "@/components/Footer";
 import styles from "./page.module.css"
 
 import one from "@/public/assets/1.jpeg";
@@ -318,7 +317,7 @@ export default function LexpalLanding() {
         ],
         cta: {
             title: "Ready to Transform Your Practice?",
-            subtitle: "Join 5,000+ legal professionals who've modernized their practice with Lexpal."
+            subtitle: "Join legal professionals who've modernized their practice with Lexpal."
         }
     }
 
@@ -507,11 +506,11 @@ export default function LexpalLanding() {
     }
 
     const handlePrimaryAction = () => {
-        router.push(userType === "lawyer" ? "/Lawyer-SignUp" : "/SignUp")
+        window.location.href = "https://workspace.lexpal.in/"
     }
 
     const handleSecondaryAction = () => {
-        router.push(userType === "lawyer" ? "/Lawyer-Login" : "/Login")
+        window.location.href = "https://workspace.lexpal.in/"
     }
 
     if (!mounted) {
@@ -519,7 +518,7 @@ export default function LexpalLanding() {
             <div className={styles.loadingScreen}>
                 <div className={styles.loadingContent}>
                     <div className={styles.loadingLogo}>
-                        <span className="material-symbols-outlined">balance</span>
+                        <img src="/assets/logo.png" alt="Lexpal Logo" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
                     </div>
                     <div className={styles.loadingSpinner}></div>
                     <p>Loading Lexpal...</p>
@@ -537,7 +536,7 @@ export default function LexpalLanding() {
                     <div className={styles.headerInner}>
                         <a href="/" className={styles.logo}>
                             <div className={styles.logoMark}>
-                                <span className="material-symbols-outlined">balance</span>
+                                <img src="/assets/logo.png" alt="Lexpal Logo" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
                             </div>
                             <span className={styles.logoText}>Lexpal</span>
                         </a>
@@ -552,9 +551,7 @@ export default function LexpalLanding() {
                             <button className={styles.navLink} onClick={() => scrollToSection("features")}>
                                 Features
                             </button>
-                            <button className={styles.navLink} onClick={() => scrollToSection("testimonials")}>
-                                Testimonials
-                            </button>
+
                         </nav>
 
                         <div className={styles.headerActions}>
@@ -701,10 +698,6 @@ export default function LexpalLanding() {
                                 <button className={styles.heroPrimaryBtn} onClick={handlePrimaryAction}>
                                     <span>Get Started</span>
                                     <span className="material-symbols-outlined">arrow_forward</span>
-                                </button>
-                                <button className={styles.heroSecondaryBtn} onClick={() => setIsVideoModalOpen(true)}>
-                                    <span className="material-symbols-outlined">play_circle</span>
-                                    <span>Watch The Film</span>
                                 </button>
                             </div>
                         </div>
@@ -991,10 +984,6 @@ export default function LexpalLanding() {
                                             <span>Get Started Free</span>
                                             <span className="material-symbols-outlined">arrow_forward</span>
                                         </button>
-                                        <button className={styles.showcaseActionSecondary} onClick={() => scrollToSection("features")}>
-                                            <span className="material-symbols-outlined">play_circle</span>
-                                            <span>Watch Demo</span>
-                                        </button>
                                     </div>
                                 )}
                             </div>
@@ -1076,10 +1065,7 @@ export default function LexpalLanding() {
                                         </div>
                                         <h3 className={styles.featureTitle}>{feature.title}</h3>
                                         <p className={styles.featureDescription}>{feature.description}</p>
-                                        <button className={styles.featureLink}>
-                                            Learn more
-                                            <span className="material-symbols-outlined">arrow_forward</span>
-                                        </button>
+                                    
                                     </div>
                                     <div className={styles.featureImageWrap}>
                                         {/* Image Component */}
@@ -1128,49 +1114,6 @@ export default function LexpalLanding() {
                 </section>
 
                 {/* ============================================ */}
-                {/* TESTIMONIALS SECTION (Flyhive Style) */}
-                {/* ============================================ */}
-                <section id="testimonials" className={styles.testimonialsSection}>
-                    <div className={styles.sectionContainer}>
-                        <div className={`${styles.sectionHeader} ${styles.animateOnScroll}`}>
-                            <span className={styles.sectionLabel}>Testimonials</span>
-                            <h2 className={styles.sectionTitle}>
-                                {userType === "lawyer" ? "Loved by Legal Professionals" : "What Our Clients Say"}
-                            </h2>
-                        </div>
-
-                        <div className={styles.testimonialsGrid}>
-                            {content.testimonials.map((testimonial, index) => (
-                                <div
-                                    key={index}
-                                    className={`${styles.testimonialCard} ${styles.animateOnScroll}`}
-                                    style={{ animationDelay: `${index * 0.1}s` }}
-                                >
-                                    <div className={styles.testimonialQuote}>
-                                        <span className="material-symbols-outlined">format_quote</span>
-                                    </div>
-                                    <blockquote className={styles.testimonialText}>
-                                        {testimonial.quote}
-                                    </blockquote>
-                                    <div className={styles.testimonialAuthor}>
-                                        <div className={styles.authorAvatar}>{testimonial.avatar}</div>
-                                        <div className={styles.authorInfo}>
-                                            <strong>{testimonial.author}</strong>
-                                            <span>{testimonial.role}</span>
-                                        </div>
-                                    </div>
-                                    <div className={styles.testimonialRating}>
-                                        {[...Array(5)].map((_, i) => (
-                                            <span key={i} className="material-symbols-outlined">star</span>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* ============================================ */}
                 {/* CTA SECTION (Flyhive Style) */}
                 {/* ============================================ */}
                 <section className={styles.ctaSection}>
@@ -1192,22 +1135,14 @@ export default function LexpalLanding() {
                             </div>
                             <p className={styles.ctaNote}>
                                 {userType === "lawyer"
-                                    ? "No credit card required • 14-day free trial • Cancel anytime"
-                                    : "Free account • No hidden fees • Cancel anytime"}
+                                    ? "No credit card required • Free trial "
+                                    : "Free account • No hidden fees "}
                             </p>
                         </div>
                     </div>
                 </section>
 
             </main>
-
-            {/* ============================================ */}
-            {/* FOOTER (Flyhive Style) */}
-            {/* ============================================ */}
-            {/* ============================================ */}
-            {/* FOOTER (Apple Style) */}
-            {/* ============================================ */}
-            <Footer userType={userType} />
         </div>
     )
 }

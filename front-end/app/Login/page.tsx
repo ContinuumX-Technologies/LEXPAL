@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import GoogleButton from "@/UI_components/GoogleButton";
-import Footer from "@/components/Footer";
 
 type FormState = {
   email: string;
@@ -91,7 +90,7 @@ export default function LoginPage() {
           {/* Nav */}
           <div className={styles.topNav}>
             <a href="/" className={styles.logo}>
-              <span className="material-symbols-outlined">balance</span>
+              <img src="/assets/logo.png" alt="Lexpal" style={{ width: '32px', height: '32px', borderRadius: '8px', objectFit: 'cover' }} />
               LEXPAL
             </a>
             <a href="/" className={styles.backBtn}>Exit</a>
@@ -159,7 +158,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      <Footer userType="client" />
     </>
   );
 }

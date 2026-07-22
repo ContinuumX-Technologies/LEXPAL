@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { stateCityMap, languagesList, specialtiesList } from "./signupData";
-import Footer from "@/components/Footer";
 
 export default function LawyerSignUp() {
   const server_url = process.env.NEXT_PUBLIC_DEV_SERVER_URL;
@@ -202,7 +201,7 @@ export default function LawyerSignUp() {
           {/* Nav */}
           <div className={styles.topNav}>
             <a href="/" className={styles.logo}>
-              <span className="material-symbols-outlined">shield</span>
+              <img src="/assets/logo.png" alt="Lexpal" style={{ width: '32px', height: '32px', borderRadius: '8px', objectFit: 'cover' }} />
               LEXPAL PRO
             </a>
             <a href="/" className={styles.backBtn}>Exit Console</a>
@@ -213,7 +212,7 @@ export default function LawyerSignUp() {
             <div className={styles.formHeader}>
               <h2 className={styles.heading}>Advocate Registration.</h2>
               <p className={styles.subheading}>
-                Apply for workspace access. <a href="/Lawyer-Login">Sign in</a>
+                Apply for workspace access. <a href="https://workspace.lexpal.in/">Sign in</a>
               </p>
             </div>
 
@@ -523,7 +522,6 @@ export default function LawyerSignUp() {
           </div>
         </div>
       </div>
-      <Footer userType="lawyer" />
     </>
   );
 }

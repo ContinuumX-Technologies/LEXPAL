@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Header from './Header';
-import Footer from './Footer';
 import styles from './LegalPageLayout.module.css';
 
 interface Section {
@@ -86,8 +85,6 @@ export default function LegalPageLayout({
                     </div>
                 </div>
             </main>
-
-            <Footer userType={userType} />
         </div>
     );
 }

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { stateCityMap } from "../Lawyer-SignUp/signupData";
-import Footer from "@/components/Footer";
 
 export default function SignUp() {
   const router = useRouter();
@@ -99,7 +98,7 @@ export default function SignUp() {
           {/* Nav */}
           <div className={styles.topNav}>
             <a href="/" className={styles.logo}>
-              <span className="material-symbols-outlined">balance</span>
+              <img src="/assets/logo.png" alt="Lexpal" style={{ width: '32px', height: '32px', borderRadius: '8px', objectFit: 'cover' }} />
               LEXPAL
             </a>
             <a href="/" className={styles.backBtn}>Exit</a>
@@ -110,7 +109,7 @@ export default function SignUp() {
             <div className={styles.formHeader}>
               <h2 className={styles.heading}>Create Account</h2>
               <p className={styles.subheading}>
-                Already a member? <a href="/Login">Log in</a>
+                Already a member? <a href="https://workspace.lexpal.in/">Log in</a>
               </p>
             </div>
 
@@ -279,7 +278,6 @@ export default function SignUp() {
           </div>
         </div>
       </div>
-      <Footer userType="client" />
     </>
   );
 }

@@ -27,7 +27,7 @@ export default function Header({ userType, setUserType, isTransitioning = false 
                     <div className={styles.headerInner}>
                         <Link href="/" className={styles.logo}>
                             <div className={styles.logoMark}>
-                                <span className="material-symbols-outlined">balance</span>
+                                <img src="/assets/logo.png" alt="Lexpal Logo" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
                             </div>
                             <span className={styles.logoText}>Lexpal</span>
                         </Link>
@@ -37,7 +37,6 @@ export default function Header({ userType, setUserType, isTransitioning = false 
                             <Link href="/#how-it-works" className={styles.navLink}>How It Works</Link>
                             <Link href="/#comparison" className={styles.navLink}>Compare</Link>
                             <Link href="/#features" className={styles.navLink}>Features</Link>
-                            <Link href="/#testimonials" className={styles.navLink}>Testimonials</Link>
                         </nav>
 
                         <div className={styles.headerActions}>
@@ -65,10 +64,10 @@ export default function Header({ userType, setUserType, isTransitioning = false 
                             </div>
 
                             <div className={styles.authButtons}>
-                                <Link href={userType === "lawyer" ? "/Lawyer-Login" : "/Login"}>
+                                <Link href="https://workspace.lexpal.in/">
                                     <button className={styles.loginButton}>Log In</button>
                                 </Link>
-                                <Link href={userType === "lawyer" ? "/Lawyer-SignUp" : "/SignUp"}>
+                                <Link href="https://workspace.lexpal.in/">
                                     <button className={styles.signupButton}>Get Started</button>
                                 </Link>
                             </div>

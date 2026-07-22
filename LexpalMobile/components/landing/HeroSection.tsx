@@ -121,13 +121,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ content, userType, onP
                         // Actually, let's keep it black for now as per "Apple Style" interpretation or update Button to take color.
                         className="bg-slate-900" // Overriding?
                     />
-                    <Button
-                        title="Watch The Film"
-                        onPress={onSecondaryAction}
-                        variant="secondary"
-                        icon={<MaterialIcons name="play-circle" size={20} color={currentTheme.primary} />}
-                        textClassName="text-slate-700"
-                    />
                 </View>
             </View>
         </View>

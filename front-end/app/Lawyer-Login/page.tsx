@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
-import Footer from "@/components/Footer";
 
 type FormState = {
   email: string;
@@ -98,7 +97,7 @@ export default function LoginPage() {
       <div className={styles.loadingScreen}>
         <div className={styles.loadingContent}>
           <div className={styles.loadingLogo}>
-            <span className="material-symbols-outlined">balance</span>
+            <img src="/assets/logo.png" alt="Lexpal Logo" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
           </div>
           <div className={styles.loadingSpinner} />
         </div>
@@ -129,7 +128,7 @@ export default function LoginPage() {
           {/* Nav */}
           <div className={styles.topNav}>
             <a href="/" className={styles.logo}>
-              <span className="material-symbols-outlined">shield</span>
+              <img src="/assets/logo.png" alt="Lexpal" style={{ width: '32px', height: '32px', borderRadius: '8px', objectFit: 'cover' }} />
               LEXPAL
             </a>
             <a href="/" className={styles.backBtn}>Exit Console</a>
@@ -199,7 +198,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      <Footer userType="lawyer" />
     </>
   );
 }
